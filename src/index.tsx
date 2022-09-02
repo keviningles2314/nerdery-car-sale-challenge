@@ -16,12 +16,10 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const key = process.env.REACT_APP_API_KEY;
-
   return {
     headers: {
       ...headers,
-      'x-hasura-admin-secret': key,
+      'x-hasura-admin-secret': process.env.REACT_APP_API_KEY,
     },
   };
 });
