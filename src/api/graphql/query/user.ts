@@ -1,11 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
 
 export const GET_USERS = gql`
-  {
-    users {
-      email
+  query Query_user($where: users_bool_exp) {
+    users(where: $where) {
       first_name
       last_name
+      email
     }
   }
 `;
