@@ -4,24 +4,51 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useQuery_UserQuery } from '../../api/graphql/__generated__/graphql-types';
+import { useLoginContext } from '../../context/LoginContext/LoginContext';
+import { SET_USER } from '../../context/LoginContext/types';
 import { emailValidation } from '../../helpers/validators';
 import Button from '../Button/Button';
 import EmailField from '../EmailField/EmailField';
 import BigText from '../Text/BigText/BigText';
+import RegularText from '../Text/RegularText/RegularText';
 import { Container } from './LoginComponentStyled';
 
 interface LoginComponentProps {
   title: string;
-  handleClick: MouseEventHandler<HTMLButtonElement>;
-  setEmail: Dispatch<SetStateAction<string>>;
 }
 
-const LoginComponent = ({
-  title,
-  handleClick,
-  setEmail,
-}: LoginComponentProps) => {
+const LoginComponent = ({ title }: LoginComponentProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const [email, setEmail] = useState<string>('');
+  const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
+  const { dispatch } = useLoginContext();
+
+  const { data } = useQuery_UserQuery({
+    variables: {
+      where: {
+        email: {
+          _eq: email,
+        },
+      },
+    },
+  });
+
+  const handleClick = () => {
+    if (data!.users.length > 0) {
+      dispatch({
+        type: SET_USER,
+        payload: { userData: data },
+      });
+      navigate('/');
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
+  };
+
   const handleEmailValidation = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -46,6 +73,7 @@ const LoginComponent = ({
         onClick={handleClick}
         disabled={isButtonDisabled}
       />
+      {isError && <RegularText text='user not found' isBaseColor={false} />}
     </Container>
   );
 };

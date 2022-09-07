@@ -6,8 +6,6 @@ import { useLoginContext } from '../../context/LoginContext/LoginContext';
 import { Container } from './HomeStyled';
 
 const Home = () => {
-  const { state } = useLoginContext();
-  console.log(state);
   return (
     <Container>
       <BigText text={'welcome'} isBaseColor={true} />

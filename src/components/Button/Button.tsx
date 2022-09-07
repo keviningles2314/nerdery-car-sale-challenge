@@ -8,6 +8,7 @@ interface ButtonProps {
   disabled?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
+
 const Button = ({ title, onClick, disabled = false }: ButtonProps) => {
   return (
     <StyledButton onClick={onClick} disabled={disabled}>

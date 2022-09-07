@@ -12,7 +12,7 @@ import {
 } from '@apollo/client';
 
 const httpLink = createHttpLink({
-  uri: 'https://new-anchovy-87.hasura.app/v1/graphql',
+  uri: process.env.REACT_APP_API,
 });
 
 const authLink = setContext((_, { headers }) => {

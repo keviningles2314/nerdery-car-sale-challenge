@@ -4,6 +4,7 @@ import Navbar from './Navbar/Navbar';
 interface LayoutProps {
   children: PropsWithChildren;
 }
+
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>

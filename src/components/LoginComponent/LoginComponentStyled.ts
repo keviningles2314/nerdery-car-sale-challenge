@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
+
 export const Container = styled.div`
   background-color: ${theme.blue};
   display: flex;
