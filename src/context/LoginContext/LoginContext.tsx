@@ -1,41 +1,50 @@
-import {
-  createContext,
-  PropsWithChildren,
-  ReactNode,
-  useContext,
-  useReducer,
-} from 'react';
+import React, { createContext, ReactNode, useContext, useReducer } from 'react';
 import { loginReducer } from './loginReducer';
 
 interface LoginContextProviderProps {
   children: ReactNode;
 }
 
+export type User = {
+  first_name: string;
+  last_name: string;
+  email: string;
+};
+
 interface LoginContext {
-  userData?: string[];
+  userData: User[];
   isUserAuthenticated?: boolean;
   isLoading?: boolean;
 }
 
-export const loginInitialState: LoginContext = {
+export const loginInitialState = {
   userData: [],
   isUserAuthenticated: false,
   isLoading: true,
 };
 
-const LoginContext = createContext<LoginContext>(loginInitialState);
+const LoginContext = createContext<{
+  state: LoginContext;
+  dispatch: React.Dispatch<any>;
+}>({
+  state: loginInitialState,
+  dispatch: () => null,
+});
 
 export const LoginContextProvider = ({
   children,
 }: LoginContextProviderProps) => {
   const [state, dispatch] = useReducer(loginReducer, loginInitialState);
 
-  const value = {
-    ...state,
-  };
-
   return (
-    <LoginContext.Provider value={value}>{children}</LoginContext.Provider>
+    <LoginContext.Provider
+      value={{
+        state,
+        dispatch,
+      }}
+    >
+      {children}
+    </LoginContext.Provider>
   );
 };
 
