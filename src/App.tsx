@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import { LoginContextProvider } from './context/LoginContext/LoginContext';
 import Home from './pages/Home/Home';
@@ -9,13 +10,15 @@ function App() {
   return (
     <LoginContextProvider>
       <Router>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route element={<ProtectedRoutes />}>
-            <Route path='/user-cars' element={<UserCars />} />
-          </Route>
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route element={<ProtectedRoutes />}>
+              <Route path='/user-cars' element={<UserCars />} />
+            </Route>
+          </Routes>
+        </Layout>
       </Router>
     </LoginContextProvider>
   );

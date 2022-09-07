@@ -8,4 +8,5 @@ export const theme = {
   small: '1vh',
   rounded: '4px',
   gray: '#7f8c8d',
+  lightBlue: '#2980b9',
 };
