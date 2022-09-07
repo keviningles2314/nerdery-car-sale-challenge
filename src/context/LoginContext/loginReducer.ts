@@ -1,18 +1,45 @@
-import { loginInitialState } from './LoginContext';
-import { DELETE_USER, SET_USER } from './types';
-import { User } from './LoginContext';
-export const loginReducer = (state: any, action: any) => {
+import { loginInitialState, User } from './LoginContext';
+
+type ActionMap<M extends { [index: string]: any }> = {
+  [Key in keyof M]: M[Key] extends undefined
+    ? {
+        type: Key;
+      }
+    : {
+        type: Key;
+        payload: M[Key];
+      };
+};
+
+export enum Types {
+  SET_USER = 'SET_USER',
+  DELETE_USER = 'DELETE_USER',
+}
+
+type UserPayload = {
+  [Types.SET_USER]: {
+    userData: User;
+  };
+  [Types.DELETE_USER]: {};
+};
+
+export type UserActions = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
+
+export const loginReducer = (
+  state = loginInitialState,
+  action: UserActions
+) => {
   switch (action.type) {
-    case SET_USER:
+    case Types.SET_USER:
       const { userData } = action.payload;
 
       return {
         ...state,
         isUserAuthenticated: true,
-        userData: userData.users[0],
+        userData: userData,
       };
 
-    case DELETE_USER:
+    case Types.DELETE_USER:
 
     default:
       return state;
