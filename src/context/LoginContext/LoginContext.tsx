@@ -1,5 +1,11 @@
-import React, { createContext, ReactNode, useContext, useReducer } from 'react';
-import { loginReducer, UserActions } from './loginReducer';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
+import { loginReducer, Types, UserActions } from './loginReducer';
 
 interface LoginContextProviderProps {
   children: ReactNode;
@@ -39,6 +45,20 @@ export const LoginContextProvider = ({
 }: LoginContextProviderProps) => {
   const [state, dispatch] = useReducer(loginReducer, loginInitialState);
 
+  useEffect(() => {
+    if (localStorage.length > 0 && !state.isUserAuthenticated) {
+      const userLocalStorageData = localStorage.getItem('userState')!;
+
+      dispatch({
+        type: Types.SET_USER,
+        payload: { userData: JSON.parse(userLocalStorageData) },
+      });
+    } else {
+      if (state.isUserAuthenticated) {
+        localStorage.setItem('userState', JSON.stringify(state.userData));
+      }
+    }
+  }, [state]);
   return (
     <LoginContext.Provider
       value={{

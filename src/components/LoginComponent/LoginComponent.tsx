@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useQuery_UserQuery } from '../../api/graphql/__generated__/graphql-types';
+import {
+  useQuery_UserLazyQuery,
+  useQuery_UserQuery,
+} from '../../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../../context/LoginContext/LoginContext';
 import { Types } from '../../context/LoginContext/loginReducer';
 
@@ -22,31 +25,36 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
   const navigate = useNavigate();
   const { dispatch } = useLoginContext();
 
-  const { data } = useQuery_UserQuery({
-    variables: {
-      where: {
-        email: {
-          _eq: email,
-        },
-      },
-    },
-  });
+  const [getUserLazyResults, { data, error, loading }] =
+    useQuery_UserLazyQuery();
 
-  const handleClick = () => {
-    if (data!.users.length > 0) {
-      try {
+  useEffect(() => {
+    if (data) {
+      if (data!.users.length > 0) {
         dispatch({
           type: Types.SET_USER,
           payload: { userData: data!.users[0] },
         });
-      } catch (error) {
-        console.log(error);
+        navigate('/');
+        setIsError(false);
+      } else {
+        setIsError(true);
+        setIsButtonDisabled(false);
       }
-      navigate('/');
-      setIsError(false);
-    } else {
-      setIsError(true);
     }
+  }, [data, loading]);
+
+  const handleClick = () => {
+    setIsButtonDisabled(true);
+    getUserLazyResults({
+      variables: {
+        where: {
+          email: {
+            _eq: email,
+          },
+        },
+      },
+    });
   };
 
   const handleEmailValidation = (
@@ -74,6 +82,7 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
         disabled={isButtonDisabled}
       />
       {isError && <RegularText text='user not found' isBaseColor={false} />}
+      {error && <RegularText text={`${error.message}`} isBaseColor={false} />}
     </Container>
   );
 };
