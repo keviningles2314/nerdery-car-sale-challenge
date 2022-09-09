@@ -19,7 +19,7 @@ export interface User {
 
 export interface LoginContext {
   userData: User;
-  isUserAuthenticated?: boolean;
+  isUserAuthenticated: boolean;
 }
 
 export const loginInitialState = {
@@ -29,7 +29,6 @@ export const loginInitialState = {
     email: '',
   },
   isUserAuthenticated: false,
-  isLoading: true,
 };
 
 const LoginContext = createContext<{

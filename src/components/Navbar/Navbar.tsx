@@ -8,6 +8,7 @@ const Navbar = () => {
     <>
       <Container>
         <LinkElement text={'Home'} path={'/'} />
+        <LinkElement text={'Cars List'} path={'/cars-list'} />
         {state.isUserAuthenticated ? (
           <LinkElement text={'Your cars'} path={'/user-cars'} />
         ) : (

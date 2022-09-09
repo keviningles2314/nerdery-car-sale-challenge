@@ -3,10 +3,10 @@ import { CodegenConfig } from '@graphql-codegen/cli';
 const config: CodegenConfig = {
   schema: [
     {
-      ${REACT_APP_API}: {
+      'https://new-anchovy-87.hasura.app/v1/graphql': {
         headers: {
           'x-hasura-admin-secret':
-            ${REACT_APP_API_KEY},
+            'rTisquXVdS2Ffxe5nK92OnNQjK72OpuKTPWUpM4kbr33bUF5zVHj63tET1N8jhez',
         },
       },
     },

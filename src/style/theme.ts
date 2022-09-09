@@ -4,7 +4,7 @@ export const theme = {
   blue: '#2c3e50',
   yellow: '#f39c12',
   big: '3vh',
-  regular: '2vh',
+  regular: '1.5vh',
   small: '1vh',
   rounded: '4px',
   gray: '#7f8c8d',
