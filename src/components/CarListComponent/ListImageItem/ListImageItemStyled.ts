@@ -9,6 +9,6 @@ export const Container = styled.div`
 `;
 
 export const ImageItem = styled.img`
-  width: 70%;
+  width: 90%;
   height: 90%;
 `;

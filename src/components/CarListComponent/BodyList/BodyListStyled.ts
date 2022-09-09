@@ -6,7 +6,7 @@ export const Container = styled.div`
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 2px;
 `;
 
 export const Section = styled(Container)`
