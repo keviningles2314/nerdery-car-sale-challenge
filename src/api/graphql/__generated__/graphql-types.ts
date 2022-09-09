@@ -3779,7 +3779,10 @@ export type Query_UserQueryVariables = Exact<{
 
 export type Query_UserQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', first_name: string, last_name: string, email: string }> };
 
-export type Query_GetCarsQueryVariables = Exact<{ [key: string]: never; }>;
+export type Query_GetCarsQueryVariables = Exact<{
+  orderBy?: InputMaybe<Array<Cars_Order_By> | Cars_Order_By>;
+  where?: InputMaybe<Cars_Bool_Exp>;
+}>;
 
 
 export type Query_GetCarsQuery = { __typename?: 'query_root', cars: Array<{ __typename?: 'cars', batch: any, condition: any, damage_type?: string | null, description?: string | null, id: number, odometer?: number | null, price: any, sale_date: any, title?: string | null, vin: string, year?: number | null, city: { __typename?: 'cities', name: string, id: number, state: { __typename?: 'states', id: number, name: string } }, color: { __typename?: 'colors', id: number, name: string }, model: { __typename?: 'models', id: number, name: string, brand: { __typename?: 'brands', id: number, name: string } } }> };
@@ -3823,8 +3826,8 @@ export type Query_UserQueryHookResult = ReturnType<typeof useQuery_UserQuery>;
 export type Query_UserLazyQueryHookResult = ReturnType<typeof useQuery_UserLazyQuery>;
 export type Query_UserQueryResult = Apollo.QueryResult<Query_UserQuery, Query_UserQueryVariables>;
 export const Query_GetCarsDocument = gql`
-    query Query_getCars {
-  cars {
+    query Query_getCars($orderBy: [cars_order_by!], $where: cars_bool_exp) {
+  cars(order_by: $orderBy, where: $where) {
     batch
     city {
       name
@@ -3872,6 +3875,8 @@ export const Query_GetCarsDocument = gql`
  * @example
  * const { data, loading, error } = useQuery_GetCarsQuery({
  *   variables: {
+ *      orderBy: // value for 'orderBy'
+ *      where: // value for 'where'
  *   },
  * });
  */

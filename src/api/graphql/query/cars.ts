@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_CARS = gql`
-  query Query_getCars {
-    cars {
+  query Query_getCars($orderBy: [cars_order_by!], $where: cars_bool_exp) {
+    cars(order_by: $orderBy, where: $where) {
       batch
       city {
         name

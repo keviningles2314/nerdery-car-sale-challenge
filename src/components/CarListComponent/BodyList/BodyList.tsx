@@ -29,9 +29,12 @@ const BodyList = ({ carsInfoArray }: BodyListProps) => {
               primaryInfo={carInfo.odometer ? carInfo.odometer! : 'No info'}
               complementaryInfo={carInfo.price}
             />
-            <ListInfoItem primaryInfo={carInfo.condition} />
             <ListInfoItem
-              primaryInfo={`${carInfo.city.state.name}-${carInfo.city.name}`}
+              primaryInfo={carInfo.condition == 'A' ? 'Salvage Title' : 'New'}
+            />
+            <ListInfoItem
+              primaryInfo={`${carInfo.city.state.name} - ${carInfo.city.name}`}
+              complementaryInfo={carInfo.sale_date}
             />
           </Section>
         );
