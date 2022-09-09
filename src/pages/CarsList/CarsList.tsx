@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useQuery_GetCarsQuery } from '../../api/graphql/__generated__/graphql-types';
+import {
+  Order_By,
+  useQuery_GetCarsQuery,
+} from '../../api/graphql/__generated__/graphql-types';
 import CarListComponent from '../../components/CarListComponent/CarListComponent';
 import FilterComponent from '../../components/FilterComponent/FilterComponent';
 import LoadingComponent from '../../components/LoadingComponent/Loading';
@@ -21,13 +24,7 @@ const CarList = () => {
         },
       });
     } else {
-      setBatchId({});
-    }
-  }, [searchParam]);
-
-  const { data, loading, error } = useQuery_GetCarsQuery({
-    variables: {
-      where: {
+      setBatchId({
         _or: [
           {
             title: {
@@ -43,9 +40,19 @@ const CarList = () => {
                 : '',
             },
           },
-          batchId,
         ],
-      },
+      });
+    }
+  }, [searchParam]);
+
+  const { data, loading, error } = useQuery_GetCarsQuery({
+    variables: {
+      orderBy: [
+        {
+          sale_date: Order_By.Desc,
+        },
+      ],
+      where: batchId,
     },
   });
   return (
