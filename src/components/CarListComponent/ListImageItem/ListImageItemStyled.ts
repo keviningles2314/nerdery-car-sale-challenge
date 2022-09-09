@@ -5,8 +5,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   box-sizing: border-box;
+  padding: 8px;
 `;
 
 export const ImageItem = styled.img`
-  width: 80%;
+  width: 70%;
+  height: 90%;
 `;

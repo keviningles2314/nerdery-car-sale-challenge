@@ -26,7 +26,7 @@ const BodyList = ({ carsInfoArray }: BodyListProps) => {
               complementaryInfo={carInfo.batch}
             />
             <ListInfoItem
-              primaryInfo={carInfo.odometer!}
+              primaryInfo={carInfo.odometer ? carInfo.odometer! : 'No info'}
               complementaryInfo={carInfo.price}
             />
             <ListInfoItem primaryInfo={carInfo.condition} />
