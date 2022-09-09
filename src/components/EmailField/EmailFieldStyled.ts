@@ -6,4 +6,6 @@ export const StyledEmailField = styled.input`
   border-radius: ${theme.rounded};
   border: none;
   padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 `;

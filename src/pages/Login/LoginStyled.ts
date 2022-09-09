@@ -13,4 +13,5 @@ export const Container = styled(ParentContainer)`
   display: flex;
   flex-direction: column;
   text-align: center;
+  box-sizing: border-box;
 `;
