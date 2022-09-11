@@ -14,6 +14,7 @@ const Navbar = () => {
         ) : (
           <LinkElement text={'Login'} path={'/login'} />
         )}
+        <LinkElement text={'+ Add a car'} path={'/add-a-car'} />
       </Container>
     </>
   );

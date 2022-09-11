@@ -1,8 +1,7 @@
 import Button from '../Button/Button';
 import EmailField from '../EmailField/EmailField';
 import { Container } from './FilterComponentStyled';
-import { useSearchParams } from 'react-router-dom';
-import React, { SetStateAction, useState } from 'react';
+import React, { useState } from 'react';
 import SelectOption from '../SelectOption/SelectOption';
 import RegularText from '../Text/RegularText/RegularText';
 
@@ -34,6 +33,7 @@ const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
       setSearchParam({ search: '', order: orderOption ? orderOption : 'desc' });
     }
   };
+
   return (
     <>
       <Container>
