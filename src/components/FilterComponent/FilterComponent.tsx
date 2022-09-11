@@ -16,7 +16,11 @@ const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
   };
 
   const onClickHandler = () => {
-    setSearchParam({ search: textSearch! });
+    if (textSearch) {
+      setSearchParam({ search: textSearch! });
+    } else {
+      setSearchParam({ search: '' });
+    }
   };
   return (
     <>

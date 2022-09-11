@@ -5,3 +5,15 @@ export const emailValidation = (email: string) => {
     return false;
   }
 };
+
+export const isValidUuid = (uuid: string) => {
+  if (
+    /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(
+      uuid
+    )
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};

@@ -7,24 +7,21 @@ import {
 import CarListComponent from '../../components/CarListComponent/CarListComponent';
 import FilterComponent from '../../components/FilterComponent/FilterComponent';
 import LoadingComponent from '../../components/LoadingComponent/Loading';
+import { isValidUuid } from '../../helpers/validators';
 import { Container } from './CarsListStyled';
 
 const CarList = () => {
   const [searchParam, setSearchParam] = useSearchParams();
-  const [batchId, setBatchId] = useState({});
+  const [filterObject, setFilterObject] = useState({});
   useEffect(() => {
-    if (
-      /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(
-        searchParam.get('search')!
-      )
-    ) {
-      setBatchId({
+    if (isValidUuid(searchParam.get('search')!)) {
+      setFilterObject({
         batch: {
           _eq: searchParam.get('search')!,
         },
       });
     } else {
-      setBatchId({
+      setFilterObject({
         _or: [
           {
             title: {
@@ -52,7 +49,7 @@ const CarList = () => {
           sale_date: Order_By.Desc,
         },
       ],
-      where: batchId,
+      where: filterObject,
     },
   });
   return (
