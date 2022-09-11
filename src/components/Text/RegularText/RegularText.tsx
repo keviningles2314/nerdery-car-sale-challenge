@@ -3,11 +3,14 @@ import { RegularTextStyled } from './RegularTextStyled';
 interface RegularTextProps {
   text: string;
   isBaseColor: boolean;
+  isBold?: boolean;
 }
 
-const RegularText = ({ text, isBaseColor }: RegularTextProps) => {
+const RegularText = ({ text, isBaseColor, isBold }: RegularTextProps) => {
   return (
-    <RegularTextStyled isBaseColor={isBaseColor}>{text}</RegularTextStyled>
+    <RegularTextStyled isBaseColor={isBaseColor} isBold={isBold!}>
+      {text}
+    </RegularTextStyled>
   );
 };
 

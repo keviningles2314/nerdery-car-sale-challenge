@@ -46,7 +46,11 @@ const CarList = () => {
     variables: {
       orderBy: [
         {
-          sale_date: Order_By.Desc,
+          sale_date: searchParam.get('order')
+            ? searchParam.get('order') == 'desc'
+              ? Order_By.Desc
+              : Order_By.Asc
+            : Order_By.Desc,
         },
       ],
       where: filterObject,

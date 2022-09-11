@@ -5,5 +5,5 @@ export const Container = styled.div`
   margin-left: 4%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 5px;
 `;
