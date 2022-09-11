@@ -42,7 +42,7 @@ const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
           placeholder={'Search by VIN, Title or Batch No'}
         />
         <Button title='Search' onClick={onClickHandler} />
-        <RegularText text='Order By: ' isBaseColor />
+        <RegularText text='Order By Sale Date: ' isBaseColor />
         <SelectOption
           optionArray={[
             { value: 'desc', text: 'Descending' },
