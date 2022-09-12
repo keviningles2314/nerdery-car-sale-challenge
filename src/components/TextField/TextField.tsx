@@ -1,6 +1,6 @@
-import { StyledEmailField } from './EmailFieldStyled';
+import { StyledEmailField } from './TextFieldStyled';
 
-interface EmailFieldProps {
+interface TextFieldProps {
   placeholder?: string;
   onChangeText?: React.ChangeEventHandler<HTMLInputElement>;
   register?: Function;
@@ -8,13 +8,13 @@ interface EmailFieldProps {
   fieldRequired?: boolean;
 }
 
-const EmailField = ({
+const TextField = ({
   placeholder = 'Insert a text',
   onChangeText,
   register,
   fieldName,
   fieldRequired,
-}: EmailFieldProps) => {
+}: TextFieldProps) => {
   return (
     <StyledEmailField
       type='text'
@@ -29,4 +29,4 @@ const EmailField = ({
   );
 };
 
-export default EmailField;
+export default TextField;

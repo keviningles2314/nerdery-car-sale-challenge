@@ -5,7 +5,7 @@ import {
 } from '../../api/graphql/__generated__/graphql-types';
 import { fieldNameValues } from '../../helpers/objectValues';
 import Button from '../Button/Button';
-import EmailField from '../EmailField/EmailField';
+import EmailField from '../TextField/TextField';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import SelectOption from '../SelectOption/SelectOption';
 import {

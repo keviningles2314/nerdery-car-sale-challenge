@@ -1,5 +1,5 @@
 import Button from '../Button/Button';
-import EmailField from '../EmailField/EmailField';
+import EmailField from '../TextField/TextField';
 import { Container } from './FilterComponentStyled';
 import React, { useState } from 'react';
 import SelectOption from '../SelectOption/SelectOption';

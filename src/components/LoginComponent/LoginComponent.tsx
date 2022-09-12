@@ -5,7 +5,7 @@ import { useLoginContext } from '../../context/LoginContext/LoginContext';
 import { Types } from '../../context/LoginContext/loginReducer';
 import { emailValidation } from '../../helpers/validators';
 import Button from '../Button/Button';
-import EmailField from '../EmailField/EmailField';
+import EmailField from '../TextField/TextField';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
 import { Container } from './LoginComponentStyled';
