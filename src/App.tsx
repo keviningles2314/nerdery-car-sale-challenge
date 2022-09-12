@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
+import PublicRoutes from './components/PublicRoutes/PublicRoutes';
 import { LoginContextProvider } from './context/LoginContext/LoginContext';
 import AddCar from './pages/AddCar/AddCar';
 import CarsList from './pages/CarsList/CarsList';
@@ -15,7 +16,9 @@ function App() {
         <Layout>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
+            <Route element={<PublicRoutes />}>
+              <Route path='/login' element={<Login />} />
+            </Route>
             <Route path='/add-a-car' element={<AddCar />} />
             <Route path='/cars-list' element={<CarsList />} />
             <Route element={<ProtectedRoutes />}>
