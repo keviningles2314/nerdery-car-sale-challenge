@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "schema:generate": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --require dotenv/config"
   },
   "eslintConfig": {
     "extends": []

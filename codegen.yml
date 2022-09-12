@@ -1,0 +1,15 @@
+overwrite: true
+schema:
+  ${REACT_APP_API}:
+    headers:
+      x-hasura-admin-secret: ${REACT_APP_TOKEN_API}
+documents: './src/**/!(*.d).{ts,tsx}'
+generates:
+  ./src/api/graphql/__generated__/graphql-types.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+  ./src/api/graphql/__generated__/graphql.schema.json:
+    plugins:
+      - 'introspection'
