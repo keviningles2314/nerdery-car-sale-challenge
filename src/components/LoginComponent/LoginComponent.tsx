@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  useQuery_UserLazyQuery,
-  useQuery_UserQuery,
-} from '../../api/graphql/__generated__/graphql-types';
+import { useQuery_UserLazyQuery } from '../../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../../context/LoginContext/LoginContext';
 import { Types } from '../../context/LoginContext/loginReducer';
-
 import { emailValidation } from '../../helpers/validators';
 import Button from '../Button/Button';
 import EmailField from '../EmailField/EmailField';
-import BigText from '../Text/BigText/BigText';
+import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
+import BigText from '../Text/HeadingTitle/HeadingTitle';
 import RegularText from '../Text/RegularText/RegularText';
 import { Container } from './LoginComponentStyled';
 
@@ -71,7 +68,7 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
 
   return (
     <Container>
-      <BigText text={title} isBaseColor={false} />
+      <HeadingTitle text={title} isBaseColor={false} />
       <EmailField
         placeholder='Insert your email'
         onChangeText={handleEmailValidation}

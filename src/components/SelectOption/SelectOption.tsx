@@ -8,7 +8,8 @@ type Option = {
 
 interface SelectOptionProps {
   optionArray?: Option[];
-  onChangeOption: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeOption?: React.ChangeEventHandler<HTMLSelectElement>;
+  register?: Function;
 }
 
 const SelectOption = ({
@@ -19,10 +20,14 @@ const SelectOption = ({
     },
   ],
   onChangeOption,
+  register,
 }: SelectOptionProps) => {
   return (
     <>
-      <Select onChange={onChangeOption}>
+      <Select
+        onChange={onChangeOption}
+        {...(register && { ...register!('gender') })}
+      >
         {optionArray.map((option, index) => {
           return (
             <Option key={index} value={option.value}>

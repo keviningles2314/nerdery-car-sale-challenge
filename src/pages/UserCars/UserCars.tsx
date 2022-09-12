@@ -1,5 +1,11 @@
+import HeadingTitle from '../../components/Text/HeadingTitle/HeadingTitle';
+
 const UserCars = () => {
-  return <>Protected Page</>;
+  return (
+    <>
+      <HeadingTitle text='Protected Page' isBaseColor />
+    </>
+  );
 };
 
 export default UserCars;

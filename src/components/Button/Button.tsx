@@ -1,5 +1,3 @@
-import BigText from '../Text/BigText/BigText';
-import Title from '../Text/BigText/BigText';
 import RegularText from '../Text/RegularText/RegularText';
 import { StyledButton } from './ButtonStyled';
 
