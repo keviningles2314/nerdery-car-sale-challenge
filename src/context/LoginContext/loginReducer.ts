@@ -7,7 +7,7 @@ type ActionMap<M extends { [index: string]: any }> = {
       }
     : {
         type: Key;
-        payload: M[Key];
+        payload?: M[Key];
       };
 };
 
@@ -31,7 +31,7 @@ export const loginReducer = (
 ) => {
   switch (action.type) {
     case Types.SET_USER:
-      const { userData } = action.payload;
+      const { userData } = action.payload!;
 
       return {
         ...state,
@@ -40,6 +40,15 @@ export const loginReducer = (
       };
 
     case Types.DELETE_USER:
+      return {
+        ...state,
+        userData: {
+          first_name: '',
+          last_name: '',
+          email: '',
+        },
+        isUserAuthenticated: false,
+      };
 
     default:
       return state;

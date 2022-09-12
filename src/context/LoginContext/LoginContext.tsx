@@ -34,9 +34,11 @@ export const loginInitialState = {
 const LoginContext = createContext<{
   state: LoginContext;
   dispatch: React.Dispatch<UserActions>;
+  logOutHandler: () => void;
 }>({
   state: loginInitialState,
   dispatch: () => null,
+  logOutHandler: () => null,
 });
 
 export const LoginContextProvider = ({
@@ -58,11 +60,20 @@ export const LoginContextProvider = ({
       }
     }
   }, [state]);
+
+  const logOutHandler = () => {
+    dispatch({
+      type: Types.DELETE_USER,
+    });
+    localStorage.clear();
+  };
+
   return (
     <LoginContext.Provider
       value={{
         state,
         dispatch,
+        logOutHandler,
       }}
     >
       {children}
