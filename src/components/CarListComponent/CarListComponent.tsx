@@ -18,4 +18,5 @@ const CarListComponent = ({ carsInfoArray }: CarListComponentProps) => {
     </Container>
   );
 };
+
 export default CarListComponent;

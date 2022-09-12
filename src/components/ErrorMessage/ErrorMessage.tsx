@@ -1,5 +1,6 @@
 import RegularText from '../Text/RegularText/RegularText';
 import { Container } from './ErrorMessageStyled';
+
 interface ErrorMessageProps {
   message: string;
 }

@@ -54,4 +54,5 @@ const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
     </>
   );
 };
+
 export default FilterComponent;

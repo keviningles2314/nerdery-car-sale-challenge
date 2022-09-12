@@ -1,5 +1,4 @@
 import { useLoginContext } from '../../context/LoginContext/LoginContext';
-import { Types } from '../../context/LoginContext/loginReducer';
 import Button from '../Button/Button';
 import LinkElement from '../LinkElement/LinkElement';
 import RegularText from '../Text/RegularText/RegularText';

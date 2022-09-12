@@ -1,4 +1,5 @@
 import { StyledEmailField } from './EmailFieldStyled';
+
 interface EmailFieldProps {
   placeholder?: string;
   onChangeText?: React.ChangeEventHandler<HTMLInputElement>;

@@ -4,6 +4,7 @@ import { Container } from './HeaderListTitleStyled';
 interface HeaderListTitleProps {
   title: string;
 }
+
 const HeaderListTitle = ({ title }: HeaderListTitleProps) => {
   return (
     <Container>
@@ -11,4 +12,5 @@ const HeaderListTitle = ({ title }: HeaderListTitleProps) => {
     </Container>
   );
 };
+
 export default HeaderListTitle;

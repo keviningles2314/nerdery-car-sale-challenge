@@ -1,5 +1,6 @@
 import path from 'node:path/win32';
 import { Container, ImageItem } from './ListImageItemStyled';
+
 interface ListImageItemProps {
   path: string;
 }

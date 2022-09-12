@@ -14,11 +14,13 @@ import {
   NestedElements,
   SectionNestedElement,
 } from './AddCarFormStyled';
+
 enum GenderEnum {
   female = 'female',
   male = 'male',
   other = 'other',
 }
+
 export interface IFormInput {
   firstName: string;
   odometer: string;
@@ -28,6 +30,7 @@ export interface IFormInput {
   age: number;
   gender: GenderEnum;
 }
+
 const AddCarForm = () => {
   const {
     register,
@@ -43,6 +46,7 @@ const AddCarForm = () => {
   // console.log(data);
 
   const { title, odometer, vin } = fieldNameValues;
+
   return (
     <Container>
       {!error ? (

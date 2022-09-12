@@ -8,8 +8,6 @@ import Button from '../Button/Button';
 import EmailField from '../EmailField/EmailField';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
-import BigText from '../Text/HeadingTitle/HeadingTitle';
-import RegularText from '../Text/RegularText/RegularText';
 import { Container } from './LoginComponentStyled';
 
 interface LoginComponentProps {
@@ -20,6 +18,7 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [email, setEmail] = useState<string>('');
   const [isError, setIsError] = useState(false);
+
   const navigate = useNavigate();
   const { dispatch } = useLoginContext();
 
@@ -84,4 +83,5 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
     </Container>
   );
 };
+
 export default LoginComponent;
