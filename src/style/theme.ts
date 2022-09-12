@@ -10,4 +10,5 @@ export const theme = {
   gray: '#7f8c8d',
   lightBlue: '#2980b9',
   colorTextField: '#f5f5f5',
+  red: '#c0392b',
 };

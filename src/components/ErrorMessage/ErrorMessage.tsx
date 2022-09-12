@@ -1,5 +1,4 @@
-import RegularText from '../Text/RegularText/RegularText';
-import { Container } from './ErrorMessageStyled';
+import { Container, ErrorParagraph } from './ErrorMessageStyled';
 
 interface ErrorMessageProps {
   message: string;
@@ -8,7 +7,7 @@ interface ErrorMessageProps {
 const ErrorMessage = ({ message }: ErrorMessageProps) => {
   return (
     <Container>
-      <RegularText text={`Error: ${message}`} isBaseColor={false} />
+      <ErrorParagraph>Error : {message}</ErrorParagraph>
     </Container>
   );
 };
