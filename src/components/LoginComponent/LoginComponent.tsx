@@ -6,6 +6,7 @@ import { Types } from '../../context/LoginContext/loginReducer';
 import { emailValidation } from '../../helpers/validators';
 import Button from '../Button/Button';
 import EmailField from '../EmailField/EmailField';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
 import BigText from '../Text/HeadingTitle/HeadingTitle';
 import RegularText from '../Text/RegularText/RegularText';
@@ -78,8 +79,8 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
         onClick={handleClick}
         disabled={isButtonDisabled}
       />
-      {isError && <RegularText text='user not found' isBaseColor={false} />}
-      {error && <RegularText text={`${error.message}`} isBaseColor={false} />}
+      {isError && <ErrorMessage message='User Not Found' />}
+      {error && <ErrorMessage message={error.message} />}
     </Container>
   );
 };

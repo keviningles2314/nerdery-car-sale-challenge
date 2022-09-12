@@ -5,6 +5,7 @@ import {
   useQuery_GetCarsQuery,
 } from '../../api/graphql/__generated__/graphql-types';
 import CarListComponent from '../../components/CarListComponent/CarListComponent';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import FilterComponent from '../../components/FilterComponent/FilterComponent';
 import LoadingComponent from '../../components/LoadingComponent/Loading';
 import { isValidUuid } from '../../helpers/validators';
@@ -59,8 +60,13 @@ const CarList = () => {
   return (
     <Container>
       <FilterComponent setSearchParam={setSearchParam} />
+
       {loading ? (
         <LoadingComponent />
+      ) : error ? (
+        <ErrorMessage message={error.message} />
+      ) : data?.cars.length == 0 ? (
+        <ErrorMessage message='No data Found' />
       ) : (
         <CarListComponent carsInfoArray={data!} />
       )}

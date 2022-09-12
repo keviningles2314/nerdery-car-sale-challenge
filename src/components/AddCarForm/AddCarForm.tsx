@@ -6,6 +6,7 @@ import {
 import { fieldNameValues } from '../../helpers/objectValues';
 import Button from '../Button/Button';
 import EmailField from '../EmailField/EmailField';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import SelectOption from '../SelectOption/SelectOption';
 import {
   Container,
@@ -44,118 +45,122 @@ const AddCarForm = () => {
   const { title, odometer, vin } = fieldNameValues;
   return (
     <Container>
-      <Form>
-        <EmailField
-          register={register}
-          fieldName={title}
-          placeholder={title}
-          fieldRequired
-        />
-        {errors.title?.type === 'required' && `${title} is Required`}
-        <NestedElements>
-          <SectionNestedElement>
-            <EmailField
-              register={register}
-              fieldName={odometer}
-              placeholder={odometer}
-              fieldRequired
-            />
-            {errors.title?.type === 'required' && `${odometer} is Required`}
-          </SectionNestedElement>
-          <SectionNestedElement>
-            <EmailField
-              register={register}
-              fieldName={vin}
-              placeholder={vin}
-              fieldRequired
-            />
-            {errors.vin?.type === 'required' && `${vin} is Required`}
-          </SectionNestedElement>
-        </NestedElements>
-        <SelectOption
-          optionArray={[
-            { value: 'female', text: 'Female' },
-            { value: 'male', text: 'Male' },
-            { value: 'other', text: 'Other' },
-          ]}
-        />
-        {/* <select {...register('gender')}>
-          <option value='female'>female</option>
-          <option value='male'>male</option>
-          <option value='other'>other</option>
-        </select> */}
-        {/* 
-        <NestedElements>
-          <TextField
-            placeholder='Brand'
-            {...register('vin', { required: true, maxLength: 20 })}
+      {!error ? (
+        <Form>
+          <EmailField
+            register={register}
+            fieldName={title}
+            placeholder={title}
+            fieldRequired
           />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-
-          <TextField
-            placeholder='Model'
-            {...register('vin', { required: true, maxLength: 20 })}
+          {errors.title?.type === 'required' && `${title} is Required`}
+          <NestedElements>
+            <SectionNestedElement>
+              <EmailField
+                register={register}
+                fieldName={odometer}
+                placeholder={odometer}
+                fieldRequired
+              />
+              {errors.title?.type === 'required' && `${odometer} is Required`}
+            </SectionNestedElement>
+            <SectionNestedElement>
+              <EmailField
+                register={register}
+                fieldName={vin}
+                placeholder={vin}
+                fieldRequired
+              />
+              {errors.vin?.type === 'required' && `${vin} is Required`}
+            </SectionNestedElement>
+          </NestedElements>
+          <SelectOption
+            optionArray={[
+              { value: 'female', text: 'Female' },
+              { value: 'male', text: 'Male' },
+              { value: 'other', text: 'Other' },
+            ]}
           />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-        </NestedElements>
-        <NestedElements>
-          <TextField
-            placeholder='Sale Date'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-
-          <TextField
-            placeholder='Price'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-        </NestedElements>
-        <NestedElements>
-          <TextField
-            placeholder='Condition'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-
-          <TextField
-            placeholder='Damage Type'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-        </NestedElements>
-        <NestedElements>
-          <TextField
-            placeholder='Year'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-          <TextField
-            placeholder='Color'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-        </NestedElements>
-        <NestedElements>
-          <TextField
-            placeholder='State'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-
-          <TextField
-            placeholder='City'
-            {...register('vin', { required: true, maxLength: 20 })}
-          />
-          {errors.vin?.type === 'required' && 'Vin is required'}
-        </NestedElements>
-
+          {/* <select {...register('gender')}>
+        <option value='female'>female</option>
+        <option value='male'>male</option>
+        <option value='other'>other</option>
+      </select> */}
+          {/* 
+      <NestedElements>
         <TextField
-          placeholder='Description'
+          placeholder='Brand'
           {...register('vin', { required: true, maxLength: 20 })}
         />
-        {errors.vin?.type === 'required' && 'Vin is required'} */}
-        <Button title='Create' onClick={handleSubmit(onSubmit)} />
-      </Form>
+        {errors.vin?.type === 'required' && 'Vin is required'}
+
+        <TextField
+          placeholder='Model'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+      </NestedElements>
+      <NestedElements>
+        <TextField
+          placeholder='Sale Date'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+
+        <TextField
+          placeholder='Price'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+      </NestedElements>
+      <NestedElements>
+        <TextField
+          placeholder='Condition'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+
+        <TextField
+          placeholder='Damage Type'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+      </NestedElements>
+      <NestedElements>
+        <TextField
+          placeholder='Year'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+        <TextField
+          placeholder='Color'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+      </NestedElements>
+      <NestedElements>
+        <TextField
+          placeholder='State'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+
+        <TextField
+          placeholder='City'
+          {...register('vin', { required: true, maxLength: 20 })}
+        />
+        {errors.vin?.type === 'required' && 'Vin is required'}
+      </NestedElements>
+
+      <TextField
+        placeholder='Description'
+        {...register('vin', { required: true, maxLength: 20 })}
+      />
+      {errors.vin?.type === 'required' && 'Vin is required'} */}
+          <Button title='Create' onClick={handleSubmit(onSubmit)} />
+        </Form>
+      ) : (
+        <ErrorMessage message={error.message} />
+      )}
     </Container>
   );
 };
