@@ -3,7 +3,7 @@ import { BaseText } from '../../style/baseText';
 import { theme } from '../../style/theme';
 
 export const Container = styled.div`
-  width: 50%;
+  width: 100%;
   text-align: center;
 `;
 

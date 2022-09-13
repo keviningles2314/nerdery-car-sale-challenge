@@ -1,11 +1,12 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import 'react-datepicker/dist/react-datepicker.css';
+import { addYears, subYears } from 'date-fns';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import {
   useGet_Add_Car_Fields_QueryLazyQuery,
   useGet_Add_Car_Fields_QueryQuery,
 } from '../../api/graphql/__generated__/graphql-types';
 import { fieldNameValues } from '../../helpers/objectValues';
 import Button from '../Button/Button';
-import EmailField from '../TextField/TextField';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import {
   ConditionContainer,
@@ -20,26 +21,63 @@ import {
 } from './AddCarFormStyled';
 import RegularText from '../Text/RegularText/RegularText';
 import TextField from '../TextField/TextField';
+import ReactDatePicker from 'react-datepicker';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-export interface IFormInput {
+export type IFormInput = {
   price: number;
   odometer: number;
   vin: string;
   title: string;
   damage: string;
-  year: number;
+  year: Date;
   description: string;
-}
+  saleDate: Date;
+  condition: string;
+  brand: number;
+  model: number;
+  color: number;
+  state: number;
+  city: number;
+};
+
+const schema = yup.object().shape({
+  title: yup.string().required(),
+  odometer: yup
+    .number()
+    .required()
+    .positive()
+    .typeError('Please insert a valid ODOmeter'),
+  vin: yup.string().required(),
+  price: yup
+    .number()
+    .required()
+    .positive()
+    .typeError('Please insert a valid Price'),
+  damage: yup.string().required(),
+  description: yup.string().required(),
+  saleDate: yup.date().required().typeError('Sale Date is required'),
+  year: yup.date().required().typeError('Vehicle Year is required'),
+  condition: yup.string().required().typeError('Please Select a condition'),
+  brand: yup.number().required().typeError('Please Select a brand'),
+  model: yup.number().required().typeError('Please Select a Model'),
+  color: yup.number().required().typeError('Please Select a Color'),
+  state: yup.number().required().typeError('Please Select a Color'),
+  city: yup.number().required().typeError('Please Select a Color'),
+});
 
 const AddCarForm = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<IFormInput>();
+    control,
+  } = useForm<IFormInput>({
+    resolver: yupResolver(schema),
+  });
 
-  const { title, odometer, vin, price, damage, year, description } =
-    fieldNameValues;
+  const { title, odometer, vin, price, damage, description } = fieldNameValues;
   const { data, error, loading } = useGet_Add_Car_Fields_QueryQuery();
 
   const [
@@ -85,9 +123,8 @@ const AddCarForm = () => {
             placeholder={title}
             fieldRequired
           />
-          {errors.title?.type === 'required' && (
-            <ErrorMessage message={`${title} is Required`} />
-          )}
+          {errors.title && <ErrorMessage message={errors.title.message!} />}
+
           <NestedElements>
             <SectionNestedElement>
               <TextField
@@ -96,10 +133,11 @@ const AddCarForm = () => {
                 placeholder={odometer}
                 fieldRequired
               />
-              {errors.title?.type === 'required' && (
-                <ErrorMessage message={`${odometer} is Required`} />
+              {errors.odometer && (
+                <ErrorMessage message={errors.odometer.message!} />
               )}
             </SectionNestedElement>
+
             <SectionNestedElement>
               <TextField
                 register={register}
@@ -107,46 +145,70 @@ const AddCarForm = () => {
                 placeholder={vin}
                 fieldRequired
               />
-              {errors.vin?.type === 'required' && (
-                <ErrorMessage message={`${vin} is Required`} />
-              )}
+              {errors.vin && <ErrorMessage message={errors.vin.message!} />}
             </SectionNestedElement>
           </NestedElements>
+
           <NestedElements>
-            <SelectOption onChange={handleOptionChange}>
-              <OptionElement value=''>Select Brand</OptionElement>
-              {!loading && (
-                <>
-                  {data?.brands.map((brand) => {
-                    return (
-                      <OptionElement key={brand.id} value={brand.id}>
-                        {brand.name}
-                      </OptionElement>
-                    );
-                  })}
-                </>
-              )}
-            </SelectOption>
-            <SelectOption>
-              <OptionElement value=''>Select Model</OptionElement>
-              {!lazyLoading && (
-                <>
-                  {lazyData?.models.map((model) => {
-                    return (
-                      <OptionElement key={model.id} value={model.id}>
-                        {model.name}
-                      </OptionElement>
-                    );
-                  })}
-                </>
-              )}
-            </SelectOption>
+            <SectionNestedElement>
+              <SelectOption
+                {...register('brand')}
+                onChange={handleOptionChange}
+              >
+                <OptionElement value=''>Select Brand</OptionElement>
+                {!loading && (
+                  <>
+                    {data?.brands.map((brand) => {
+                      return (
+                        <OptionElement key={brand.id} value={brand.id}>
+                          {brand.name}
+                        </OptionElement>
+                      );
+                    })}
+                  </>
+                )}
+              </SelectOption>
+              {errors.brand && <ErrorMessage message={errors.brand.message!} />}
+            </SectionNestedElement>
+            <SectionNestedElement>
+              <SelectOption {...register('model')}>
+                <OptionElement value=''>Select Model</OptionElement>
+                {!lazyLoading && (
+                  <>
+                    {lazyData?.models.map((model) => {
+                      return (
+                        <OptionElement key={model.id} value={model.id}>
+                          {model.name}
+                        </OptionElement>
+                      );
+                    })}
+                  </>
+                )}
+              </SelectOption>
+              {errors.model && <ErrorMessage message={errors.model.message!} />}
+            </SectionNestedElement>
           </NestedElements>
+
           <NestedElements>
             <SectionNestedElement>
               <RegularText text='Sale Date' isBaseColor />
-              <InputElementField type='date' />
+              <Controller
+                control={control}
+                name='saleDate'
+                render={({ field: { onChange, value, ref } }) => (
+                  <ReactDatePicker
+                    minDate={new Date()}
+                    onChange={onChange}
+                    selected={value}
+                    placeholderText='Select a Sale Date'
+                  />
+                )}
+              />
+              {errors.saleDate && (
+                <ErrorMessage message={errors.saleDate.message!} />
+              )}
             </SectionNestedElement>
+
             <SectionNestedElement>
               <TextField
                 register={register}
@@ -154,25 +216,36 @@ const AddCarForm = () => {
                 placeholder={price}
                 fieldRequired
               />
-              {errors.price?.type === 'required' && (
-                <ErrorMessage message={`${price} is Required`} />
-              )}
+              {errors.price && <ErrorMessage message={errors.price.message!} />}
             </SectionNestedElement>
           </NestedElements>
+
           <NestedElements>
             <SectionNestedElement>
-              <RegularText text='Condition :' isBaseColor />
+              <RegularText text='Vehicle Condition :' isBaseColor />
               <ConditionContainer>
-                <LabelCondition>
+                <LabelCondition htmlFor='salvage'>
                   <RegularText text='A: Salvage Title' isBaseColor />
-                  <InputElementField type='radio' value='A' />
+                  <InputElementField
+                    {...register('condition')}
+                    type='radio'
+                    value='A'
+                  />
                 </LabelCondition>
-                <LabelCondition>
+                <LabelCondition htmlFor='new'>
                   <RegularText text='N: New' isBaseColor />
-                  <InputElementField type='radio' value='N' />
+                  <InputElementField
+                    type='radio'
+                    {...register('condition')}
+                    value='N'
+                  />
                 </LabelCondition>
               </ConditionContainer>
+              {errors.condition && (
+                <ErrorMessage message={errors.condition.message!} />
+              )}
             </SectionNestedElement>
+
             <SectionNestedElement>
               <TextField
                 register={register}
@@ -180,25 +253,33 @@ const AddCarForm = () => {
                 placeholder={damage}
                 fieldRequired
               />
-              {errors.damage?.type === 'required' && (
-                <ErrorMessage message={`${damage} is Required`} />
+              {errors.damage && (
+                <ErrorMessage message={errors.damage.message!} />
               )}
             </SectionNestedElement>
           </NestedElements>
           <NestedElements>
             <SectionNestedElement>
-              <TextField
-                register={register}
-                fieldName={year}
-                placeholder={year}
-                fieldRequired
+              <RegularText text='Vehicle Year' isBaseColor />
+              <Controller
+                control={control}
+                name='year'
+                render={({ field: { onChange, value, ref } }) => (
+                  <ReactDatePicker
+                    onChange={onChange}
+                    selected={value}
+                    showYearPicker
+                    placeholderText='Select a Year'
+                    dateFormat='yyyy'
+                    minDate={subYears(new Date(), 50)}
+                    maxDate={addYears(new Date(), 1)}
+                  />
+                )}
               />
-              {errors.year?.type === 'required' && (
-                <ErrorMessage message={`${year} is Required`} />
-              )}
+              {errors.year && <ErrorMessage message={errors.year.message!} />}
             </SectionNestedElement>
             <SectionNestedElement>
-              <SelectOption>
+              <SelectOption {...register('color')}>
                 <OptionElement value=''>Select Color</OptionElement>
                 {!loading && (
                   <>
@@ -212,37 +293,47 @@ const AddCarForm = () => {
                   </>
                 )}
               </SelectOption>
+              {errors.color && <ErrorMessage message={errors.color.message!} />}
             </SectionNestedElement>
           </NestedElements>
           <NestedElements>
-            <SelectOption onChange={handleOptionStateChange}>
-              <OptionElement value=''>Select State</OptionElement>
-              {!loading && (
-                <>
-                  {data?.states.map((state) => {
-                    return (
-                      <OptionElement key={state.id} value={state.id}>
-                        {state.name}
-                      </OptionElement>
-                    );
-                  })}
-                </>
-              )}
-            </SelectOption>
-            <SelectOption>
-              <OptionElement value=''>Select City</OptionElement>
-              {!lazyLoading && (
-                <>
-                  {lazyData?.cities.map((city) => {
-                    return (
-                      <OptionElement key={city.id} value={city.id}>
-                        {city.name}
-                      </OptionElement>
-                    );
-                  })}
-                </>
-              )}
-            </SelectOption>
+            <SectionNestedElement>
+              <SelectOption
+                {...register('state')}
+                onChange={handleOptionStateChange}
+              >
+                <OptionElement value=''>Select State</OptionElement>
+                {!loading && (
+                  <>
+                    {data?.states.map((state) => {
+                      return (
+                        <OptionElement key={state.id} value={state.id}>
+                          {state.name}
+                        </OptionElement>
+                      );
+                    })}
+                  </>
+                )}
+              </SelectOption>
+              {errors.state && <ErrorMessage message={errors.state.message!} />}
+            </SectionNestedElement>
+            <SectionNestedElement>
+              <SelectOption {...register('city')}>
+                <OptionElement value=''>Select City</OptionElement>
+                {!lazyLoading && (
+                  <>
+                    {lazyData?.cities.map((city) => {
+                      return (
+                        <OptionElement key={city.id} value={city.id}>
+                          {city.name}
+                        </OptionElement>
+                      );
+                    })}
+                  </>
+                )}
+              </SelectOption>
+              {errors.city && <ErrorMessage message={errors.city.message!} />}
+            </SectionNestedElement>
           </NestedElements>
           <TextField
             register={register}
@@ -250,8 +341,8 @@ const AddCarForm = () => {
             placeholder={description}
             fieldRequired
           />
-          {errors.description?.type === 'required' && (
-            <ErrorMessage message={`${description} is Required`} />
+          {errors.description && (
+            <ErrorMessage message={errors.description.message!} />
           )}
 
           <Button title='Create' onClick={handleSubmit(onSubmit)} />

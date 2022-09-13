@@ -6,4 +6,5 @@ export const fieldNameValues = {
   damage: 'damage',
   year: 'year',
   description: 'description',
+  saleDate: 'saleDate',
 };
