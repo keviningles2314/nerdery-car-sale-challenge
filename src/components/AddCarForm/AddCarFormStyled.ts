@@ -21,6 +21,7 @@ export const NestedElements = styled.div`
 
 export const SectionNestedElement = styled(NestedElements)`
   flex-direction: column;
+  justify-content: center;
   width: 100%;
 `;
 
