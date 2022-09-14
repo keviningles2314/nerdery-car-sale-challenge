@@ -56,6 +56,7 @@ const CarList = () => {
       ],
       where: filterObject,
     },
+    fetchPolicy: 'no-cache',
   });
   return (
     <Container>

@@ -104,10 +104,8 @@ const AddCarForm = () => {
 
   const { data, error, loading } = useGet_Add_Car_Fields_QueryQuery();
 
-  const [
-    getQuery_Get_Add_Car_LazyQuery,
-    { data: lazyData, loading: lazyLoading },
-  ] = useGet_Add_Car_Fields_QueryLazyQuery();
+  const [getAddCarfieldsLazyQuery, { data: lazyData, loading: lazyLoading }] =
+    useGet_Add_Car_Fields_QueryLazyQuery();
 
   const [
     insertCar,
@@ -139,7 +137,7 @@ const AddCarForm = () => {
   const handleOptionStateChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    getQuery_Get_Add_Car_LazyQuery({
+    getAddCarfieldsLazyQuery({
       variables: {
         where: {
           state_id: {
@@ -151,7 +149,7 @@ const AddCarForm = () => {
   };
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    getQuery_Get_Add_Car_LazyQuery({
+    getAddCarfieldsLazyQuery({
       variables: {
         modelsWhere: {
           brand_id: {
