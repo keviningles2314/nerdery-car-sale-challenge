@@ -4,6 +4,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import {
   useGet_Add_Car_Fields_QueryLazyQuery,
   useGet_Add_Car_Fields_QueryQuery,
+  useMutation_CarsMutation,
 } from '../../api/graphql/__generated__/graphql-types';
 import { fieldNameValues } from '../../helpers/objectValues';
 import Button from '../Button/Button';
@@ -24,6 +25,9 @@ import TextField from '../TextField/TextField';
 import ReactDatePicker from 'react-datepicker';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
+import { useEffect, useState } from 'react';
+import SuccessCreationMessage from '../SuccessCreationMessage/SuccessCreationMessage';
 
 export type IFormInput = {
   price: number;
@@ -73,17 +77,64 @@ const AddCarForm = () => {
     formState: { errors },
     handleSubmit,
     control,
+    resetField,
   } = useForm<IFormInput>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      title: '',
+      odometer: undefined,
+      vin: '',
+      brand: undefined,
+      model: undefined,
+      saleDate: new Date(),
+      price: undefined,
+      condition: '',
+      damage: '',
+      year: new Date(),
+      color: undefined,
+      state: undefined,
+      city: undefined,
+      description: '',
+    },
   });
 
+  const [isSuccessCreation, setIsSuccesCreation] = useState<boolean>(false);
+
   const { title, odometer, vin, price, damage, description } = fieldNameValues;
+
   const { data, error, loading } = useGet_Add_Car_Fields_QueryQuery();
 
   const [
     getQuery_Get_Add_Car_LazyQuery,
     { data: lazyData, loading: lazyLoading },
   ] = useGet_Add_Car_Fields_QueryLazyQuery();
+
+  const [
+    insertCar,
+    { data: mutationData, loading: mutationLoading, error: mutationError },
+  ] = useMutation_CarsMutation();
+
+  useEffect(() => {
+    if (mutationData) {
+      if (mutationData!.insert_cars!.returning!.length > 0) {
+        resetField('title');
+        resetField('odometer');
+        resetField('vin');
+        resetField('brand');
+        resetField('model');
+        resetField('saleDate');
+        resetField('price');
+        resetField('condition');
+        resetField('damage');
+        resetField('year');
+        resetField('color');
+        resetField('state');
+        resetField('city');
+        resetField('description');
+        setIsSuccesCreation(true);
+      }
+    }
+  }, [mutationData, mutationLoading]);
 
   const handleOptionStateChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -111,8 +162,31 @@ const AddCarForm = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
-
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    setIsSuccesCreation(false);
+    insertCar({
+      variables: {
+        objects: [
+          {
+            batch: uuidv4(),
+            odometer: data.odometer,
+            brand_id: data.brand,
+            color_id: data.color,
+            condition: data.condition,
+            damage_type: data.damage,
+            description: data.description,
+            model_id: data.model,
+            state_id: data.state,
+            city_id: data.city,
+            sale_date: data.saleDate,
+            title: data.title,
+            vin: data.vin,
+            year: Number(data.year.getFullYear()),
+          },
+        ],
+      },
+    });
+  };
   return (
     <Container>
       {!error ? (
@@ -258,6 +332,7 @@ const AddCarForm = () => {
               )}
             </SectionNestedElement>
           </NestedElements>
+
           <NestedElements>
             <SectionNestedElement>
               <RegularText text='Vehicle Year' isBaseColor />
@@ -296,6 +371,7 @@ const AddCarForm = () => {
               {errors.color && <ErrorMessage message={errors.color.message!} />}
             </SectionNestedElement>
           </NestedElements>
+
           <NestedElements>
             <SectionNestedElement>
               <SelectOption
@@ -335,6 +411,7 @@ const AddCarForm = () => {
               {errors.city && <ErrorMessage message={errors.city.message!} />}
             </SectionNestedElement>
           </NestedElements>
+
           <TextField
             register={register}
             fieldName={description}
@@ -345,7 +422,13 @@ const AddCarForm = () => {
             <ErrorMessage message={errors.description.message!} />
           )}
 
-          <Button title='Create' onClick={handleSubmit(onSubmit)} />
+          <Button
+            title={mutationLoading ? 'Creating...' : 'Create'}
+            onClick={handleSubmit(onSubmit)}
+            disabled={mutationLoading ? true : false}
+          />
+          {mutationError && <ErrorMessage message={mutationError.message} />}
+          {isSuccessCreation && <SuccessCreationMessage />}
         </Form>
       ) : (
         <ErrorMessage message={error.message} />

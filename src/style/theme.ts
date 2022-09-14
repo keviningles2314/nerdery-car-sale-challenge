@@ -11,4 +11,5 @@ export const theme = {
   lightBlue: '#2980b9',
   colorTextField: '#f5f5f5',
   red: '#c0392b',
+  green: '#26a65b',
 };

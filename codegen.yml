@@ -1,8 +1,8 @@
 overwrite: true
 schema:
-  ${REACT_APP_API}:
+  https://working-swan-45.hasura.app/v1/graphql:
     headers:
-      x-hasura-admin-secret: ${REACT_APP_TOKEN_API}
+      x-hasura-admin-secret: 6G6GeneaqR7WrQDlRdLzs7NxY0r8I480LFFT3OXGmA4Ijg8xqhIguIZkQLx5oWTl
 documents: './src/**/!(*.d).{ts,tsx}'
 generates:
   ./src/api/graphql/__generated__/graphql-types.ts:
