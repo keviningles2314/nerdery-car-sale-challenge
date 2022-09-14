@@ -4,6 +4,7 @@ import CarListComponent from '../CarListComponent/CarListComponent';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadingComponent from '../LoadingComponent/Loading';
 import { Container } from './FavoriteCarsListStyled';
+
 const FavoriteCarsList = () => {
   const { state } = useLoginContext();
   const {

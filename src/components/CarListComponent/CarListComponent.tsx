@@ -24,7 +24,6 @@ interface CarListComponentProps {
 }
 
 const CarListComponent = ({ favoritesCarsArray }: CarListComponentProps) => {
-  console.log(favoritesCarsArray);
   const [searchParam, setSearchParam] = useSearchParams();
   const [filterObject, setFilterObject] = useState({});
   useEffect(() => {
