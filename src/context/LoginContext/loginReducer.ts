@@ -46,6 +46,7 @@ export const loginReducer = (
           first_name: '',
           last_name: '',
           email: '',
+          id: 0,
         },
         isUserAuthenticated: false,
       };

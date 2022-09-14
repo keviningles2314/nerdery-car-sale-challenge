@@ -15,6 +15,7 @@ export interface User {
   first_name: string;
   last_name: string;
   email: string;
+  id: number;
 }
 
 export interface LoginContext {
@@ -27,6 +28,7 @@ export const loginInitialState = {
     first_name: '',
     last_name: '',
     email: '',
+    id: 0,
   },
   isUserAuthenticated: false,
 };

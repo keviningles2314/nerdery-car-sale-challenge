@@ -1,10 +1,11 @@
-import HeadingTitle from '../../components/Text/HeadingTitle/HeadingTitle';
+import FavoriteCarsList from '../../components/FavoriteCarsList/FavoriteCarsList';
+import { Container } from '../CarsList/CarsListStyled';
 
 const UserCars = () => {
   return (
-    <>
-      <HeadingTitle text='Protected Page' isBaseColor />
-    </>
+    <Container>
+      <FavoriteCarsList />
+    </Container>
   );
 };
 
