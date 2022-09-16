@@ -5,7 +5,6 @@ import App from './App';
 import { setContext } from '@apollo/client/link/context';
 import {
   ApolloClient,
-  HttpLink,
   ApolloProvider,
   InMemoryCache,
   createHttpLink,
@@ -27,6 +26,7 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
+  connectToDevTools: true,
 });
 
 const root = ReactDOM.createRoot(

@@ -2,6 +2,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { addYears, subYears } from 'date-fns';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import {
+  Cars,
   useGet_Add_Car_Fields_QueryLazyQuery,
   useGet_Add_Car_Fields_QueryQuery,
   useMutation_CarsMutation,
@@ -28,6 +29,7 @@ import * as yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import SuccessCreationMessage from '../SuccessCreationMessage/SuccessCreationMessage';
+import { GET_CARS } from '../../api/graphql/query/cars';
 
 export type IFormInput = {
   price: number;
@@ -44,6 +46,23 @@ export type IFormInput = {
   color: number;
   state: number;
   city: number;
+};
+
+const defaultValues = {
+  title: '',
+  odometer: undefined,
+  vin: '',
+  brand: undefined,
+  model: undefined,
+  saleDate: new Date(),
+  price: undefined,
+  condition: '',
+  damage: '',
+  year: new Date(),
+  color: undefined,
+  state: undefined,
+  city: undefined,
+  description: '',
 };
 
 const schema = yup.object().shape({
@@ -77,25 +96,10 @@ const AddCarForm = () => {
     formState: { errors },
     handleSubmit,
     control,
-    resetField,
+    reset,
   } = useForm<IFormInput>({
     resolver: yupResolver(schema),
-    defaultValues: {
-      title: '',
-      odometer: undefined,
-      vin: '',
-      brand: undefined,
-      model: undefined,
-      saleDate: new Date(),
-      price: undefined,
-      condition: '',
-      damage: '',
-      year: new Date(),
-      color: undefined,
-      state: undefined,
-      city: undefined,
-      description: '',
-    },
+    defaultValues: defaultValues,
   });
 
   const [isSuccessCreation, setIsSuccesCreation] = useState<boolean>(false);
@@ -114,21 +118,8 @@ const AddCarForm = () => {
 
   useEffect(() => {
     if (mutationData) {
-      if (mutationData!.insert_cars!.returning!.length > 0) {
-        resetField('title');
-        resetField('odometer');
-        resetField('vin');
-        resetField('brand');
-        resetField('model');
-        resetField('saleDate');
-        resetField('price');
-        resetField('condition');
-        resetField('damage');
-        resetField('year');
-        resetField('color');
-        resetField('state');
-        resetField('city');
-        resetField('description');
+      if (mutationData!.insert_cars!.returning.length > 0) {
+        reset(defaultValues);
         setIsSuccesCreation(true);
       }
     }
@@ -160,9 +151,9 @@ const AddCarForm = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     setIsSuccesCreation(false);
-    insertCar({
+    await insertCar({
       variables: {
         objects: [
           {
@@ -173,6 +164,7 @@ const AddCarForm = () => {
             condition: data.condition,
             damage_type: data.damage,
             description: data.description,
+            price: data.price,
             model_id: data.model,
             state_id: data.state,
             city_id: data.city,
@@ -183,6 +175,43 @@ const AddCarForm = () => {
           },
         ],
       },
+      optimisticResponse: {
+        __typename: 'mutation_root',
+        insert_cars: {
+          __typename: 'cars_mutation_response',
+          returning: [
+            {
+              __typename: 'cars',
+              year: Number(data.year.getFullYear()),
+            },
+          ],
+        },
+      },
+      update: (proxy, response) => {
+        const previousData = proxy.readQuery<{ cars: Cars[] }>({
+          query: GET_CARS,
+        });
+
+        if (previousData !== null) {
+          proxy.writeQuery({
+            query: GET_CARS,
+
+            data: {
+              ...previousData,
+              cars: [response.data?.insert_cars, ...previousData.cars],
+            },
+          });
+        } else {
+          proxy.writeQuery({
+            query: GET_CARS,
+            data: {
+              cars: [response.data?.insert_cars],
+            },
+          });
+        }
+      },
+      refetchQueries: [GET_CARS],
+      awaitRefetchQueries: true,
     });
   };
   return (

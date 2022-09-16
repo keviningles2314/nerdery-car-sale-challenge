@@ -24,6 +24,7 @@ const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
   };
 
   const onClickHandler = () => {
+    event?.preventDefault();
     if (textSearch) {
       setSearchParam({
         search: textSearch!,

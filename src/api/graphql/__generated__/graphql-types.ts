@@ -3475,7 +3475,7 @@ export type Mutation_CarsMutationVariables = Exact<{
 }>;
 
 
-export type Mutation_CarsMutation = { __typename?: 'mutation_root', insert_cars?: { __typename?: 'cars_mutation_response', returning: Array<{ __typename?: 'cars', id: number }> } | null };
+export type Mutation_CarsMutation = { __typename?: 'mutation_root', insert_cars?: { __typename?: 'cars_mutation_response', returning: Array<{ __typename?: 'cars', year?: number | null }> } | null };
 
 export type Query_GetCarsQueryVariables = Exact<{
   orderBy?: InputMaybe<Array<Cars_Order_By> | Cars_Order_By>;
@@ -3512,7 +3512,7 @@ export const Mutation_CarsDocument = gql`
     mutation Mutation_cars($objects: [cars_insert_input!]!) {
   insert_cars(objects: $objects) {
     returning {
-      id
+      year
     }
   }
 }

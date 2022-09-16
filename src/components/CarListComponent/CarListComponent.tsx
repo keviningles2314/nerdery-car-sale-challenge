@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import {
   Cars,
   Order_By,
-  Query_GetCarsQuery,
+  Query_GetCarsQueryVariables,
   useQuery_GetCarsQuery,
 } from '../../api/graphql/__generated__/graphql-types';
 import { isValidUuid } from '../../helpers/validators';
@@ -24,68 +24,80 @@ interface CarListComponentProps {
 }
 
 const CarListComponent = ({ favoritesCarsArray }: CarListComponentProps) => {
+  const { data, loading, error, refetch } = useQuery_GetCarsQuery();
   const [searchParam, setSearchParam] = useSearchParams();
-  const [filterObject, setFilterObject] = useState({});
+  const [filterObject, setFilterObject] =
+    useState<Query_GetCarsQueryVariables>();
   useEffect(() => {
     if (isValidUuid(searchParam.get('search')!)) {
       setFilterObject({
-        _and: [
+        orderBy: [
           {
-            batch: {
-              _eq: searchParam.get('search')!,
-            },
-          },
-          {
-            id: {
-              _in:
-                favoritesCarsArray &&
-                favoritesCarsArray.map((carId) => carId.car_id),
-            },
+            sale_date: searchParam.get('order')
+              ? searchParam.get('order') == 'desc'
+                ? Order_By.Desc
+                : Order_By.Asc
+              : Order_By.Desc,
           },
         ],
+        where: {
+          _and: [
+            {
+              batch: {
+                _eq: searchParam.get('search')!,
+              },
+            },
+            {
+              id: {
+                _in:
+                  favoritesCarsArray &&
+                  favoritesCarsArray.map((carId) => carId.car_id),
+              },
+            },
+          ],
+        },
       });
     } else {
       setFilterObject({
-        _or: [
+        orderBy: [
           {
-            title: {
-              _iregex: searchParam.get('search')
-                ? searchParam.get('search')
-                : '',
-            },
-          },
-          {
-            vin: {
-              _iregex: searchParam.get('search')
-                ? searchParam.get('search')
-                : '',
-            },
+            sale_date: searchParam.get('order')
+              ? searchParam.get('order') == 'desc'
+                ? Order_By.Desc
+                : Order_By.Asc
+              : Order_By.Desc,
           },
         ],
-        id: {
-          _in:
-            favoritesCarsArray &&
-            favoritesCarsArray.map((carId) => carId.car_id),
+        where: {
+          _or: [
+            {
+              title: {
+                _iregex: searchParam.get('search')
+                  ? searchParam.get('search')
+                  : '',
+              },
+            },
+            {
+              vin: {
+                _iregex: searchParam.get('search')
+                  ? searchParam.get('search')
+                  : '',
+              },
+            },
+          ],
+          id: {
+            _in:
+              favoritesCarsArray &&
+              favoritesCarsArray.map((carId) => carId.car_id),
+          },
         },
       });
     }
   }, [searchParam]);
 
-  const { data, loading, error } = useQuery_GetCarsQuery({
-    variables: {
-      orderBy: [
-        {
-          sale_date: searchParam.get('order')
-            ? searchParam.get('order') == 'desc'
-              ? Order_By.Desc
-              : Order_By.Asc
-            : Order_By.Desc,
-        },
-      ],
-      where: filterObject,
-    },
-    fetchPolicy: 'no-cache',
-  });
+  useEffect(() => {
+    refetch(filterObject);
+  }, [filterObject]);
 
   return (
     <Container>
