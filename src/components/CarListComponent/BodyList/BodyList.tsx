@@ -1,7 +1,5 @@
-import {
-  Cars,
-  Query_GetCarsQuery,
-} from '../../../api/graphql/__generated__/graphql-types';
+import { Query_GetCarsQuery } from '../../../api/graphql/__generated__/graphql-types';
+import useFavoriteCar from '../../../hooks/useFavoriteCar';
 import ListImageItem from '../ListImageItem/ListImageItem';
 import ListInfoItem from '../ListInfoItem/ListInfoItem';
 import { Container, Section } from './BodyListStyled';
@@ -14,6 +12,7 @@ const BodyList = ({ carsInfoArray }: BodyListProps) => {
   return (
     <Container>
       {carsInfoArray.cars.map((carInfo) => {
+        const [isFavorite] = useFavoriteCar(carInfo.id);
         return (
           <Section key={carInfo.batch}>
             <ListImageItem
@@ -36,6 +35,7 @@ const BodyList = ({ carsInfoArray }: BodyListProps) => {
             <ListInfoItem
               title='Vehicle Condition:'
               primaryInfo={carInfo.condition == 'A' ? 'Salvage Title' : 'New'}
+              isFavorite={isFavorite}
             />
             <ListInfoItem
               title='Location:'

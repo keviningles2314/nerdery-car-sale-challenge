@@ -6,6 +6,7 @@ interface ListInfoItemProps {
   complementaryInfo?: string | number;
   title: string;
   complementaryTitle?: string;
+  isFavorite?: boolean;
 }
 
 const ListInfoItem = ({
@@ -13,6 +14,7 @@ const ListInfoItem = ({
   complementaryInfo,
   title,
   complementaryTitle,
+  isFavorite,
 }: ListInfoItemProps) => {
   return (
     <Container>
@@ -24,6 +26,8 @@ const ListInfoItem = ({
           <RegularText text={`${complementaryInfo}`} isBaseColor />
         </>
       )}
+
+      {isFavorite && <RegularText text={'Favorite'} isBaseColor />}
     </Container>
   );
 };
