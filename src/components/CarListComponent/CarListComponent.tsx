@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
-  Cars,
   Order_By,
   Query_GetCarsQueryVariables,
   useQuery_GetCarsQuery,

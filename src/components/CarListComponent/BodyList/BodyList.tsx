@@ -1,5 +1,4 @@
 import { Query_GetCarsQuery } from '../../../api/graphql/__generated__/graphql-types';
-import useFavoriteCar from '../../../hooks/useFavoriteCar';
 import ListImageItem from '../ListImageItem/ListImageItem';
 import ListInfoItem from '../ListInfoItem/ListInfoItem';
 import { Container, Section } from './BodyListStyled';
@@ -9,16 +8,15 @@ interface BodyListProps {
 }
 
 const BodyList = ({ carsInfoArray }: BodyListProps) => {
+  const defaultPath =
+    'https://cs.copart.com/v1/AUTH_svc.pdoc00001/LPP351/bd59842d8adb41af996749fdfeedba6e_ful.jpg';
+
   return (
     <Container>
       {carsInfoArray.cars.map((carInfo) => {
         return (
           <Section key={carInfo.batch}>
-            <ListImageItem
-              path={
-                'https://cs.copart.com/v1/AUTH_svc.pdoc00001/LPP351/bd59842d8adb41af996749fdfeedba6e_ful.jpg'
-              }
-            />
+            <ListImageItem path={defaultPath} />
             <ListInfoItem
               title='Title:'
               primaryInfo={`${carInfo.year} ${carInfo.model.brand.name} ${carInfo.model.name}`}
