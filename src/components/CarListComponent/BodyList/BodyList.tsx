@@ -12,7 +12,6 @@ const BodyList = ({ carsInfoArray }: BodyListProps) => {
   return (
     <Container>
       {carsInfoArray.cars.map((carInfo) => {
-        const [isFavorite] = useFavoriteCar(carInfo.id);
         return (
           <Section key={carInfo.batch}>
             <ListImageItem
@@ -35,7 +34,7 @@ const BodyList = ({ carsInfoArray }: BodyListProps) => {
             <ListInfoItem
               title='Vehicle Condition:'
               primaryInfo={carInfo.condition == 'A' ? 'Salvage Title' : 'New'}
-              isFavorite={isFavorite}
+              carId={carInfo!.id!}
             />
             <ListInfoItem
               title='Location:'

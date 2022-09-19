@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useQueryFavoriteCarsQuery } from '../api/graphql/__generated__/graphql-types';
+import { GET_FAVORITE_CARS } from '../api/graphql/query/favoriteCars';
+import {
+  useDelete_User_CarsMutation,
+  useInsert_User_CarsMutation,
+  useQueryFavoriteCarsQuery,
+  User_Cars,
+} from '../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../context/LoginContext/LoginContext';
 
 const useFavoriteCar = (carId: number) => {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const { state } = useLoginContext();
+  const [addFavoriteCarById] = useInsert_User_CarsMutation();
+  const [removeFavoriteCarById] = useDelete_User_CarsMutation();
   const {
     data: dataFavorites,
     loading: loadingFavorites,
@@ -18,25 +26,80 @@ const useFavoriteCar = (carId: number) => {
               _eq: state.userData.id,
             },
           },
-          {
-            car_id: {
-              _eq: carId,
-            },
-          },
         ],
       },
     },
   });
+
+  const AddToFavorites = async (idCar: number) => {
+    await addFavoriteCarById({
+      variables: {
+        objects: [
+          {
+            user_id: state.userData.id,
+            car_id: idCar,
+          },
+        ],
+      },
+      optimisticResponse: {
+        __typename: 'mutation_root',
+        insert_user_cars: {
+          __typename: 'user_cars_mutation_response',
+          returning: [
+            {
+              __typename: 'user_cars',
+              user_id: state.userData.id,
+              car_id: idCar,
+            },
+          ],
+        },
+      },
+      refetchQueries: [GET_FAVORITE_CARS],
+      awaitRefetchQueries: true,
+    });
+  };
+
+  const removeToFavorites = (idCar: number) => {
+    removeFavoriteCarById({
+      variables: {
+        where: {
+          car_id: {
+            _eq: idCar,
+          },
+        },
+      },
+      optimisticResponse: {
+        delete_user_cars: {
+          __typename: 'user_cars_mutation_response',
+          returning: [
+            {
+              __typename: 'user_cars',
+              user_id: state.userData.id,
+              car_id: idCar,
+            },
+          ],
+        },
+      },
+      refetchQueries: [GET_FAVORITE_CARS],
+      awaitRefetchQueries: true,
+    });
+  };
+
   useEffect(() => {
     if (!loadingFavorites) {
-      if (dataFavorites!.user_cars!.length > 0) {
+      if (dataFavorites!.user_cars!.find((car) => car.car_id == carId)) {
         setIsFavorite(true);
       } else {
         setIsFavorite(false);
       }
     }
-  }, [loadingFavorites]);
+  }, [dataFavorites]);
 
-  return [isFavorite];
+  return [
+    isFavorite,
+    AddToFavorites,
+    removeToFavorites,
+    errorFavorites,
+  ] as const;
 };
 export default useFavoriteCar;

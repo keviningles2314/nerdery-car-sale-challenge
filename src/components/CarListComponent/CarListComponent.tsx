@@ -97,7 +97,7 @@ const CarListComponent = ({ favoritesCarsArray }: CarListComponentProps) => {
 
   useEffect(() => {
     refetch(filterObject);
-  }, [filterObject]);
+  }, [filterObject, favoritesCarsArray]);
 
   return (
     <Container>

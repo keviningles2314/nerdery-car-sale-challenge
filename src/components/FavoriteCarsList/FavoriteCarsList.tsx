@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useQueryFavoriteCarsQuery } from '../../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../../context/LoginContext/LoginContext';
+import useFavoriteCar from '../../hooks/useFavoriteCar';
 import CarListComponent from '../CarListComponent/CarListComponent';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import LoadingComponent from '../LoadingComponent/Loading';
@@ -19,7 +21,6 @@ const FavoriteCarsList = () => {
         },
       },
     },
-    fetchPolicy: 'no-cache',
   });
 
   return (
