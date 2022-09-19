@@ -92,7 +92,7 @@ const CarListComponent = ({ favoritesCarsArray }: CarListComponentProps) => {
         },
       });
     }
-  }, [searchParam]);
+  }, [searchParam, favoritesCarsArray]);
 
   useEffect(() => {
     refetch(filterObject);

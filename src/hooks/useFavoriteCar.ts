@@ -4,7 +4,6 @@ import {
   useDelete_User_CarsMutation,
   useInsert_User_CarsMutation,
   useQueryFavoriteCarsQuery,
-  User_Cars,
 } from '../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../context/LoginContext/LoginContext';
 
@@ -79,6 +78,16 @@ const useFavoriteCar = (carId: number) => {
             },
           ],
         },
+      },
+      update: (cache, { data }) => {
+        const cacheId = cache.identify(data!.delete_user_cars!);
+        cache.modify({
+          fields: {
+            GET_FAVORITE_CARS: (existingFieldData, { toReference }) => {
+              return [...existingFieldData, toReference(cacheId!)];
+            },
+          },
+        });
       },
       refetchQueries: [GET_FAVORITE_CARS],
       awaitRefetchQueries: true,

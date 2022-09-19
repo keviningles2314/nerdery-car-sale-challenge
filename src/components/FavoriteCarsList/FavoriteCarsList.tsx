@@ -13,6 +13,7 @@ const FavoriteCarsList = () => {
     data: dataFavorites,
     loading: loadingFavorites,
     error: errorFavorites,
+    refetch,
   } = useQueryFavoriteCarsQuery({
     variables: {
       where: {
