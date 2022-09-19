@@ -22,8 +22,8 @@ function App() {
             </Route>
             <Route path='/add-a-car' element={<AddCar />} />
             <Route path='/cars-list' element={<CarsList />} />
+            <Route path='/car/:idCar' element={<CarDetail />} />
             <Route element={<ProtectedRoutes />}>
-              <Route path='/car/:idCar' element={<CarDetail />} />
               <Route path='/user-cars' element={<UserCars />} />
             </Route>
           </Routes>
