@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Select, Option } from '../SelectOption/SelectOptionStyled';
+import { Select, Option } from '../SelectOptionFilter/SelectOptionStyled';
 
 export const Container = styled.div`
   display: flex;

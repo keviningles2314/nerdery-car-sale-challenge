@@ -2,8 +2,9 @@ import Button from '../Button/Button';
 import EmailField from '../TextField/TextField';
 import { Container } from './FilterComponentStyled';
 import React, { useState } from 'react';
-import SelectOption from '../SelectOption/SelectOption';
+import SelectOption from '../SelectOptionFilter/SelectOption';
 import RegularText from '../Text/RegularText/RegularText';
+import SelectOptionFilter from '../SelectOptionFilter/SelectOption';
 
 interface FilterComponentProps {
   setSearchParam: Function;
@@ -42,7 +43,7 @@ const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
         />
         <Button title='Search' onClick={onClickHandler} />
         <RegularText text='Order By Sale Date: ' isBaseColor />
-        <SelectOption
+        <SelectOptionFilter
           optionArray={[
             { value: 'desc', text: 'Descending' },
             { value: 'asc', text: 'Ascending' },

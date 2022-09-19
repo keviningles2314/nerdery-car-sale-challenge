@@ -108,8 +108,15 @@ const AddCarForm = () => {
 
   const { data, error, loading } = useGet_Add_Car_Fields_QueryQuery();
 
-  const [getAddCarfieldsLazyQuery, { data: lazyData, loading: lazyLoading }] =
-    useGet_Add_Car_Fields_QueryLazyQuery();
+  const [
+    getModelsLazyQuery,
+    { data: lazyModelData, loading: lazyModelLoading },
+  ] = useGet_Add_Car_Fields_QueryLazyQuery();
+
+  const [
+    getCitiesLazyQuery,
+    { data: lazyCitiesData, loading: lazyCitiesLoading },
+  ] = useGet_Add_Car_Fields_QueryLazyQuery();
 
   const [
     insertCar,
@@ -128,7 +135,7 @@ const AddCarForm = () => {
   const handleOptionStateChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    getAddCarfieldsLazyQuery({
+    getCitiesLazyQuery({
       variables: {
         where: {
           state_id: {
@@ -140,7 +147,7 @@ const AddCarForm = () => {
   };
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    getAddCarfieldsLazyQuery({
+    getModelsLazyQuery({
       variables: {
         modelsWhere: {
           brand_id: {
@@ -274,9 +281,9 @@ const AddCarForm = () => {
             <SectionNestedElement>
               <SelectOption {...register('model')}>
                 <OptionElement value=''>Select Model</OptionElement>
-                {!lazyLoading && (
+                {!lazyModelLoading && (
                   <>
-                    {lazyData?.models.map((model) => {
+                    {lazyModelData?.models.map((model) => {
                       return (
                         <OptionElement key={model.id} value={model.id}>
                           {model.name}
@@ -423,9 +430,9 @@ const AddCarForm = () => {
             <SectionNestedElement>
               <SelectOption {...register('city')}>
                 <OptionElement value=''>Select City</OptionElement>
-                {!lazyLoading && (
+                {!lazyCitiesLoading && (
                   <>
-                    {lazyData?.cities.map((city) => {
+                    {lazyCitiesData?.cities.map((city) => {
                       return (
                         <OptionElement key={city.id} value={city.id}>
                           {city.name}

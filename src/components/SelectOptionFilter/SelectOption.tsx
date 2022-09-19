@@ -6,13 +6,13 @@ type Option = {
   text: string;
 };
 
-interface SelectOptionProps {
+interface SelectOptionFilterProps {
   optionArray?: Option[];
   onChangeOption?: React.ChangeEventHandler<HTMLSelectElement>;
   register?: Function;
 }
 
-const SelectOption = ({
+const SelectOptionFilter = ({
   optionArray = [
     {
       value: 'option',
@@ -20,14 +20,10 @@ const SelectOption = ({
     },
   ],
   onChangeOption,
-  register,
-}: SelectOptionProps) => {
+}: SelectOptionFilterProps) => {
   return (
     <>
-      <Select
-        onChange={onChangeOption}
-        {...(register && { ...register!('gender') })}
-      >
+      <Select onChange={onChangeOption}>
         {optionArray.map((option, index) => {
           return (
             <Option key={index} value={option.value}>
@@ -40,4 +36,4 @@ const SelectOption = ({
   );
 };
 
-export default SelectOption;
+export default SelectOptionFilter;
