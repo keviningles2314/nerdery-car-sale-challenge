@@ -32,8 +32,8 @@ import SuccessCreationMessage from '../SuccessCreationMessage/SuccessCreationMes
 import { GET_CARS } from '../../api/graphql/query/cars';
 
 export type IFormInput = {
-  price: number;
-  odometer: number;
+  price: number | null;
+  odometer: number | null;
   vin: string;
   title: string;
   damage: string;
@@ -41,27 +41,27 @@ export type IFormInput = {
   description: string;
   saleDate: Date;
   condition: string;
-  brand: number;
-  model: number;
-  color: number;
-  state: number;
-  city: number;
+  brand: number | null;
+  model: number | null;
+  color: number | null;
+  state: number | null;
+  city: number | null;
 };
 
-const defaultValues = {
+const defaultValuesObject = {
   title: '',
-  odometer: undefined,
+  odometer: null,
   vin: '',
-  brand: undefined,
-  model: undefined,
+  brand: null,
+  model: null,
   saleDate: new Date(),
-  price: undefined,
+  price: null,
   condition: '',
   damage: '',
   year: new Date(),
-  color: undefined,
-  state: undefined,
-  city: undefined,
+  color: null,
+  state: null,
+  city: null,
   description: '',
 };
 
@@ -99,7 +99,7 @@ const AddCarForm = () => {
     reset,
   } = useForm<IFormInput>({
     resolver: yupResolver(schema),
-    defaultValues: defaultValues,
+    defaultValues: defaultValuesObject,
   });
 
   const [isSuccessCreation, setIsSuccesCreation] = useState<boolean>(false);
@@ -119,7 +119,7 @@ const AddCarForm = () => {
   useEffect(() => {
     if (mutationData) {
       if (mutationData!.insert_cars!.returning.length > 0) {
-        reset(defaultValues);
+        reset(defaultValuesObject);
         setIsSuccesCreation(true);
       }
     }
