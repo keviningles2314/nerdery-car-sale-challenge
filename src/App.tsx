@@ -4,6 +4,7 @@ import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import PublicRoutes from './components/PublicRoutes/PublicRoutes';
 import { LoginContextProvider } from './context/LoginContext/LoginContext';
 import AddCar from './pages/AddCar/AddCar';
+import CarDetail from './pages/CarDetail/CarDetail';
 import CarsList from './pages/CarsList/CarsList';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
@@ -22,6 +23,7 @@ function App() {
             <Route path='/add-a-car' element={<AddCar />} />
             <Route path='/cars-list' element={<CarsList />} />
             <Route element={<ProtectedRoutes />}>
+              <Route path='/car/:idCar' element={<CarDetail />} />
               <Route path='/user-cars' element={<UserCars />} />
             </Route>
           </Routes>

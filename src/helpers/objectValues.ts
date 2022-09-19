@@ -8,3 +8,6 @@ export const fieldNameValues = {
   description: 'description',
   saleDate: 'saleDate',
 };
+
+export const defaultImagePath =
+  'https://cs.copart.com/v1/AUTH_svc.pdoc00001/LPP351/bd59842d8adb41af996749fdfeedba6e_ful.jpg';

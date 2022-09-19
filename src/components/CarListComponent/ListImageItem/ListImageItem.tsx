@@ -1,14 +1,17 @@
 import path from 'node:path/win32';
-import { Container, ImageItem } from './ListImageItemStyled';
+import { Container, ImageItem, ImageLink } from './ListImageItemStyled';
 
 interface ListImageItemProps {
   path: string;
+  idCar: number;
 }
 
-const ListImageItem = ({ path }: ListImageItemProps) => {
+const ListImageItem = ({ path, idCar }: ListImageItemProps) => {
   return (
     <Container>
-      <ImageItem src={path} />
+      <ImageLink to={`/car/${idCar}`}>
+        <ImageItem src={path} />
+      </ImageLink>
     </Container>
   );
 };
