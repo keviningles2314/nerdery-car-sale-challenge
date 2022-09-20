@@ -21,7 +21,10 @@ const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
   const OnChangeOptionHandler = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSearchParam({ order: event.target.value });
+    setSearchParam({
+      search: textSearch ? textSearch : '',
+      order: event.target.value,
+    });
   };
 
   const onClickHandler = () => {
