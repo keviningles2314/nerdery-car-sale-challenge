@@ -1,7 +1,16 @@
-import { Query_GetCarsQuery } from '../../api/graphql/__generated__/graphql-types';
+import { TypeOf } from 'yup';
+import { GET_CARS } from '../../api/graphql/query/cars';
+import {
+  Cars,
+  Cars_Constraint,
+  Query_GetCarsDocument,
+  Query_GetCarsQuery,
+  Query_GetCarsQueryResult,
+  useQuery_GetCarsQuery,
+} from '../../api/graphql/__generated__/graphql-types';
 import { defaultImagePath } from '../../helpers/objectValues';
 import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
-import RegularText from '../Text/RegularText/RegularText';
+
 import {
   Container,
   ImageDetail,
@@ -10,7 +19,7 @@ import {
 import CarInfoItem from './CarInfoItem/CarInfoItem';
 
 interface CarDetailComponentProps {
-  carInfo: Query_GetCarsQuery;
+  carInfo: Cars;
 }
 
 const CarDetailComponent = ({ carInfo }: CarDetailComponentProps) => {
@@ -28,7 +37,7 @@ const CarDetailComponent = ({ carInfo }: CarDetailComponentProps) => {
     title,
     vin,
     year,
-  } = carInfo.cars[0];
+  } = carInfo;
   return (
     <Container>
       <ImageDetail src={defaultImagePath} />
