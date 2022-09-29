@@ -28,7 +28,7 @@ const CarDetail = () => {
       ) : error ? (
         <ErrorMessage message={error.message} />
       ) : (
-        <CarDetailComponent carInfo={data!.cars[0] as Cars} />
+        <CarDetailComponent carInfo={data!.cars[0]} />
       )}
     </Container>
   );

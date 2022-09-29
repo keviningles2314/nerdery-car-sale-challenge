@@ -1,16 +1,17 @@
-import { Query_GetCarsQuery } from '../../../api/graphql/__generated__/graphql-types';
+import { Cars } from '../../../api/graphql/__generated__/graphql-types';
 import ListImageItem from '../ListImageItem/ListImageItem';
 import ListInfoItem from '../ListInfoItem/ListInfoItem';
 import { Container, Section } from './BodyListStyled';
 import { defaultImagePath } from '../../../helpers/objectValues';
+
 interface BodyListProps {
-  carsInfoArray: Query_GetCarsQuery;
+  carsInfo: Cars[];
 }
 
-const BodyList = ({ carsInfoArray }: BodyListProps) => {
+const BodyList = ({ carsInfo }: BodyListProps) => {
   return (
     <Container>
-      {carsInfoArray.cars.map((carInfo) => {
+      {carsInfo.map((carInfo) => {
         return (
           <Section key={carInfo.batch}>
             <ListImageItem path={defaultImagePath} idCar={carInfo.id} />

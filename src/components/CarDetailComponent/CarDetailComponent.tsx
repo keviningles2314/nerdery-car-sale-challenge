@@ -1,13 +1,4 @@
-import { TypeOf } from 'yup';
-import { GET_CARS } from '../../api/graphql/query/cars';
-import {
-  Cars,
-  Cars_Constraint,
-  Query_GetCarsDocument,
-  Query_GetCarsQuery,
-  Query_GetCarsQueryResult,
-  useQuery_GetCarsQuery,
-} from '../../api/graphql/__generated__/graphql-types';
+import { Cars } from '../../api/graphql/__generated__/graphql-types';
 import { defaultImagePath } from '../../helpers/objectValues';
 import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
 

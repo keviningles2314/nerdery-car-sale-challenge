@@ -2,9 +2,15 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -131,7 +137,6 @@ export type Brands_Aggregate_Fields = {
   variance?: Maybe<Brands_Variance_Fields>;
 };
 
-
 /** aggregate fields of "brands" */
 export type Brands_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Brands_Select_Column>>;
@@ -161,7 +166,7 @@ export enum Brands_Constraint {
   /** unique or primary key constraint on columns "id" */
   BrandsPkey = 'brands_pkey',
   /** unique or primary key constraint on columns "uuid" */
-  BrandsUuidKey = 'brands_uuid_key'
+  BrandsUuidKey = 'brands_uuid_key',
 }
 
 /** input type for incrementing numeric columns in table "brands" */
@@ -241,7 +246,7 @@ export enum Brands_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 /** input type for updating data in table "brands" */
@@ -305,7 +310,7 @@ export enum Brands_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 export type Brands_Updates = {
@@ -340,35 +345,30 @@ export type Brands_Variance_Fields = {
 /** columns and relationships of "cars" */
 export type Cars = {
   __typename?: 'cars';
-  batch: Scalars['uuid'];
-  /** An object relationship */
-  brand: Brands;
-  brand_id: Scalars['Int'];
-  /** An object relationship */
-  city: Cities;
-  city_id: Scalars['Int'];
-  /** An object relationship */
-  color: Colors;
-  color_id: Scalars['Int'];
-  condition: Scalars['bpchar'];
-  create_date: Scalars['date'];
-  damage_type?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
-  /** An object relationship */
-  model: Models;
-  model_id: Scalars['Int'];
-  odometer?: Maybe<Scalars['Int']>;
-  price: Scalars['money'];
-  sale_date: Scalars['date'];
-  /** An object relationship */
-  state: States;
-  state_id: Scalars['Int'];
-  title?: Maybe<Scalars['String']>;
-  update_date: Scalars['date'];
-  uuid: Scalars['uuid'];
-  vin: Scalars['String'];
-  year?: Maybe<Scalars['Int']>;
+  batch: any;
+  condition: any;
+  damage_type?: string | null;
+  description?: string | null;
+  id: number;
+  odometer?: number | null;
+  price: any;
+  sale_date: any;
+  title?: string | null;
+  vin: string;
+  year?: number | null;
+  city: {
+    __typename?: 'cities';
+    name: string;
+    id: number;
+    state: { __typename?: 'states'; id: number; name: string };
+  };
+  color: { __typename?: 'colors'; id: number; name: string };
+  model: {
+    __typename?: 'models';
+    id: number;
+    name: string;
+    brand: { __typename?: 'brands'; id: number; name: string };
+  };
 };
 
 /** aggregated selection of "cars" */
@@ -393,7 +393,6 @@ export type Cars_Aggregate_Fields = {
   var_samp?: Maybe<Cars_Var_Samp_Fields>;
   variance?: Maybe<Cars_Variance_Fields>;
 };
-
 
 /** aggregate fields of "cars" */
 export type Cars_Aggregate_FieldsCountArgs = {
@@ -455,7 +454,7 @@ export enum Cars_Constraint {
   /** unique or primary key constraint on columns "uuid" */
   CarsUuidKey = 'cars_uuid_key',
   /** unique or primary key constraint on columns "vin" */
-  CarsVinKey = 'cars_vin_key'
+  CarsVinKey = 'cars_vin_key',
 }
 
 /** input type for incrementing numeric columns in table "cars" */
@@ -635,7 +634,7 @@ export enum Cars_Select_Column {
   /** column name */
   Vin = 'vin',
   /** column name */
-  Year = 'year'
+  Year = 'year',
 }
 
 /** input type for updating data in table "cars" */
@@ -787,7 +786,7 @@ export enum Cars_Update_Column {
   /** column name */
   Vin = 'vin',
   /** column name */
-  Year = 'year'
+  Year = 'year',
 }
 
 export type Cars_Updates = {
@@ -874,7 +873,6 @@ export type Cities_Aggregate_Fields = {
   variance?: Maybe<Cities_Variance_Fields>;
 };
 
-
 /** aggregate fields of "cities" */
 export type Cities_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Cities_Select_Column>>;
@@ -931,7 +929,7 @@ export type Cities_Bool_Exp = {
 /** unique or primary key constraints on table "cities" */
 export enum Cities_Constraint {
   /** unique or primary key constraint on columns "id" */
-  CitiesPkey = 'cities_pkey'
+  CitiesPkey = 'cities_pkey',
 }
 
 /** input type for incrementing numeric columns in table "cities" */
@@ -1029,7 +1027,7 @@ export enum Cities_Select_Column {
   /** column name */
   StateId = 'state_id',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 /** input type for updating data in table "cities" */
@@ -1117,7 +1115,7 @@ export enum Cities_Update_Column {
   /** column name */
   StateId = 'state_id',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 export type Cities_Updates = {
@@ -1198,7 +1196,6 @@ export type Colors_Aggregate_Fields = {
   variance?: Maybe<Colors_Variance_Fields>;
 };
 
-
 /** aggregate fields of "colors" */
 export type Colors_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Colors_Select_Column>>;
@@ -1228,7 +1225,7 @@ export enum Colors_Constraint {
   /** unique or primary key constraint on columns "id" */
   ColorsPkey = 'colors_pkey',
   /** unique or primary key constraint on columns "uuid" */
-  ColorsUuidKey = 'colors_uuid_key'
+  ColorsUuidKey = 'colors_uuid_key',
 }
 
 /** input type for incrementing numeric columns in table "colors" */
@@ -1301,7 +1298,7 @@ export enum Colors_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 /** input type for updating data in table "colors" */
@@ -1357,7 +1354,7 @@ export enum Colors_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 export type Colors_Updates = {
@@ -1391,7 +1388,7 @@ export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
   Asc = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
@@ -1441,7 +1438,6 @@ export type Models_Aggregate_Fields = {
   variance?: Maybe<Models_Variance_Fields>;
 };
 
-
 /** aggregate fields of "models" */
 export type Models_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Models_Select_Column>>;
@@ -1472,7 +1468,7 @@ export enum Models_Constraint {
   /** unique or primary key constraint on columns "id" */
   ModelsPkey = 'models_pkey',
   /** unique or primary key constraint on columns "uuid" */
-  ModelsUuidKey = 'models_uuid_key'
+  ModelsUuidKey = 'models_uuid_key',
 }
 
 /** input type for incrementing numeric columns in table "models" */
@@ -1554,7 +1550,7 @@ export enum Models_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 /** input type for updating data in table "models" */
@@ -1618,7 +1614,7 @@ export enum Models_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 export type Models_Updates = {
@@ -1780,102 +1776,85 @@ export type Mutation_Root = {
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_BrandsArgs = {
   where: Brands_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Brands_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_CarsArgs = {
   where: Cars_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Cars_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_CitiesArgs = {
   where: Cities_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Cities_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_ColorsArgs = {
   where: Colors_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Colors_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_ModelsArgs = {
   where: Models_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_Models_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_StatesArgs = {
   where: States_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_States_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_User_CarsArgs = {
   where: User_Cars_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_User_Cars_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_UsersArgs = {
   where: Users_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_BrandsArgs = {
@@ -1883,13 +1862,11 @@ export type Mutation_RootInsert_BrandsArgs = {
   on_conflict?: InputMaybe<Brands_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Brands_OneArgs = {
   object: Brands_Insert_Input;
   on_conflict?: InputMaybe<Brands_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_CarsArgs = {
@@ -1897,13 +1874,11 @@ export type Mutation_RootInsert_CarsArgs = {
   on_conflict?: InputMaybe<Cars_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Cars_OneArgs = {
   object: Cars_Insert_Input;
   on_conflict?: InputMaybe<Cars_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_CitiesArgs = {
@@ -1911,13 +1886,11 @@ export type Mutation_RootInsert_CitiesArgs = {
   on_conflict?: InputMaybe<Cities_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Cities_OneArgs = {
   object: Cities_Insert_Input;
   on_conflict?: InputMaybe<Cities_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_ColorsArgs = {
@@ -1925,13 +1898,11 @@ export type Mutation_RootInsert_ColorsArgs = {
   on_conflict?: InputMaybe<Colors_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Colors_OneArgs = {
   object: Colors_Insert_Input;
   on_conflict?: InputMaybe<Colors_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_ModelsArgs = {
@@ -1939,13 +1910,11 @@ export type Mutation_RootInsert_ModelsArgs = {
   on_conflict?: InputMaybe<Models_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Models_OneArgs = {
   object: Models_Insert_Input;
   on_conflict?: InputMaybe<Models_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_StatesArgs = {
@@ -1953,13 +1922,11 @@ export type Mutation_RootInsert_StatesArgs = {
   on_conflict?: InputMaybe<States_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_States_OneArgs = {
   object: States_Insert_Input;
   on_conflict?: InputMaybe<States_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_User_CarsArgs = {
@@ -1967,13 +1934,11 @@ export type Mutation_RootInsert_User_CarsArgs = {
   on_conflict?: InputMaybe<User_Cars_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_User_Cars_OneArgs = {
   object: User_Cars_Insert_Input;
   on_conflict?: InputMaybe<User_Cars_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_UsersArgs = {
@@ -1981,13 +1946,11 @@ export type Mutation_RootInsert_UsersArgs = {
   on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_BrandsArgs = {
@@ -1996,7 +1959,6 @@ export type Mutation_RootUpdate_BrandsArgs = {
   where: Brands_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Brands_By_PkArgs = {
   _inc?: InputMaybe<Brands_Inc_Input>;
@@ -2004,12 +1966,10 @@ export type Mutation_RootUpdate_Brands_By_PkArgs = {
   pk_columns: Brands_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Brands_ManyArgs = {
   updates: Array<Brands_Updates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_CarsArgs = {
@@ -2018,7 +1978,6 @@ export type Mutation_RootUpdate_CarsArgs = {
   where: Cars_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Cars_By_PkArgs = {
   _inc?: InputMaybe<Cars_Inc_Input>;
@@ -2026,12 +1985,10 @@ export type Mutation_RootUpdate_Cars_By_PkArgs = {
   pk_columns: Cars_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Cars_ManyArgs = {
   updates: Array<Cars_Updates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_CitiesArgs = {
@@ -2040,7 +1997,6 @@ export type Mutation_RootUpdate_CitiesArgs = {
   where: Cities_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Cities_By_PkArgs = {
   _inc?: InputMaybe<Cities_Inc_Input>;
@@ -2048,12 +2004,10 @@ export type Mutation_RootUpdate_Cities_By_PkArgs = {
   pk_columns: Cities_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Cities_ManyArgs = {
   updates: Array<Cities_Updates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_ColorsArgs = {
@@ -2062,7 +2016,6 @@ export type Mutation_RootUpdate_ColorsArgs = {
   where: Colors_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Colors_By_PkArgs = {
   _inc?: InputMaybe<Colors_Inc_Input>;
@@ -2070,12 +2023,10 @@ export type Mutation_RootUpdate_Colors_By_PkArgs = {
   pk_columns: Colors_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Colors_ManyArgs = {
   updates: Array<Colors_Updates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_ModelsArgs = {
@@ -2084,7 +2035,6 @@ export type Mutation_RootUpdate_ModelsArgs = {
   where: Models_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Models_By_PkArgs = {
   _inc?: InputMaybe<Models_Inc_Input>;
@@ -2092,12 +2042,10 @@ export type Mutation_RootUpdate_Models_By_PkArgs = {
   pk_columns: Models_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Models_ManyArgs = {
   updates: Array<Models_Updates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_StatesArgs = {
@@ -2106,7 +2054,6 @@ export type Mutation_RootUpdate_StatesArgs = {
   where: States_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_States_By_PkArgs = {
   _inc?: InputMaybe<States_Inc_Input>;
@@ -2114,12 +2061,10 @@ export type Mutation_RootUpdate_States_By_PkArgs = {
   pk_columns: States_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_States_ManyArgs = {
   updates: Array<States_Updates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_User_CarsArgs = {
@@ -2128,7 +2073,6 @@ export type Mutation_RootUpdate_User_CarsArgs = {
   where: User_Cars_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_User_Cars_By_PkArgs = {
   _inc?: InputMaybe<User_Cars_Inc_Input>;
@@ -2136,12 +2080,10 @@ export type Mutation_RootUpdate_User_Cars_By_PkArgs = {
   pk_columns: User_Cars_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_User_Cars_ManyArgs = {
   updates: Array<User_Cars_Updates>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
@@ -2150,14 +2092,12 @@ export type Mutation_RootUpdate_UsersArgs = {
   where: Users_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_Users_By_PkArgs = {
   _inc?: InputMaybe<Users_Inc_Input>;
   _set?: InputMaybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_Users_ManyArgs = {
@@ -2177,7 +2117,7 @@ export enum Order_By {
   /** in descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
+  DescNullsLast = 'desc_nulls_last',
 }
 
 export type Query_Root = {
@@ -2232,7 +2172,6 @@ export type Query_Root = {
   users_by_pk?: Maybe<Users>;
 };
 
-
 export type Query_RootBrandsArgs = {
   distinct_on?: InputMaybe<Array<Brands_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2240,7 +2179,6 @@ export type Query_RootBrandsArgs = {
   order_by?: InputMaybe<Array<Brands_Order_By>>;
   where?: InputMaybe<Brands_Bool_Exp>;
 };
-
 
 export type Query_RootBrands_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Brands_Select_Column>>;
@@ -2250,11 +2188,9 @@ export type Query_RootBrands_AggregateArgs = {
   where?: InputMaybe<Brands_Bool_Exp>;
 };
 
-
 export type Query_RootBrands_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootCarsArgs = {
   distinct_on?: InputMaybe<Array<Cars_Select_Column>>;
@@ -2264,7 +2200,6 @@ export type Query_RootCarsArgs = {
   where?: InputMaybe<Cars_Bool_Exp>;
 };
 
-
 export type Query_RootCars_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Cars_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2273,11 +2208,9 @@ export type Query_RootCars_AggregateArgs = {
   where?: InputMaybe<Cars_Bool_Exp>;
 };
 
-
 export type Query_RootCars_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootCitiesArgs = {
   distinct_on?: InputMaybe<Array<Cities_Select_Column>>;
@@ -2287,7 +2220,6 @@ export type Query_RootCitiesArgs = {
   where?: InputMaybe<Cities_Bool_Exp>;
 };
 
-
 export type Query_RootCities_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Cities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2296,11 +2228,9 @@ export type Query_RootCities_AggregateArgs = {
   where?: InputMaybe<Cities_Bool_Exp>;
 };
 
-
 export type Query_RootCities_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootColorsArgs = {
   distinct_on?: InputMaybe<Array<Colors_Select_Column>>;
@@ -2310,7 +2240,6 @@ export type Query_RootColorsArgs = {
   where?: InputMaybe<Colors_Bool_Exp>;
 };
 
-
 export type Query_RootColors_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Colors_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2319,11 +2248,9 @@ export type Query_RootColors_AggregateArgs = {
   where?: InputMaybe<Colors_Bool_Exp>;
 };
 
-
 export type Query_RootColors_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootModelsArgs = {
   distinct_on?: InputMaybe<Array<Models_Select_Column>>;
@@ -2333,7 +2260,6 @@ export type Query_RootModelsArgs = {
   where?: InputMaybe<Models_Bool_Exp>;
 };
 
-
 export type Query_RootModels_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Models_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2342,11 +2268,9 @@ export type Query_RootModels_AggregateArgs = {
   where?: InputMaybe<Models_Bool_Exp>;
 };
 
-
 export type Query_RootModels_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootStatesArgs = {
   distinct_on?: InputMaybe<Array<States_Select_Column>>;
@@ -2356,7 +2280,6 @@ export type Query_RootStatesArgs = {
   where?: InputMaybe<States_Bool_Exp>;
 };
 
-
 export type Query_RootStates_AggregateArgs = {
   distinct_on?: InputMaybe<Array<States_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2365,11 +2288,9 @@ export type Query_RootStates_AggregateArgs = {
   where?: InputMaybe<States_Bool_Exp>;
 };
 
-
 export type Query_RootStates_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootUser_CarsArgs = {
   distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>;
@@ -2379,7 +2300,6 @@ export type Query_RootUser_CarsArgs = {
   where?: InputMaybe<User_Cars_Bool_Exp>;
 };
 
-
 export type Query_RootUser_Cars_AggregateArgs = {
   distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2388,11 +2308,9 @@ export type Query_RootUser_Cars_AggregateArgs = {
   where?: InputMaybe<User_Cars_Bool_Exp>;
 };
 
-
 export type Query_RootUser_Cars_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
@@ -2402,7 +2320,6 @@ export type Query_RootUsersArgs = {
   where?: InputMaybe<Users_Bool_Exp>;
 };
 
-
 export type Query_RootUsers_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2410,7 +2327,6 @@ export type Query_RootUsers_AggregateArgs = {
   order_by?: InputMaybe<Array<Users_Order_By>>;
   where?: InputMaybe<Users_Bool_Exp>;
 };
-
 
 export type Query_RootUsers_By_PkArgs = {
   id: Scalars['Int'];
@@ -2441,7 +2357,6 @@ export type States = {
   uuid: Scalars['uuid'];
 };
 
-
 /** columns and relationships of "states" */
 export type StatesCitiesArgs = {
   distinct_on?: InputMaybe<Array<Cities_Select_Column>>;
@@ -2450,7 +2365,6 @@ export type StatesCitiesArgs = {
   order_by?: InputMaybe<Array<Cities_Order_By>>;
   where?: InputMaybe<Cities_Bool_Exp>;
 };
-
 
 /** columns and relationships of "states" */
 export type StatesCities_AggregateArgs = {
@@ -2484,7 +2398,6 @@ export type States_Aggregate_Fields = {
   variance?: Maybe<States_Variance_Fields>;
 };
 
-
 /** aggregate fields of "states" */
 export type States_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<States_Select_Column>>;
@@ -2513,7 +2426,7 @@ export enum States_Constraint {
   /** unique or primary key constraint on columns "id" */
   StatesPkey = 'states_pkey',
   /** unique or primary key constraint on columns "uuid" */
-  StatesUuidKey = 'states_uuid_key'
+  StatesUuidKey = 'states_uuid_key',
 }
 
 /** input type for incrementing numeric columns in table "states" */
@@ -2588,7 +2501,7 @@ export enum States_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 /** input type for updating data in table "states" */
@@ -2644,7 +2557,7 @@ export enum States_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 export type States_Updates = {
@@ -2741,7 +2654,6 @@ export type Subscription_Root = {
   users_stream: Array<Users>;
 };
 
-
 export type Subscription_RootBrandsArgs = {
   distinct_on?: InputMaybe<Array<Brands_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2749,7 +2661,6 @@ export type Subscription_RootBrandsArgs = {
   order_by?: InputMaybe<Array<Brands_Order_By>>;
   where?: InputMaybe<Brands_Bool_Exp>;
 };
-
 
 export type Subscription_RootBrands_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Brands_Select_Column>>;
@@ -2759,18 +2670,15 @@ export type Subscription_RootBrands_AggregateArgs = {
   where?: InputMaybe<Brands_Bool_Exp>;
 };
 
-
 export type Subscription_RootBrands_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootBrands_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Brands_Stream_Cursor_Input>>;
   where?: InputMaybe<Brands_Bool_Exp>;
 };
-
 
 export type Subscription_RootCarsArgs = {
   distinct_on?: InputMaybe<Array<Cars_Select_Column>>;
@@ -2780,7 +2688,6 @@ export type Subscription_RootCarsArgs = {
   where?: InputMaybe<Cars_Bool_Exp>;
 };
 
-
 export type Subscription_RootCars_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Cars_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2789,18 +2696,15 @@ export type Subscription_RootCars_AggregateArgs = {
   where?: InputMaybe<Cars_Bool_Exp>;
 };
 
-
 export type Subscription_RootCars_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootCars_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Cars_Stream_Cursor_Input>>;
   where?: InputMaybe<Cars_Bool_Exp>;
 };
-
 
 export type Subscription_RootCitiesArgs = {
   distinct_on?: InputMaybe<Array<Cities_Select_Column>>;
@@ -2810,7 +2714,6 @@ export type Subscription_RootCitiesArgs = {
   where?: InputMaybe<Cities_Bool_Exp>;
 };
 
-
 export type Subscription_RootCities_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Cities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2819,18 +2722,15 @@ export type Subscription_RootCities_AggregateArgs = {
   where?: InputMaybe<Cities_Bool_Exp>;
 };
 
-
 export type Subscription_RootCities_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootCities_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Cities_Stream_Cursor_Input>>;
   where?: InputMaybe<Cities_Bool_Exp>;
 };
-
 
 export type Subscription_RootColorsArgs = {
   distinct_on?: InputMaybe<Array<Colors_Select_Column>>;
@@ -2840,7 +2740,6 @@ export type Subscription_RootColorsArgs = {
   where?: InputMaybe<Colors_Bool_Exp>;
 };
 
-
 export type Subscription_RootColors_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Colors_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2849,18 +2748,15 @@ export type Subscription_RootColors_AggregateArgs = {
   where?: InputMaybe<Colors_Bool_Exp>;
 };
 
-
 export type Subscription_RootColors_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootColors_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Colors_Stream_Cursor_Input>>;
   where?: InputMaybe<Colors_Bool_Exp>;
 };
-
 
 export type Subscription_RootModelsArgs = {
   distinct_on?: InputMaybe<Array<Models_Select_Column>>;
@@ -2870,7 +2766,6 @@ export type Subscription_RootModelsArgs = {
   where?: InputMaybe<Models_Bool_Exp>;
 };
 
-
 export type Subscription_RootModels_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Models_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2879,18 +2774,15 @@ export type Subscription_RootModels_AggregateArgs = {
   where?: InputMaybe<Models_Bool_Exp>;
 };
 
-
 export type Subscription_RootModels_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootModels_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Models_Stream_Cursor_Input>>;
   where?: InputMaybe<Models_Bool_Exp>;
 };
-
 
 export type Subscription_RootStatesArgs = {
   distinct_on?: InputMaybe<Array<States_Select_Column>>;
@@ -2900,7 +2792,6 @@ export type Subscription_RootStatesArgs = {
   where?: InputMaybe<States_Bool_Exp>;
 };
 
-
 export type Subscription_RootStates_AggregateArgs = {
   distinct_on?: InputMaybe<Array<States_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2909,18 +2800,15 @@ export type Subscription_RootStates_AggregateArgs = {
   where?: InputMaybe<States_Bool_Exp>;
 };
 
-
 export type Subscription_RootStates_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootStates_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<States_Stream_Cursor_Input>>;
   where?: InputMaybe<States_Bool_Exp>;
 };
-
 
 export type Subscription_RootUser_CarsArgs = {
   distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>;
@@ -2930,7 +2818,6 @@ export type Subscription_RootUser_CarsArgs = {
   where?: InputMaybe<User_Cars_Bool_Exp>;
 };
 
-
 export type Subscription_RootUser_Cars_AggregateArgs = {
   distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2939,18 +2826,15 @@ export type Subscription_RootUser_Cars_AggregateArgs = {
   where?: InputMaybe<User_Cars_Bool_Exp>;
 };
 
-
 export type Subscription_RootUser_Cars_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootUser_Cars_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<User_Cars_Stream_Cursor_Input>>;
   where?: InputMaybe<User_Cars_Bool_Exp>;
 };
-
 
 export type Subscription_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
@@ -2960,7 +2844,6 @@ export type Subscription_RootUsersArgs = {
   where?: InputMaybe<Users_Bool_Exp>;
 };
 
-
 export type Subscription_RootUsers_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2969,11 +2852,9 @@ export type Subscription_RootUsers_AggregateArgs = {
   where?: InputMaybe<Users_Bool_Exp>;
 };
 
-
 export type Subscription_RootUsers_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootUsers_StreamArgs = {
   batch_size: Scalars['Int'];
@@ -3013,7 +2894,6 @@ export type User_Cars_Aggregate_Fields = {
   variance?: Maybe<User_Cars_Variance_Fields>;
 };
 
-
 /** aggregate fields of "user_cars" */
 export type User_Cars_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<User_Cars_Select_Column>>;
@@ -3044,7 +2924,7 @@ export enum User_Cars_Constraint {
   /** unique or primary key constraint on columns "id" */
   UserCarsPkey = 'user_cars_pkey',
   /** unique or primary key constraint on columns "uuid" */
-  UserCarsUuidKey = 'user_cars_uuid_key'
+  UserCarsUuidKey = 'user_cars_uuid_key',
 }
 
 /** input type for incrementing numeric columns in table "user_cars" */
@@ -3118,7 +2998,7 @@ export enum User_Cars_Select_Column {
   /** column name */
   UserId = 'user_id',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 /** input type for updating data in table "user_cars" */
@@ -3186,7 +3066,7 @@ export enum User_Cars_Update_Column {
   /** column name */
   UserId = 'user_id',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 export type User_Cars_Updates = {
@@ -3254,7 +3134,6 @@ export type Users_Aggregate_Fields = {
   variance?: Maybe<Users_Variance_Fields>;
 };
 
-
 /** aggregate fields of "users" */
 export type Users_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Users_Select_Column>>;
@@ -3286,7 +3165,7 @@ export enum Users_Constraint {
   /** unique or primary key constraint on columns "id" */
   UsersPkey = 'users_pkey',
   /** unique or primary key constraint on columns "uuid" */
-  UsersUuidKey = 'users_uuid_key'
+  UsersUuidKey = 'users_uuid_key',
 }
 
 /** input type for incrementing numeric columns in table "users" */
@@ -3364,7 +3243,7 @@ export enum Users_Select_Column {
   /** column name */
   LastName = 'last_name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 /** input type for updating data in table "users" */
@@ -3428,7 +3307,7 @@ export enum Users_Update_Column {
   /** column name */
   LastName = 'last_name',
   /** column name */
-  Uuid = 'uuid'
+  Uuid = 'uuid',
 }
 
 export type Users_Updates = {
@@ -3474,65 +3353,160 @@ export type Insert_User_CarsMutationVariables = Exact<{
   objects: Array<User_Cars_Insert_Input> | User_Cars_Insert_Input;
 }>;
 
-
-export type Insert_User_CarsMutation = { __typename?: 'mutation_root', insert_user_cars?: { __typename?: 'user_cars_mutation_response', returning: Array<{ __typename?: 'user_cars', car_id: number, user_id: number }> } | null };
+export type Insert_User_CarsMutation = {
+  __typename?: 'mutation_root';
+  insert_user_cars?: {
+    __typename?: 'user_cars_mutation_response';
+    returning: Array<{
+      __typename?: 'user_cars';
+      car_id: number;
+      user_id: number;
+    }>;
+  } | null;
+};
 
 export type Delete_User_CarsMutationVariables = Exact<{
   where: User_Cars_Bool_Exp;
 }>;
 
-
-export type Delete_User_CarsMutation = { __typename?: 'mutation_root', delete_user_cars?: { __typename?: 'user_cars_mutation_response', returning: Array<{ __typename?: 'user_cars', car_id: number, user_id: number }> } | null };
+export type Delete_User_CarsMutation = {
+  __typename?: 'mutation_root';
+  delete_user_cars?: {
+    __typename?: 'user_cars_mutation_response';
+    returning: Array<{
+      __typename?: 'user_cars';
+      car_id: number;
+      user_id: number;
+    }>;
+  } | null;
+};
 
 export type Mutation_CarsMutationVariables = Exact<{
   objects: Array<Cars_Insert_Input> | Cars_Insert_Input;
 }>;
 
-
-export type Mutation_CarsMutation = { __typename?: 'mutation_root', insert_cars?: { __typename?: 'cars_mutation_response', returning: Array<{ __typename?: 'cars', batch: any, brand_id: number, model_id: number, year?: number | null, vin: string, title?: string | null, sale_date: any, price: any, odometer?: number | null, damage_type?: string | null, condition: any, color_id: number, state_id: number, city_id: number, description?: string | null }> } | null };
+export type Mutation_CarsMutation = {
+  __typename?: 'mutation_root';
+  insert_cars?: {
+    __typename?: 'cars_mutation_response';
+    returning: Array<{
+      __typename?: 'cars';
+      batch: any;
+      brand_id: number;
+      model_id: number;
+      year?: number | null;
+      vin: string;
+      title?: string | null;
+      sale_date: any;
+      price: any;
+      odometer?: number | null;
+      damage_type?: string | null;
+      condition: any;
+      color_id: number;
+      state_id: number;
+      city_id: number;
+      description?: string | null;
+    }>;
+  } | null;
+};
 
 export type Query_GetCarsQueryVariables = Exact<{
   orderBy?: InputMaybe<Array<Cars_Order_By> | Cars_Order_By>;
   where?: InputMaybe<Cars_Bool_Exp>;
 }>;
 
-
-export type Query_GetCarsQuery = { __typename?: 'query_root', cars: Array<{ __typename?: 'cars', batch: any, condition: any, damage_type?: string | null, description?: string | null, id: number, odometer?: number | null, price: any, sale_date: any, title?: string | null, vin: string, year?: number | null, city: { __typename?: 'cities', name: string, id: number, state: { __typename?: 'states', id: number, name: string } }, color: { __typename?: 'colors', id: number, name: string }, model: { __typename?: 'models', id: number, name: string, brand: { __typename?: 'brands', id: number, name: string } } }> };
+export type Query_GetCarsQuery = {
+  __typename?: 'query_root';
+  cars: Array<{
+    __typename?: 'cars';
+    batch: any;
+    condition: any;
+    damage_type?: string | null;
+    description?: string | null;
+    id: number;
+    odometer?: number | null;
+    price: any;
+    sale_date: any;
+    title?: string | null;
+    vin: string;
+    year?: number | null;
+    city: {
+      __typename?: 'cities';
+      name: string;
+      id: number;
+      state: { __typename?: 'states'; id: number; name: string };
+    };
+    color: { __typename?: 'colors'; id: number; name: string };
+    model: {
+      __typename?: 'models';
+      id: number;
+      name: string;
+      brand: { __typename?: 'brands'; id: number; name: string };
+    };
+  }>;
+};
 
 export type QueryFavoriteCarsQueryVariables = Exact<{
   where?: InputMaybe<User_Cars_Bool_Exp>;
 }>;
 
-
-export type QueryFavoriteCarsQuery = { __typename?: 'query_root', user_cars: Array<{ __typename?: 'user_cars', car_id: number, user_id: number }> };
+export type QueryFavoriteCarsQuery = {
+  __typename?: 'query_root';
+  user_cars: Array<{
+    __typename?: 'user_cars';
+    car_id: number;
+    user_id: number;
+  }>;
+};
 
 export type Get_Add_Car_Fields_QueryQueryVariables = Exact<{
   where?: InputMaybe<Cities_Bool_Exp>;
   modelsWhere?: InputMaybe<Models_Bool_Exp>;
 }>;
 
-
-export type Get_Add_Car_Fields_QueryQuery = { __typename?: 'query_root', colors: Array<{ __typename?: 'colors', id: number, name: string }>, states: Array<{ __typename?: 'states', id: number, name: string }>, cities: Array<{ __typename?: 'cities', id: number, name: string, state_id: number }>, brands: Array<{ __typename?: 'brands', id: number, name: string }>, models: Array<{ __typename?: 'models', id: number, name: string }> };
+export type Get_Add_Car_Fields_QueryQuery = {
+  __typename?: 'query_root';
+  colors: Array<{ __typename?: 'colors'; id: number; name: string }>;
+  states: Array<{ __typename?: 'states'; id: number; name: string }>;
+  cities: Array<{
+    __typename?: 'cities';
+    id: number;
+    name: string;
+    state_id: number;
+  }>;
+  brands: Array<{ __typename?: 'brands'; id: number; name: string }>;
+  models: Array<{ __typename?: 'models'; id: number; name: string }>;
+};
 
 export type Query_UserQueryVariables = Exact<{
   where?: InputMaybe<Users_Bool_Exp>;
 }>;
 
-
-export type Query_UserQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'users', first_name: string, last_name: string, email: string, id: number }> };
-
+export type Query_UserQuery = {
+  __typename?: 'query_root';
+  users: Array<{
+    __typename?: 'users';
+    first_name: string;
+    last_name: string;
+    email: string;
+    id: number;
+  }>;
+};
 
 export const Insert_User_CarsDocument = gql`
-    mutation Insert_user_cars($objects: [user_cars_insert_input!]!) {
-  insert_user_cars(objects: $objects) {
-    returning {
-      car_id
-      user_id
+  mutation Insert_user_cars($objects: [user_cars_insert_input!]!) {
+    insert_user_cars(objects: $objects) {
+      returning {
+        car_id
+        user_id
+      }
     }
   }
-}
-    `;
-export type Insert_User_CarsMutationFn = Apollo.MutationFunction<Insert_User_CarsMutation, Insert_User_CarsMutationVariables>;
+`;
+export type Insert_User_CarsMutationFn = Apollo.MutationFunction<
+  Insert_User_CarsMutation,
+  Insert_User_CarsMutationVariables
+>;
 
 /**
  * __useInsert_User_CarsMutation__
@@ -3551,24 +3525,41 @@ export type Insert_User_CarsMutationFn = Apollo.MutationFunction<Insert_User_Car
  *   },
  * });
  */
-export function useInsert_User_CarsMutation(baseOptions?: Apollo.MutationHookOptions<Insert_User_CarsMutation, Insert_User_CarsMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<Insert_User_CarsMutation, Insert_User_CarsMutationVariables>(Insert_User_CarsDocument, options);
-      }
-export type Insert_User_CarsMutationHookResult = ReturnType<typeof useInsert_User_CarsMutation>;
-export type Insert_User_CarsMutationResult = Apollo.MutationResult<Insert_User_CarsMutation>;
-export type Insert_User_CarsMutationOptions = Apollo.BaseMutationOptions<Insert_User_CarsMutation, Insert_User_CarsMutationVariables>;
+export function useInsert_User_CarsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Insert_User_CarsMutation,
+    Insert_User_CarsMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Insert_User_CarsMutation,
+    Insert_User_CarsMutationVariables
+  >(Insert_User_CarsDocument, options);
+}
+export type Insert_User_CarsMutationHookResult = ReturnType<
+  typeof useInsert_User_CarsMutation
+>;
+export type Insert_User_CarsMutationResult =
+  Apollo.MutationResult<Insert_User_CarsMutation>;
+export type Insert_User_CarsMutationOptions = Apollo.BaseMutationOptions<
+  Insert_User_CarsMutation,
+  Insert_User_CarsMutationVariables
+>;
 export const Delete_User_CarsDocument = gql`
-    mutation Delete_user_cars($where: user_cars_bool_exp!) {
-  delete_user_cars(where: $where) {
-    returning {
-      car_id
-      user_id
+  mutation Delete_user_cars($where: user_cars_bool_exp!) {
+    delete_user_cars(where: $where) {
+      returning {
+        car_id
+        user_id
+      }
     }
   }
-}
-    `;
-export type Delete_User_CarsMutationFn = Apollo.MutationFunction<Delete_User_CarsMutation, Delete_User_CarsMutationVariables>;
+`;
+export type Delete_User_CarsMutationFn = Apollo.MutationFunction<
+  Delete_User_CarsMutation,
+  Delete_User_CarsMutationVariables
+>;
 
 /**
  * __useDelete_User_CarsMutation__
@@ -3587,37 +3578,54 @@ export type Delete_User_CarsMutationFn = Apollo.MutationFunction<Delete_User_Car
  *   },
  * });
  */
-export function useDelete_User_CarsMutation(baseOptions?: Apollo.MutationHookOptions<Delete_User_CarsMutation, Delete_User_CarsMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<Delete_User_CarsMutation, Delete_User_CarsMutationVariables>(Delete_User_CarsDocument, options);
-      }
-export type Delete_User_CarsMutationHookResult = ReturnType<typeof useDelete_User_CarsMutation>;
-export type Delete_User_CarsMutationResult = Apollo.MutationResult<Delete_User_CarsMutation>;
-export type Delete_User_CarsMutationOptions = Apollo.BaseMutationOptions<Delete_User_CarsMutation, Delete_User_CarsMutationVariables>;
+export function useDelete_User_CarsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Delete_User_CarsMutation,
+    Delete_User_CarsMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Delete_User_CarsMutation,
+    Delete_User_CarsMutationVariables
+  >(Delete_User_CarsDocument, options);
+}
+export type Delete_User_CarsMutationHookResult = ReturnType<
+  typeof useDelete_User_CarsMutation
+>;
+export type Delete_User_CarsMutationResult =
+  Apollo.MutationResult<Delete_User_CarsMutation>;
+export type Delete_User_CarsMutationOptions = Apollo.BaseMutationOptions<
+  Delete_User_CarsMutation,
+  Delete_User_CarsMutationVariables
+>;
 export const Mutation_CarsDocument = gql`
-    mutation Mutation_cars($objects: [cars_insert_input!]!) {
-  insert_cars(objects: $objects) {
-    returning {
-      batch
-      brand_id
-      model_id
-      year
-      vin
-      title
-      sale_date
-      price
-      odometer
-      damage_type
-      condition
-      color_id
-      state_id
-      city_id
-      description
+  mutation Mutation_cars($objects: [cars_insert_input!]!) {
+    insert_cars(objects: $objects) {
+      returning {
+        batch
+        brand_id
+        model_id
+        year
+        vin
+        title
+        sale_date
+        price
+        odometer
+        damage_type
+        condition
+        color_id
+        state_id
+        city_id
+        description
+      }
     }
   }
-}
-    `;
-export type Mutation_CarsMutationFn = Apollo.MutationFunction<Mutation_CarsMutation, Mutation_CarsMutationVariables>;
+`;
+export type Mutation_CarsMutationFn = Apollo.MutationFunction<
+  Mutation_CarsMutation,
+  Mutation_CarsMutationVariables
+>;
 
 /**
  * __useMutation_CarsMutation__
@@ -3636,50 +3644,64 @@ export type Mutation_CarsMutationFn = Apollo.MutationFunction<Mutation_CarsMutat
  *   },
  * });
  */
-export function useMutation_CarsMutation(baseOptions?: Apollo.MutationHookOptions<Mutation_CarsMutation, Mutation_CarsMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<Mutation_CarsMutation, Mutation_CarsMutationVariables>(Mutation_CarsDocument, options);
-      }
-export type Mutation_CarsMutationHookResult = ReturnType<typeof useMutation_CarsMutation>;
-export type Mutation_CarsMutationResult = Apollo.MutationResult<Mutation_CarsMutation>;
-export type Mutation_CarsMutationOptions = Apollo.BaseMutationOptions<Mutation_CarsMutation, Mutation_CarsMutationVariables>;
+export function useMutation_CarsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Mutation_CarsMutation,
+    Mutation_CarsMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Mutation_CarsMutation,
+    Mutation_CarsMutationVariables
+  >(Mutation_CarsDocument, options);
+}
+export type Mutation_CarsMutationHookResult = ReturnType<
+  typeof useMutation_CarsMutation
+>;
+export type Mutation_CarsMutationResult =
+  Apollo.MutationResult<Mutation_CarsMutation>;
+export type Mutation_CarsMutationOptions = Apollo.BaseMutationOptions<
+  Mutation_CarsMutation,
+  Mutation_CarsMutationVariables
+>;
 export const Query_GetCarsDocument = gql`
-    query Query_getCars($orderBy: [cars_order_by!], $where: cars_bool_exp) {
-  cars(order_by: $orderBy, where: $where) {
-    batch
-    city {
-      name
-      id
-      state {
+  query Query_getCars($orderBy: [cars_order_by!], $where: cars_bool_exp) {
+    cars(order_by: $orderBy, where: $where) {
+      batch
+      city {
+        name
+        id
+        state {
+          id
+          name
+        }
+      }
+      color {
         id
         name
       }
-    }
-    color {
+      condition
+      damage_type
+      description
       id
-      name
-    }
-    condition
-    damage_type
-    description
-    id
-    odometer
-    price
-    sale_date
-    title
-    vin
-    year
-    model {
-      id
-      name
-      brand {
+      odometer
+      price
+      sale_date
+      title
+      vin
+      year
+      model {
         id
         name
+        brand {
+          id
+          name
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useQuery_GetCarsQuery__
@@ -3698,25 +3720,48 @@ export const Query_GetCarsDocument = gql`
  *   },
  * });
  */
-export function useQuery_GetCarsQuery(baseOptions?: Apollo.QueryHookOptions<Query_GetCarsQuery, Query_GetCarsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<Query_GetCarsQuery, Query_GetCarsQueryVariables>(Query_GetCarsDocument, options);
-      }
-export function useQuery_GetCarsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Query_GetCarsQuery, Query_GetCarsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<Query_GetCarsQuery, Query_GetCarsQueryVariables>(Query_GetCarsDocument, options);
-        }
-export type Query_GetCarsQueryHookResult = ReturnType<typeof useQuery_GetCarsQuery>;
-export type Query_GetCarsLazyQueryHookResult = ReturnType<typeof useQuery_GetCarsLazyQuery>;
-export type Query_GetCarsQueryResult = Apollo.QueryResult<Query_GetCarsQuery, Query_GetCarsQueryVariables>;
-export const QueryFavoriteCarsDocument = gql`
-    query QueryFavoriteCars($where: user_cars_bool_exp) {
-  user_cars(where: $where) {
-    car_id
-    user_id
-  }
+export function useQuery_GetCarsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Query_GetCarsQuery,
+    Query_GetCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Query_GetCarsQuery, Query_GetCarsQueryVariables>(
+    Query_GetCarsDocument,
+    options
+  );
 }
-    `;
+export function useQuery_GetCarsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Query_GetCarsQuery,
+    Query_GetCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Query_GetCarsQuery, Query_GetCarsQueryVariables>(
+    Query_GetCarsDocument,
+    options
+  );
+}
+export type Query_GetCarsQueryHookResult = ReturnType<
+  typeof useQuery_GetCarsQuery
+>;
+export type Query_GetCarsLazyQueryHookResult = ReturnType<
+  typeof useQuery_GetCarsLazyQuery
+>;
+export type Query_GetCarsQueryResult = Apollo.QueryResult<
+  Query_GetCarsQuery,
+  Query_GetCarsQueryVariables
+>;
+export const QueryFavoriteCarsDocument = gql`
+  query QueryFavoriteCars($where: user_cars_bool_exp) {
+    user_cars(where: $where) {
+      car_id
+      user_id
+    }
+  }
+`;
 
 /**
  * __useQueryFavoriteCarsQuery__
@@ -3734,42 +3779,68 @@ export const QueryFavoriteCarsDocument = gql`
  *   },
  * });
  */
-export function useQueryFavoriteCarsQuery(baseOptions?: Apollo.QueryHookOptions<QueryFavoriteCarsQuery, QueryFavoriteCarsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<QueryFavoriteCarsQuery, QueryFavoriteCarsQueryVariables>(QueryFavoriteCarsDocument, options);
-      }
-export function useQueryFavoriteCarsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QueryFavoriteCarsQuery, QueryFavoriteCarsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<QueryFavoriteCarsQuery, QueryFavoriteCarsQueryVariables>(QueryFavoriteCarsDocument, options);
-        }
-export type QueryFavoriteCarsQueryHookResult = ReturnType<typeof useQueryFavoriteCarsQuery>;
-export type QueryFavoriteCarsLazyQueryHookResult = ReturnType<typeof useQueryFavoriteCarsLazyQuery>;
-export type QueryFavoriteCarsQueryResult = Apollo.QueryResult<QueryFavoriteCarsQuery, QueryFavoriteCarsQueryVariables>;
-export const Get_Add_Car_Fields_QueryDocument = gql`
-    query GET_ADD_CAR_FIELDS_Query($where: cities_bool_exp, $modelsWhere: models_bool_exp) {
-  colors {
-    id
-    name
-  }
-  states {
-    id
-    name
-  }
-  cities(where: $where) {
-    id
-    name
-    state_id
-  }
-  brands {
-    id
-    name
-  }
-  models(where: $modelsWhere) {
-    id
-    name
-  }
+export function useQueryFavoriteCarsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >(QueryFavoriteCarsDocument, options);
 }
-    `;
+export function useQueryFavoriteCarsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >(QueryFavoriteCarsDocument, options);
+}
+export type QueryFavoriteCarsQueryHookResult = ReturnType<
+  typeof useQueryFavoriteCarsQuery
+>;
+export type QueryFavoriteCarsLazyQueryHookResult = ReturnType<
+  typeof useQueryFavoriteCarsLazyQuery
+>;
+export type QueryFavoriteCarsQueryResult = Apollo.QueryResult<
+  QueryFavoriteCarsQuery,
+  QueryFavoriteCarsQueryVariables
+>;
+export const Get_Add_Car_Fields_QueryDocument = gql`
+  query GET_ADD_CAR_FIELDS_Query(
+    $where: cities_bool_exp
+    $modelsWhere: models_bool_exp
+  ) {
+    colors {
+      id
+      name
+    }
+    states {
+      id
+      name
+    }
+    cities(where: $where) {
+      id
+      name
+      state_id
+    }
+    brands {
+      id
+      name
+    }
+    models(where: $modelsWhere) {
+      id
+      name
+    }
+  }
+`;
 
 /**
  * __useGet_Add_Car_Fields_QueryQuery__
@@ -3788,27 +3859,50 @@ export const Get_Add_Car_Fields_QueryDocument = gql`
  *   },
  * });
  */
-export function useGet_Add_Car_Fields_QueryQuery(baseOptions?: Apollo.QueryHookOptions<Get_Add_Car_Fields_QueryQuery, Get_Add_Car_Fields_QueryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<Get_Add_Car_Fields_QueryQuery, Get_Add_Car_Fields_QueryQueryVariables>(Get_Add_Car_Fields_QueryDocument, options);
-      }
-export function useGet_Add_Car_Fields_QueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Get_Add_Car_Fields_QueryQuery, Get_Add_Car_Fields_QueryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<Get_Add_Car_Fields_QueryQuery, Get_Add_Car_Fields_QueryQueryVariables>(Get_Add_Car_Fields_QueryDocument, options);
-        }
-export type Get_Add_Car_Fields_QueryQueryHookResult = ReturnType<typeof useGet_Add_Car_Fields_QueryQuery>;
-export type Get_Add_Car_Fields_QueryLazyQueryHookResult = ReturnType<typeof useGet_Add_Car_Fields_QueryLazyQuery>;
-export type Get_Add_Car_Fields_QueryQueryResult = Apollo.QueryResult<Get_Add_Car_Fields_QueryQuery, Get_Add_Car_Fields_QueryQueryVariables>;
-export const Query_UserDocument = gql`
-    query Query_user($where: users_bool_exp) {
-  users(where: $where) {
-    first_name
-    last_name
-    email
-    id
-  }
+export function useGet_Add_Car_Fields_QueryQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >(Get_Add_Car_Fields_QueryDocument, options);
 }
-    `;
+export function useGet_Add_Car_Fields_QueryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >(Get_Add_Car_Fields_QueryDocument, options);
+}
+export type Get_Add_Car_Fields_QueryQueryHookResult = ReturnType<
+  typeof useGet_Add_Car_Fields_QueryQuery
+>;
+export type Get_Add_Car_Fields_QueryLazyQueryHookResult = ReturnType<
+  typeof useGet_Add_Car_Fields_QueryLazyQuery
+>;
+export type Get_Add_Car_Fields_QueryQueryResult = Apollo.QueryResult<
+  Get_Add_Car_Fields_QueryQuery,
+  Get_Add_Car_Fields_QueryQueryVariables
+>;
+export const Query_UserDocument = gql`
+  query Query_user($where: users_bool_exp) {
+    users(where: $where) {
+      first_name
+      last_name
+      email
+      id
+    }
+  }
+`;
 
 /**
  * __useQuery_UserQuery__
@@ -3826,14 +3920,35 @@ export const Query_UserDocument = gql`
  *   },
  * });
  */
-export function useQuery_UserQuery(baseOptions?: Apollo.QueryHookOptions<Query_UserQuery, Query_UserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<Query_UserQuery, Query_UserQueryVariables>(Query_UserDocument, options);
-      }
-export function useQuery_UserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Query_UserQuery, Query_UserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<Query_UserQuery, Query_UserQueryVariables>(Query_UserDocument, options);
-        }
+export function useQuery_UserQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Query_UserQuery,
+    Query_UserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Query_UserQuery, Query_UserQueryVariables>(
+    Query_UserDocument,
+    options
+  );
+}
+export function useQuery_UserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Query_UserQuery,
+    Query_UserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Query_UserQuery, Query_UserQueryVariables>(
+    Query_UserDocument,
+    options
+  );
+}
 export type Query_UserQueryHookResult = ReturnType<typeof useQuery_UserQuery>;
-export type Query_UserLazyQueryHookResult = ReturnType<typeof useQuery_UserLazyQuery>;
-export type Query_UserQueryResult = Apollo.QueryResult<Query_UserQuery, Query_UserQueryVariables>;
+export type Query_UserLazyQueryHookResult = ReturnType<
+  typeof useQuery_UserLazyQuery
+>;
+export type Query_UserQueryResult = Apollo.QueryResult<
+  Query_UserQuery,
+  Query_UserQueryVariables
+>;

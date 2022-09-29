@@ -107,7 +107,7 @@ const CarListComponent = ({ favoritesCarsArray }: CarListComponentProps) => {
       ) : (
         <>
           <HeaderList />
-          <BodyList carsInfoArray={data!} />
+          <BodyList carsInfo={data!.cars} />
         </>
       )}
     </Container>
