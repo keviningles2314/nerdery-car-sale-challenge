@@ -9,7 +9,7 @@ interface ButtonProps {
 
 const Button = ({ title, onClick, disabled = false }: ButtonProps) => {
   return (
-    <StyledButton onClick={onClick} disabled={disabled}>
+    <StyledButton onClick={onClick} disabled={disabled} data-testid='button'>
       <RegularText text={title} isBaseColor={false} />
     </StyledButton>
   );

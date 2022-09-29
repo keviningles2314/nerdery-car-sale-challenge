@@ -1,4 +1,5 @@
 import {
+  Get_Add_Car_Fields_QueryDocument,
   Order_By,
   Query_GetCarsDocument,
 } from '../../api/graphql/__generated__/graphql-types';
@@ -6,30 +7,6 @@ import {
 export const mockCarObject = {
   request: {
     query: Query_GetCarsDocument,
-    variables: {
-      orderBy: [
-        {
-          sale_date: Order_By.Desc,
-        },
-      ],
-      where: {
-        _or: [
-          {
-            title: {
-              _iregex: '',
-            },
-          },
-          {
-            vin: {
-              _iregex: '',
-            },
-          },
-        ],
-        id: {
-          _in: undefined,
-        },
-      },
-    },
   },
   result: {
     data: {
@@ -80,30 +57,6 @@ export const mockCarObject = {
 export const mockEmptyObject = {
   request: {
     query: Query_GetCarsDocument,
-    variables: {
-      orderBy: [
-        {
-          sale_date: Order_By.Desc,
-        },
-      ],
-      where: {
-        _or: [
-          {
-            title: {
-              _iregex: '',
-            },
-          },
-          {
-            vin: {
-              _iregex: '',
-            },
-          },
-        ],
-        id: {
-          _in: undefined,
-        },
-      },
-    },
   },
   result: {
     data: {
@@ -163,6 +116,94 @@ export const mockCarDetailObject = {
           vin: 'MTE4584',
           year: 2017,
           description: 'No damage',
+        },
+      ],
+    },
+  },
+};
+
+export const mockSelectData = {
+  request: {
+    query: Get_Add_Car_Fields_QueryDocument,
+  },
+  result: {
+    data: {
+      brands: [
+        {
+          id: 2,
+          name: 'Jeep',
+        },
+      ],
+      models: [
+        {
+          id: 2,
+          name: 'Patriot',
+        },
+      ],
+      colors: [
+        {
+          id: 2,
+          name: 'Red',
+        },
+      ],
+      states: [
+        {
+          id: 2,
+          name: 'Utah',
+        },
+      ],
+      cities: [],
+    },
+  },
+};
+
+export const mockSelectDataVariables = {
+  request: {
+    query: Get_Add_Car_Fields_QueryDocument,
+    variables: {
+      modelsWhere: {
+        brand_id: {
+          _eq: 2,
+        },
+      },
+      where: {
+        state_id: {
+          _eq: 2,
+        },
+      },
+    },
+  },
+  result: {
+    data: {
+      brands: [
+        {
+          id: 2,
+          name: 'Jeep',
+        },
+      ],
+      models: [
+        {
+          id: 2,
+          name: 'Patriot',
+        },
+      ],
+      colors: [
+        {
+          id: 2,
+          name: 'Red',
+        },
+      ],
+      states: [
+        {
+          id: 2,
+          name: 'Utah',
+        },
+      ],
+      cities: [
+        {
+          id: 2,
+          name: 'Salt Lake',
+          state_id: 2,
         },
       ],
     },

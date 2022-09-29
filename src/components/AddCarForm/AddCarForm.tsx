@@ -84,10 +84,10 @@ const schema = yup.object().shape({
   year: yup.date().required().typeError('Vehicle Year is required'),
   condition: yup.string().required().typeError('Please Select a condition'),
   brand: yup.number().required().typeError('Please Select a brand'),
-  model: yup.number().required().typeError('Please Select a Model'),
-  color: yup.number().required().typeError('Please Select a Color'),
-  state: yup.number().required().typeError('Please Select a Color'),
-  city: yup.number().required().typeError('Please Select a Color'),
+  model: yup.number().required().typeError('Please Select a model'),
+  color: yup.number().required().typeError('Please Select a color'),
+  state: yup.number().required().typeError('Please Select a state'),
+  city: yup.number().required().typeError('Please Select a city'),
 });
 
 const AddCarForm = () => {
@@ -224,7 +224,7 @@ const AddCarForm = () => {
   return (
     <Container>
       {!error ? (
-        <Form>
+        <Form data-testid='form'>
           <TextField
             register={register}
             fieldName={title}
@@ -262,6 +262,7 @@ const AddCarForm = () => {
               <SelectOption
                 {...register('brand')}
                 onChange={handleOptionChange}
+                data-testid='brand'
               >
                 <OptionElement value=''>Select Brand</OptionElement>
                 {!loading && (
@@ -279,7 +280,7 @@ const AddCarForm = () => {
               {errors.brand && <ErrorMessage message={errors.brand.message!} />}
             </SectionNestedElement>
             <SectionNestedElement>
-              <SelectOption {...register('model')}>
+              <SelectOption {...register('model')} data-testid='model'>
                 <OptionElement value=''>Select Model</OptionElement>
                 {!lazyModelLoading && (
                   <>
