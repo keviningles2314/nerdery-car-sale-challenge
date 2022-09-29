@@ -27,7 +27,7 @@ import ReactDatePicker from 'react-datepicker';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import SuccessCreationMessage from '../SuccessCreationMessage/SuccessCreationMessage';
 import { GET_CARS } from '../../api/graphql/query/cars';
 
@@ -102,8 +102,6 @@ const AddCarForm = () => {
     defaultValues: defaultValuesObject,
   });
 
-  const [isSuccessCreation, setIsSuccesCreation] = useState<boolean>(false);
-
   const { title, odometer, vin, price, damage, description } = fieldNameValues;
 
   const { data, error, loading } = useGet_Add_Car_Fields_QueryQuery();
@@ -118,19 +116,10 @@ const AddCarForm = () => {
     { data: lazyCitiesData, loading: lazyCitiesLoading },
   ] = useGet_Add_Car_Fields_QueryLazyQuery();
 
-  const [
-    insertCar,
-    { data: mutationData, loading: mutationLoading, error: mutationError },
-  ] = useMutation_CarsMutation();
+  const [insertCar, { loading: mutationLoading, error: mutationError }] =
+    useMutation_CarsMutation();
 
-  useEffect(() => {
-    if (mutationData) {
-      if (mutationData!.insert_cars!.returning.length > 0) {
-        reset(defaultValuesObject);
-        setIsSuccesCreation(true);
-      }
-    }
-  }, [mutationData, mutationLoading]);
+  const [isSuccessCreation, setIsSuccessCreation] = useState(false);
 
   const handleOptionStateChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -158,30 +147,39 @@ const AddCarForm = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    setIsSuccesCreation(false);
+  const onSubmit: SubmitHandler<IFormInput> = async (dataForm) => {
+    setIsSuccessCreation(false);
     await insertCar({
       variables: {
         objects: [
           {
             batch: uuidv4(),
-            odometer: data.odometer,
-            brand_id: data.brand,
-            color_id: data.color,
-            condition: data.condition,
-            damage_type: data.damage,
-            description: data.description,
-            price: data.price,
-            model_id: data.model,
-            state_id: data.state,
-            city_id: data.city,
-            sale_date: data.saleDate,
-            title: data.title,
-            vin: data.vin,
-            year: Number(data.year.getFullYear()),
+            odometer: dataForm.odometer,
+            brand_id: dataForm.brand,
+            color_id: dataForm.color,
+            condition: dataForm.condition,
+            damage_type: dataForm.damage,
+            description: dataForm.description,
+            price: dataForm.price,
+            model_id: dataForm.model,
+            state_id: dataForm.state,
+            city_id: dataForm.city,
+            sale_date: dataForm.saleDate,
+            title: dataForm.title,
+            vin: dataForm.vin,
+            year: Number(dataForm.year.getFullYear()),
           },
         ],
       },
+      onCompleted: (dataCompleted) => {
+        if (dataCompleted.insert_cars) {
+          if (dataCompleted.insert_cars.returning.length > 0) {
+            reset(defaultValuesObject);
+            setIsSuccessCreation(true);
+          }
+        }
+      },
+
       optimisticResponse: {
         __typename: 'mutation_root',
         insert_cars: {
@@ -189,7 +187,21 @@ const AddCarForm = () => {
           returning: [
             {
               __typename: 'cars',
-              year: Number(data.year.getFullYear()),
+              batch: uuidv4(),
+              odometer: dataForm.odometer,
+              brand_id: dataForm.brand!,
+              color_id: dataForm.color!,
+              condition: dataForm.condition,
+              damage_type: dataForm.damage,
+              description: dataForm.description,
+              price: dataForm.price,
+              model_id: dataForm.model!,
+              state_id: dataForm.state!,
+              city_id: dataForm.city!,
+              sale_date: dataForm.saleDate,
+              title: dataForm.title,
+              vin: dataForm.vin,
+              year: Number(dataForm.year.getFullYear()),
             },
           ],
         },
@@ -205,20 +217,20 @@ const AddCarForm = () => {
 
             data: {
               ...previousData,
-              cars: [response.data?.insert_cars, ...previousData.cars],
+              cars: response.data
+                ? [response.data.insert_cars, ...previousData.cars]
+                : null,
             },
           });
         } else {
           proxy.writeQuery({
             query: GET_CARS,
             data: {
-              cars: [response.data?.insert_cars],
+              cars: response.data ? [response.data.insert_cars] : null,
             },
           });
         }
       },
-      refetchQueries: [GET_CARS],
-      awaitRefetchQueries: true,
     });
   };
   return (

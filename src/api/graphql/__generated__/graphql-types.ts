@@ -3489,7 +3489,7 @@ export type Mutation_CarsMutationVariables = Exact<{
 }>;
 
 
-export type Mutation_CarsMutation = { __typename?: 'mutation_root', insert_cars?: { __typename?: 'cars_mutation_response', returning: Array<{ __typename?: 'cars', year?: number | null }> } | null };
+export type Mutation_CarsMutation = { __typename?: 'mutation_root', insert_cars?: { __typename?: 'cars_mutation_response', returning: Array<{ __typename?: 'cars', batch: any, brand_id: number, model_id: number, year?: number | null, vin: string, title?: string | null, sale_date: any, price: any, odometer?: number | null, damage_type?: string | null, condition: any, color_id: number, state_id: number, city_id: number, description?: string | null }> } | null };
 
 export type Query_GetCarsQueryVariables = Exact<{
   orderBy?: InputMaybe<Array<Cars_Order_By> | Cars_Order_By>;
@@ -3598,7 +3598,21 @@ export const Mutation_CarsDocument = gql`
     mutation Mutation_cars($objects: [cars_insert_input!]!) {
   insert_cars(objects: $objects) {
     returning {
+      batch
+      brand_id
+      model_id
       year
+      vin
+      title
+      sale_date
+      price
+      odometer
+      damage_type
+      condition
+      color_id
+      state_id
+      city_id
+      description
     }
   }
 }
