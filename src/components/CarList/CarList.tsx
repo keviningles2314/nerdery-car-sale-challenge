@@ -7,22 +7,22 @@ import {
 } from '../../api/graphql/__generated__/graphql-types';
 import { isValidUuid } from '../../helpers/validators';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import FilterComponent from '../FilterComponent/FilterComponent';
+import FilterComponent from '../Filter/Filter';
 import HeaderList from '../HeaderList/HeaderList';
-import LoadingComponent from '../LoadingComponent/Loading';
+import LoadingComponent from '../Loading/Loading';
 import BodyList from './BodyList/BodyList';
-import { Container } from './CarListComponentStyled';
+import { Container } from './CarListStyled';
 
 interface usercars {
   user_id: number;
   car_id: number;
 }
 
-interface CarListComponentProps {
+interface CarListProps {
   favoritesCarsArray?: usercars[];
 }
 
-const CarListComponent = ({ favoritesCarsArray }: CarListComponentProps) => {
+const CarListComponent = ({ favoritesCarsArray }: CarListProps) => {
   const { data, loading, error, refetch } = useQuery_GetCarsQuery();
   const [searchParam, setSearchParam] = useSearchParams();
   useEffect(() => {

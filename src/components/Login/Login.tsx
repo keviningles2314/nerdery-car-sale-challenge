@@ -7,7 +7,7 @@ import { emailValidation } from '../../helpers/validators';
 import Button from '../Button/Button';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
-import { Container } from './LoginComponentStyled';
+import { Container } from './LoginStyled';
 import TextField from '../TextField/TextField';
 
 interface LoginComponentProps {

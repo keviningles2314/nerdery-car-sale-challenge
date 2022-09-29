@@ -1,4 +1,4 @@
-import CarListComponent from '../../components/CarListComponent/CarListComponent';
+import CarListComponent from '../../components/CarList/CarList';
 import { Container } from './CarsListStyled';
 
 const CarList = () => {

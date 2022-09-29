@@ -1,6 +1,6 @@
 import RegularText from '../Text/RegularText/RegularText';
 
-const LoadingComponent = () => {
+const Loading = () => {
   return <RegularText text='Loading...' isBaseColor />;
 };
-export default LoadingComponent;
+export default Loading;

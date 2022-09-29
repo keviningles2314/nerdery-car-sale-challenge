@@ -4,7 +4,7 @@ import {
   Query_GetCarsDocument,
   useQuery_GetCarsQuery,
 } from '../../api/graphql/__generated__/graphql-types';
-import CarDetailComponent from '../../components/CarDetailComponent/CarDetailComponent';
+import CarDetailComponent from '../../components/CarDetail/CarDetail';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import LoadingComponent from '../../components/LoadingComponent/Loading';
 import { Container } from './CarDetailStyled';

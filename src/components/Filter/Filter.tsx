@@ -1,15 +1,15 @@
 import EmailField from '../TextField/TextField';
-import { Container } from './FilterComponentStyled';
+import { Container } from './FilterStyled';
 import React, { useCallback, useEffect, useState } from 'react';
 import RegularText from '../Text/RegularText/RegularText';
 import SelectOptionFilter from '../SelectOptionFilter/SelectOption';
 import debounce from 'lodash/debounce';
 
-interface FilterComponentProps {
+interface FilterProps {
   setSearchParam: Function;
 }
 
-const FilterComponent = ({ setSearchParam }: FilterComponentProps) => {
+const FilterComponent = ({ setSearchParam }: FilterProps) => {
   const [textSearch, setTextSearch] = useState<string>();
   const [orderOption, setOrderOption] = useState<string>();
 

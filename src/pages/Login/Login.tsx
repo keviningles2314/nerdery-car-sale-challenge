@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginComponent from '../../components/LoginComponent/LoginComponent';
+import LoginComponent from '../../components/Login/Login';
 
 import { Container, ParentContainer } from './LoginStyled';
 

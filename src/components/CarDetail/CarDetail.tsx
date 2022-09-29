@@ -2,18 +2,14 @@ import { Cars } from '../../api/graphql/__generated__/graphql-types';
 import { defaultImagePath } from '../../helpers/objectValues';
 import HeadingTitle from '../Text/HeadingTitle/HeadingTitle';
 
-import {
-  Container,
-  ImageDetail,
-  InfoContainer,
-} from './CarDetailComponentStyled';
+import { Container, ImageDetail, InfoContainer } from './CarDetailStyled';
 import CarInfoItem from './CarInfoItem/CarInfoItem';
 
-interface CarDetailComponentProps {
+interface CarDetailProps {
   carInfo: Cars;
 }
 
-const CarDetailComponent = ({ carInfo }: CarDetailComponentProps) => {
+const CarDetailComponent = ({ carInfo }: CarDetailProps) => {
   const {
     batch,
     city,

@@ -1,5 +1,5 @@
 import RegularText from '../../Text/RegularText/RegularText';
-import { Container } from '../CarDetailComponentStyled';
+import { Container } from '../CarDetailStyled';
 
 interface CarInfoItemProps {
   title: string;
