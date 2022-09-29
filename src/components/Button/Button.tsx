@@ -1,5 +1,5 @@
 import RegularText from '../Text/RegularText/RegularText';
-import { StyledButton } from './ButtonStyled';
+import { ButtonStyled } from './ButtonStyled';
 
 interface ButtonProps {
   title: string;
@@ -9,9 +9,9 @@ interface ButtonProps {
 
 const Button = ({ title, onClick, disabled = false }: ButtonProps) => {
   return (
-    <StyledButton onClick={onClick} disabled={disabled} data-testid='button'>
+    <ButtonStyled onClick={onClick} disabled={disabled} data-testid='button'>
       <RegularText text={title} isBaseColor={false} />
-    </StyledButton>
+    </ButtonStyled>
   );
 };
 
