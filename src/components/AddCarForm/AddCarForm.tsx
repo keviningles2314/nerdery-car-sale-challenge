@@ -235,7 +235,9 @@ const AddCarForm = () => {
   };
   return (
     <Container>
-      {!error ? (
+      {error ? (
+        <ErrorMessage message={error.message} />
+      ) : (
         <Form data-testid='form'>
           <TextField
             register={register}
@@ -477,8 +479,6 @@ const AddCarForm = () => {
           {mutationError && <ErrorMessage message={mutationError.message} />}
           {isSuccessCreation && <SuccessCreationMessage />}
         </Form>
-      ) : (
-        <ErrorMessage message={error.message} />
       )}
     </Container>
   );
