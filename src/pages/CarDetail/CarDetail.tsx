@@ -6,7 +6,7 @@ import {
 } from '../../api/graphql/__generated__/graphql-types';
 import CarDetailComponent from '../../components/CarDetail/CarDetail';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import LoadingComponent from '../../components/LoadingComponent/Loading';
+import LoadingComponent from '../../components/Loading/Loading';
 import { Container } from './CarDetailStyled';
 
 const CarDetail = () => {

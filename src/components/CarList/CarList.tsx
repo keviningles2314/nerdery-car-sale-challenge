@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   Order_By,
-  Query_GetCarsQueryVariables,
   useQuery_GetCarsQuery,
 } from '../../api/graphql/__generated__/graphql-types';
 import { isValidUuid } from '../../helpers/validators';
@@ -19,10 +18,10 @@ interface usercars {
 }
 
 interface CarListProps {
-  favoritesCarsArray?: usercars[];
+  favoritesCars?: usercars[];
 }
 
-const CarListComponent = ({ favoritesCarsArray }: CarListProps) => {
+const CarListComponent = ({ favoritesCars }: CarListProps) => {
   const { data, loading, error, refetch } = useQuery_GetCarsQuery();
   const [searchParam, setSearchParam] = useSearchParams();
   useEffect(() => {
@@ -48,8 +47,7 @@ const CarListComponent = ({ favoritesCarsArray }: CarListProps) => {
               {
                 id: {
                   _in:
-                    favoritesCarsArray &&
-                    favoritesCarsArray.map((carId) => carId.car_id),
+                    favoritesCars && favoritesCars.map((carId) => carId.car_id),
                 },
               },
             ],
@@ -84,32 +82,33 @@ const CarListComponent = ({ favoritesCarsArray }: CarListProps) => {
               },
             ],
             id: {
-              _in:
-                favoritesCarsArray &&
-                favoritesCarsArray.map((carId) => carId.car_id),
+              _in: favoritesCars && favoritesCars.map((carId) => carId.car_id),
             },
           },
         });
       }
     }
-  }, [searchParam, favoritesCarsArray]);
+  }, [searchParam, favoritesCars, loading]);
+
+  if (loading) {
+    return <LoadingComponent />;
+  }
+
+  if (error) {
+    return <ErrorMessage message={error.message} />;
+  }
+
+  if (data) {
+    if (data.cars.length == 0) {
+      <ErrorMessage message='No data Found' />;
+    }
+  }
 
   return (
     <Container>
       <FilterComponent setSearchParam={setSearchParam} />
-
-      {loading ? (
-        <LoadingComponent />
-      ) : error ? (
-        <ErrorMessage message={error.message} />
-      ) : data?.cars.length == 0 ? (
-        <ErrorMessage message='No data Found' />
-      ) : (
-        <>
-          <HeaderList />
-          <BodyList carsInfo={data!.cars} />
-        </>
-      )}
+      <HeaderList />
+      {data ? <BodyList carsInfo={data.cars} /> : null}
     </Container>
   );
 };

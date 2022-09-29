@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import { useQueryFavoriteCarsQuery } from '../../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../../context/LoginContext/LoginContext';
-import useFavoriteCar from '../../hooks/useFavoriteCar';
 import CarListComponent from '../CarList/CarList';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import LoadingComponent from '../LoadingComponent/Loading';
+import LoadingComponent from '../Loading/Loading';
 import { Container } from './FavoriteCarsListStyled';
 
 const FavoriteCarsList = () => {
@@ -13,7 +11,6 @@ const FavoriteCarsList = () => {
     data: dataFavorites,
     loading: loadingFavorites,
     error: errorFavorites,
-    refetch,
   } = useQueryFavoriteCarsQuery({
     variables: {
       where: {
@@ -24,17 +21,23 @@ const FavoriteCarsList = () => {
     },
   });
 
+  if (loadingFavorites) {
+    return <LoadingComponent />;
+  }
+  if (errorFavorites) {
+    <ErrorMessage message={errorFavorites.message} />;
+  }
+  if (dataFavorites) {
+    if (dataFavorites.user_cars.length == 0) {
+      return <ErrorMessage message='No data Found' />;
+    }
+  }
+
   return (
     <Container>
-      {loadingFavorites ? (
-        <LoadingComponent />
-      ) : errorFavorites ? (
-        <ErrorMessage message={errorFavorites.message} />
-      ) : dataFavorites?.user_cars.length == 0 ? (
-        <ErrorMessage message='No data Found' />
-      ) : (
-        <CarListComponent favoritesCarsArray={dataFavorites!.user_cars} />
-      )}
+      {dataFavorites ? (
+        <CarListComponent favoritesCars={dataFavorites.user_cars} />
+      ) : null}
     </Container>
   );
 };
