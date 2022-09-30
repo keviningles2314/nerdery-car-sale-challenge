@@ -8,7 +8,6 @@ import {
 import { useLoginContext } from '../context/LoginContext/LoginContext';
 
 const useFavoriteCar = (carId: number | null) => {
-  const [isFavorite, setIsFavorite] = useState(false);
   const { state } = useLoginContext();
   const [addFavoriteCarById] = useInsert_User_CarsMutation();
   const [removeFavoriteCarById] = useDelete_User_CarsMutation();
@@ -29,6 +28,10 @@ const useFavoriteCar = (carId: number | null) => {
       },
     },
   });
+
+  const isFavorite = dataFavorites
+    ? Boolean(dataFavorites.user_cars.find((car) => car.car_id == carId))
+    : false;
 
   const AddToFavorites = async (idCar: number) => {
     await addFavoriteCarById({
@@ -97,18 +100,6 @@ const useFavoriteCar = (carId: number | null) => {
       awaitRefetchQueries: true,
     });
   };
-
-  useEffect(() => {
-    if (!loadingFavorites) {
-      if (dataFavorites) {
-        if (dataFavorites.user_cars.find((car) => car.car_id == carId)) {
-          setIsFavorite(true);
-        } else {
-          setIsFavorite(false);
-        }
-      }
-    }
-  }, [dataFavorites]);
 
   return [
     isFavorite,

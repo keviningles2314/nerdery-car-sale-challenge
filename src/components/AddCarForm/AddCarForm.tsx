@@ -31,7 +31,7 @@ import { useState } from 'react';
 import SuccessCreationMessage from '../SuccessCreationMessage/SuccessCreationMessage';
 import { GET_CARS } from '../../api/graphql/query/cars';
 
-export type IFormInput = {
+export type FormInput = {
   price: number | null;
   odometer: number | null;
   vin: string;
@@ -97,7 +97,7 @@ const AddCarForm = () => {
     handleSubmit,
     control,
     reset,
-  } = useForm<IFormInput>({
+  } = useForm<FormInput>({
     resolver: yupResolver(schema),
     defaultValues: defaultValuesObject,
   });
@@ -147,7 +147,7 @@ const AddCarForm = () => {
     });
   };
 
-  const onSubmit: SubmitHandler<IFormInput> = async (dataForm) => {
+  const onSubmit: SubmitHandler<FormInput> = async (dataForm) => {
     setIsSuccessCreation(false);
     await insertCar({
       variables: {
