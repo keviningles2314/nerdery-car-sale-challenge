@@ -10,7 +10,6 @@ export const ParentContainer = styled.div`
 
 export const Container = styled(ParentContainer)`
   width: 40%;
-  display: flex;
   flex-direction: column;
   text-align: center;
   box-sizing: border-box;
