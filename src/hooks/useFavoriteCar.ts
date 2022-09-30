@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
-import { GET_FAVORITE_CARS } from '../api/graphql/query/favoriteCars';
 import {
   useDelete_User_CarsMutation,
   useInsert_User_CarsMutation,
   useQueryFavoriteCarsQuery,
+  User_Cars,
 } from '../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../context/LoginContext/LoginContext';
+
+interface userCars extends User_Cars {
+  __ref?: string;
+}
 
 const useFavoriteCar = (carId: number | null) => {
   const { state } = useLoginContext();
@@ -44,20 +47,27 @@ const useFavoriteCar = (carId: number | null) => {
         ],
       },
       optimisticResponse: {
-        __typename: 'mutation_root',
         insert_user_cars: {
-          __typename: 'user_cars_mutation_response',
           returning: [
             {
               __typename: 'user_cars',
               user_id: state.userData.id,
               car_id: idCar,
+              id: Number((Math.random() * 100).toFixed(0)),
             },
           ],
         },
       },
-      refetchQueries: [GET_FAVORITE_CARS],
-      awaitRefetchQueries: true,
+      update(cache, { data }) {
+        cache.modify({
+          fields: {
+            user_cars: (existingFieldsData) => {
+              return [...existingFieldsData, data?.insert_user_cars];
+            },
+          },
+          optimistic: true,
+        });
+      },
     });
   };
 
@@ -72,32 +82,34 @@ const useFavoriteCar = (carId: number | null) => {
       },
       optimisticResponse: {
         delete_user_cars: {
-          __typename: 'user_cars_mutation_response',
           returning: [
             {
               __typename: 'user_cars',
               user_id: state.userData.id,
               car_id: idCar,
+              id: Number((Math.random() * 100).toFixed(0)),
             },
           ],
         },
       },
-      update: (cache, { data }) => {
-        if (data && data.delete_user_cars) {
-          const cacheId = cache.identify(data.delete_user_cars);
-          cache.modify({
-            fields: {
-              GET_FAVORITE_CARS: (existingFieldData, { toReference }) => {
-                if (cacheId) {
-                  return [...existingFieldData, toReference(cacheId)];
+      update(cache, { data }) {
+        cache.modify({
+          fields: {
+            user_cars: (existingFieldsData) => {
+              const favoriteId = dataFavorites?.user_cars.find(
+                (dataFavorite) => dataFavorite.car_id === idCar
+              )?.id;
+              return existingFieldsData.filter((favorites: userCars) => {
+                if (favorites.__ref) {
+                  return favorites.__ref !== `user_cars:${favoriteId}`;
                 }
-              },
+                return favorites.id !== favoriteId;
+              });
             },
-          });
-        }
+          },
+          optimistic: true,
+        });
       },
-      refetchQueries: [GET_FAVORITE_CARS],
-      awaitRefetchQueries: true,
     });
   };
 

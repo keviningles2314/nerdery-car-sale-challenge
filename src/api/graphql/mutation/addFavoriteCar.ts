@@ -6,6 +6,7 @@ export const addFavoriteCar = gql`
       returning {
         car_id
         user_id
+        id
       }
     }
   }

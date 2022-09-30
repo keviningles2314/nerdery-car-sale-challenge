@@ -3361,6 +3361,7 @@ export type Insert_User_CarsMutation = {
       __typename?: 'user_cars';
       car_id: number;
       user_id: number;
+      id: number;
     }>;
   } | null;
 };
@@ -3377,6 +3378,7 @@ export type Delete_User_CarsMutation = {
       __typename?: 'user_cars';
       car_id: number;
       user_id: number;
+      id: number;
     }>;
   } | null;
 };
@@ -3456,6 +3458,7 @@ export type QueryFavoriteCarsQuery = {
     __typename?: 'user_cars';
     car_id: number;
     user_id: number;
+    id: number;
   }>;
 };
 
@@ -3499,6 +3502,7 @@ export const Insert_User_CarsDocument = gql`
       returning {
         car_id
         user_id
+        id
       }
     }
   }
@@ -3552,6 +3556,7 @@ export const Delete_User_CarsDocument = gql`
       returning {
         car_id
         user_id
+        id
       }
     }
   }
@@ -3759,6 +3764,7 @@ export const QueryFavoriteCarsDocument = gql`
     user_cars(where: $where) {
       car_id
       user_id
+      id
     }
   }
 `;

@@ -92,7 +92,7 @@ const CarListComponent = ({ favoritesCars }: CarListProps) => {
         }
       }
     }
-  }, [search, order, favoritesCars, loading]);
+  }, [search, order, favoritesCars, loading, data]);
 
   if (loading) {
     return <LoadingComponent />;

@@ -5,6 +5,7 @@ export const GET_FAVORITE_CARS = gql`
     user_cars(where: $where) {
       car_id
       user_id
+      id
     }
   }
 `;
