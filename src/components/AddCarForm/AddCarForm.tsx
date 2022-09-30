@@ -101,7 +101,7 @@ const AddCarForm = () => {
     resolver: yupResolver(schema),
     defaultValues: defaultValuesObject,
   });
-
+  const randomNumber = Math.random();
   const { title, odometer, vin, price, damage, description } = fieldNameValues;
 
   const { data, error, loading } = useGet_Add_Car_Fields_QueryQuery();
@@ -189,15 +189,15 @@ const AddCarForm = () => {
               __typename: 'cars',
               batch: uuidv4(),
               odometer: dataForm.odometer,
-              brand_id: dataForm.brand!,
-              color_id: dataForm.color!,
+              brand_id: dataForm.brand ? dataForm.brand : randomNumber,
+              color_id: dataForm.color ? dataForm.color : randomNumber,
               condition: dataForm.condition,
               damage_type: dataForm.damage,
               description: dataForm.description,
               price: dataForm.price,
-              model_id: dataForm.model!,
-              state_id: dataForm.state!,
-              city_id: dataForm.city!,
+              model_id: dataForm.model ? dataForm.model : randomNumber,
+              state_id: dataForm.state ? dataForm.state : randomNumber,
+              city_id: dataForm.city ? dataForm.city : randomNumber,
               sale_date: dataForm.saleDate,
               title: dataForm.title,
               vin: dataForm.vin,
@@ -245,7 +245,9 @@ const AddCarForm = () => {
             placeholder={title}
             fieldRequired
           />
-          {errors.title && <ErrorMessage message={errors.title.message!} />}
+          {errors.title && errors.title.message ? (
+            <ErrorMessage message={errors.title.message} />
+          ) : null}
 
           <NestedElements>
             <SectionNestedElement>
@@ -255,9 +257,9 @@ const AddCarForm = () => {
                 placeholder={odometer}
                 fieldRequired
               />
-              {errors.odometer && (
-                <ErrorMessage message={errors.odometer.message!} />
-              )}
+              {errors.odometer && errors.odometer.message ? (
+                <ErrorMessage message={errors.odometer.message} />
+              ) : null}
             </SectionNestedElement>
 
             <SectionNestedElement>
@@ -267,7 +269,9 @@ const AddCarForm = () => {
                 placeholder={vin}
                 fieldRequired
               />
-              {errors.vin && <ErrorMessage message={errors.vin.message!} />}
+              {errors.vin && errors.vin.message ? (
+                <ErrorMessage message={errors.vin.message} />
+              ) : null}
             </SectionNestedElement>
           </NestedElements>
 
@@ -291,7 +295,9 @@ const AddCarForm = () => {
                   </>
                 )}
               </SelectOption>
-              {errors.brand && <ErrorMessage message={errors.brand.message!} />}
+              {errors.brand && errors.brand.message ? (
+                <ErrorMessage message={errors.brand.message} />
+              ) : null}
             </SectionNestedElement>
             <SectionNestedElement>
               <SelectOption {...register('model')} data-testid='model'>
@@ -308,7 +314,9 @@ const AddCarForm = () => {
                   </>
                 )}
               </SelectOption>
-              {errors.model && <ErrorMessage message={errors.model.message!} />}
+              {errors.model && errors.model.message ? (
+                <ErrorMessage message={errors.model.message} />
+              ) : null}
             </SectionNestedElement>
           </NestedElements>
 
@@ -327,11 +335,7 @@ const AddCarForm = () => {
                   />
                 )}
               />
-              {errors.saleDate && (
-                <ErrorMessage message={errors.saleDate.message!} />
-              )}
             </SectionNestedElement>
-
             <SectionNestedElement>
               <TextField
                 register={register}
@@ -339,7 +343,9 @@ const AddCarForm = () => {
                 placeholder={price}
                 fieldRequired
               />
-              {errors.price && <ErrorMessage message={errors.price.message!} />}
+              {errors.price && errors.price.message ? (
+                <ErrorMessage message={errors.price.message} />
+              ) : null}
             </SectionNestedElement>
           </NestedElements>
 
@@ -364,9 +370,9 @@ const AddCarForm = () => {
                   />
                 </LabelCondition>
               </ConditionContainer>
-              {errors.condition && (
-                <ErrorMessage message={errors.condition.message!} />
-              )}
+              {errors.condition && errors.condition.message ? (
+                <ErrorMessage message={errors.condition.message} />
+              ) : null}
             </SectionNestedElement>
 
             <SectionNestedElement>
@@ -376,9 +382,9 @@ const AddCarForm = () => {
                 placeholder={damage}
                 fieldRequired
               />
-              {errors.damage && (
-                <ErrorMessage message={errors.damage.message!} />
-              )}
+              {errors.damage && errors.damage.message ? (
+                <ErrorMessage message={errors.damage.message} />
+              ) : null}
             </SectionNestedElement>
           </NestedElements>
 
@@ -400,7 +406,6 @@ const AddCarForm = () => {
                   />
                 )}
               />
-              {errors.year && <ErrorMessage message={errors.year.message!} />}
             </SectionNestedElement>
             <SectionNestedElement>
               <SelectOption {...register('color')}>
@@ -417,7 +422,9 @@ const AddCarForm = () => {
                   </>
                 )}
               </SelectOption>
-              {errors.color && <ErrorMessage message={errors.color.message!} />}
+              {errors.color && errors.color.message ? (
+                <ErrorMessage message={errors.color.message} />
+              ) : null}
             </SectionNestedElement>
           </NestedElements>
 
@@ -440,14 +447,16 @@ const AddCarForm = () => {
                   </>
                 )}
               </SelectOption>
-              {errors.state && <ErrorMessage message={errors.state.message!} />}
+              {errors.state && errors.state.message ? (
+                <ErrorMessage message={errors.state.message} />
+              ) : null}
             </SectionNestedElement>
             <SectionNestedElement>
               <SelectOption {...register('city')}>
                 <OptionElement value=''>Select City</OptionElement>
-                {!lazyCitiesLoading && (
+                {!lazyCitiesLoading && lazyCitiesData ? (
                   <>
-                    {lazyCitiesData?.cities.map((city) => {
+                    {lazyCitiesData.cities.map((city) => {
                       return (
                         <OptionElement key={city.id} value={city.id}>
                           {city.name}
@@ -455,9 +464,11 @@ const AddCarForm = () => {
                       );
                     })}
                   </>
-                )}
+                ) : null}
               </SelectOption>
-              {errors.city && <ErrorMessage message={errors.city.message!} />}
+              {errors.city && errors.city.message ? (
+                <ErrorMessage message={errors.city.message} />
+              ) : null}
             </SectionNestedElement>
           </NestedElements>
 
@@ -467,9 +478,9 @@ const AddCarForm = () => {
             placeholder={description}
             fieldRequired
           />
-          {errors.description && (
-            <ErrorMessage message={errors.description.message!} />
-          )}
+          {errors.description && errors.description.message ? (
+            <ErrorMessage message={errors.description.message} />
+          ) : null}
 
           <Button
             title={mutationLoading ? 'Creating...' : 'Create'}

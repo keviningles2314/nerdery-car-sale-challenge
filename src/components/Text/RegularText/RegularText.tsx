@@ -6,9 +6,13 @@ interface RegularTextProps {
   isBold?: boolean;
 }
 
-const RegularText = ({ text, isBaseColor, isBold }: RegularTextProps) => {
+const RegularText = ({
+  text,
+  isBaseColor,
+  isBold = false,
+}: RegularTextProps) => {
   return (
-    <RegularTextStyled isBaseColor={isBaseColor} isBold={isBold!}>
+    <RegularTextStyled isBaseColor={isBaseColor} isBold={isBold}>
       {text}
     </RegularTextStyled>
   );

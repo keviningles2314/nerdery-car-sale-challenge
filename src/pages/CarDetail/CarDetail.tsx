@@ -21,15 +21,17 @@ const CarDetail = () => {
     },
   });
 
+  if (loading) {
+    return <LoadingComponent />;
+  }
+
+  if (error) {
+    <ErrorMessage message={error.message} />;
+  }
+
   return (
     <Container>
-      {loading ? (
-        <LoadingComponent />
-      ) : error ? (
-        <ErrorMessage message={error.message} />
-      ) : (
-        <CarDetailComponent carInfo={data!.cars[0]} />
-      )}
+      {data ? <CarDetailComponent carInfo={data.cars[0]} /> : null}
     </Container>
   );
 };

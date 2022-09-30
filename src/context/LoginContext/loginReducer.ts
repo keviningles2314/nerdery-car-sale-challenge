@@ -31,14 +31,16 @@ export const loginReducer = (
 ) => {
   switch (action.type) {
     case Types.SET_USER:
-      const { userData } = action.payload!;
+      if (action.payload) {
+        const { userData } = action.payload;
 
-      return {
-        ...state,
-        isUserAuthenticated: true,
-        userData: userData,
-      };
-
+        return {
+          ...state,
+          isUserAuthenticated: true,
+          userData: userData,
+        };
+      }
+      return { ...state };
     case Types.DELETE_USER:
       return {
         ...state,

@@ -50,12 +50,15 @@ export const LoginContextProvider = ({
 
   useEffect(() => {
     if (localStorage.length > 0 && !state.isUserAuthenticated) {
-      const userLocalStorageData = localStorage.getItem('userState')!;
-
-      dispatch({
-        type: Types.SET_USER,
-        payload: { userData: JSON.parse(userLocalStorageData) },
-      });
+      if (localStorage.getItem('userState')) {
+        const userLocalStorageData = localStorage.getItem('userState');
+        if (userLocalStorageData) {
+          dispatch({
+            type: Types.SET_USER,
+            payload: { userData: JSON.parse(userLocalStorageData) },
+          });
+        }
+      }
     } else {
       if (state.isUserAuthenticated) {
         localStorage.setItem('userState', JSON.stringify(state.userData));

@@ -26,10 +26,10 @@ const ListInfoItem = ({
 }: ListInfoItemProps) => {
   const { state } = useLoginContext();
   const [isFavorite, AddToFavorites, removeToFavorites, errorFavorites] =
-    useFavoriteCar(carId!);
+    useFavoriteCar(carId ? carId : null);
 
   const handleFavorite = (carId: number) => {
-    if (isFavorite!) {
+    if (isFavorite) {
       removeToFavorites(carId);
     } else {
       AddToFavorites(carId);
@@ -40,19 +40,19 @@ const ListInfoItem = ({
     <Container>
       <RegularText text={title} isBaseColor isBold />
       <RegularText text={`${primaryInfo}`} isBaseColor />
-      {complementaryInfo && (
+      {complementaryInfo && complementaryTitle ? (
         <>
-          <RegularText text={complementaryTitle!} isBaseColor isBold />
+          <RegularText text={complementaryTitle} isBaseColor isBold />
           <RegularText text={`${complementaryInfo}`} isBaseColor />
         </>
-      )}
+      ) : null}
 
-      {state.isUserAuthenticated && !complementaryInfo && (
-        <FavoriteButton onClick={() => handleFavorite(carId!)}>
+      {state.isUserAuthenticated && !complementaryInfo && carId ? (
+        <FavoriteButton onClick={() => handleFavorite(carId)}>
           {isFavorite ? <StarSolid /> : <StarRegular />}
           {errorFavorites && <ErrorMessage message={errorFavorites.message} />}
         </FavoriteButton>
-      )}
+      ) : null}
     </Container>
   );
 };

@@ -24,71 +24,75 @@ interface CarListProps {
 const CarListComponent = ({ favoritesCars }: CarListProps) => {
   const { data, loading, error, refetch } = useQuery_GetCarsQuery();
   const [searchParam, setSearchParam] = useSearchParams();
+
+  const search = searchParam.get('search');
+  const order = searchParam.get('order');
+
   useEffect(() => {
     if (!loading) {
-      if (isValidUuid(searchParam.get('search')!)) {
-        refetch({
-          orderBy: [
-            {
-              sale_date: searchParam.get('order')
-                ? searchParam.get('order') == 'desc'
-                  ? Order_By.Desc
-                  : Order_By.Asc
-                : Order_By.Desc,
-            },
-          ],
-          where: {
-            _and: [
+      if (search != null) {
+        if (isValidUuid(search)) {
+          refetch({
+            orderBy: [
               {
-                batch: {
-                  _eq: searchParam.get('search')!,
-                },
-              },
-              {
-                id: {
-                  _in:
-                    favoritesCars && favoritesCars.map((carId) => carId.car_id),
-                },
+                sale_date: order
+                  ? order
+                    ? Order_By.Desc
+                    : Order_By.Asc
+                  : Order_By.Desc,
               },
             ],
-          },
-        });
-      } else {
-        refetch({
-          orderBy: [
-            {
-              sale_date: searchParam.get('order')
-                ? searchParam.get('order') == 'desc'
-                  ? Order_By.Desc
-                  : Order_By.Asc
-                : Order_By.Desc,
+            where: {
+              _and: [
+                {
+                  batch: {
+                    _eq: search,
+                  },
+                },
+                {
+                  id: {
+                    _in:
+                      favoritesCars &&
+                      favoritesCars.map((carId) => carId.car_id),
+                  },
+                },
+              ],
             },
-          ],
-          where: {
-            _or: [
+          });
+        } else {
+          refetch({
+            orderBy: [
               {
-                title: {
-                  _iregex: searchParam.get('search')
-                    ? searchParam.get('search')
-                    : '',
-                },
-              },
-              {
-                vin: {
-                  _iregex: searchParam.get('search')
-                    ? searchParam.get('search')
-                    : '',
-                },
+                sale_date: order
+                  ? order == 'desc'
+                    ? Order_By.Desc
+                    : Order_By.Asc
+                  : Order_By.Desc,
               },
             ],
-            id: {
-              _in: favoritesCars && favoritesCars.map((carId) => carId.car_id),
+            where: {
+              _or: [
+                {
+                  title: {
+                    _iregex: search ? search : '',
+                  },
+                },
+                {
+                  vin: {
+                    _iregex: search ? search : '',
+                  },
+                },
+              ],
+              id: {
+                _in:
+                  favoritesCars && favoritesCars.map((carId) => carId.car_id),
+              },
             },
-          },
-        });
+          });
+        }
       }
     }
-  }, [searchParam, favoritesCars, loading]);
+  }, [search, order, favoritesCars, loading]);
 
   if (loading) {
     return <LoadingComponent />;

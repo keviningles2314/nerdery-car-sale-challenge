@@ -24,14 +24,14 @@ const BodyList = ({ carsInfo }: BodyListProps) => {
             />
             <ListInfoItem
               title='Odometer:'
-              primaryInfo={carInfo.odometer ? carInfo.odometer! : 'No info'}
+              primaryInfo={carInfo.odometer ? carInfo.odometer : 'No info'}
               complementaryTitle='Price:'
               complementaryInfo={carInfo.price}
             />
             <ListInfoItem
               title='Vehicle Condition:'
               primaryInfo={carInfo.condition == 'A' ? 'Salvage Title' : 'New'}
-              carId={carInfo!.id!}
+              carId={carInfo.id}
             />
             <ListInfoItem
               title='Location:'

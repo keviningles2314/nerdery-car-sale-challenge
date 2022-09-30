@@ -29,22 +29,28 @@ const CarDetailComponent = ({ carInfo }: CarDetailProps) => {
     <Container>
       <ImageDetail src={defaultImagePath} />
       <InfoContainer>
-        <HeadingTitle text={title!} isBaseColor />
+        {title ? <HeadingTitle text={title} isBaseColor /> : null}
         <CarInfoItem title={'Batch'} element={batch} />
-        <CarInfoItem title={'Odometer'} element={odometer!} />
+        {odometer ? (
+          <CarInfoItem title={'Odometer'} element={odometer} />
+        ) : null}
         <CarInfoItem title={'Vin'} element={vin} />
         <CarInfoItem title={'Sale Date'} element={sale_date} />
         <CarInfoItem title={'Price'} element={price} />
         <CarInfoItem title={'Brand'} element={model.brand.name} />
         <CarInfoItem title={'Model'} element={model.name} />
         <CarInfoItem title={'Color'} element={color.name} />
-        <CarInfoItem title={'Year'} element={year!} />
-        <CarInfoItem title={'Description'} element={description!} />
+        {year ? <CarInfoItem title={'Year'} element={year} /> : null}
+        {description ? (
+          <CarInfoItem title={'Description'} element={description} />
+        ) : null}
         <CarInfoItem
           title={'Condition (N: New A: Salvage Title)'}
           element={condition}
         />
-        <CarInfoItem title={'Damage Type'} element={damage_type!} />
+        {damage_type ? (
+          <CarInfoItem title={'Damage Type'} element={damage_type} />
+        ) : null}
         <CarInfoItem title={'State'} element={city.state.name} />
         <CarInfoItem title={'City'} element={city.name} />
       </InfoContainer>

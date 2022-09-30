@@ -7,8 +7,8 @@ import {
 } from '../api/graphql/__generated__/graphql-types';
 import { useLoginContext } from '../context/LoginContext/LoginContext';
 
-const useFavoriteCar = (carId: number) => {
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+const useFavoriteCar = (carId: number | null) => {
+  const [isFavorite, setIsFavorite] = useState(false);
   const { state } = useLoginContext();
   const [addFavoriteCarById] = useInsert_User_CarsMutation();
   const [removeFavoriteCarById] = useDelete_User_CarsMutation();
@@ -80,14 +80,18 @@ const useFavoriteCar = (carId: number) => {
         },
       },
       update: (cache, { data }) => {
-        const cacheId = cache.identify(data!.delete_user_cars!);
-        cache.modify({
-          fields: {
-            GET_FAVORITE_CARS: (existingFieldData, { toReference }) => {
-              return [...existingFieldData, toReference(cacheId!)];
+        if (data && data.delete_user_cars) {
+          const cacheId = cache.identify(data.delete_user_cars);
+          cache.modify({
+            fields: {
+              GET_FAVORITE_CARS: (existingFieldData, { toReference }) => {
+                if (cacheId) {
+                  return [...existingFieldData, toReference(cacheId)];
+                }
+              },
             },
-          },
-        });
+          });
+        }
       },
       refetchQueries: [GET_FAVORITE_CARS],
       awaitRefetchQueries: true,
@@ -96,10 +100,12 @@ const useFavoriteCar = (carId: number) => {
 
   useEffect(() => {
     if (!loadingFavorites) {
-      if (dataFavorites!.user_cars!.find((car) => car.car_id == carId)) {
-        setIsFavorite(true);
-      } else {
-        setIsFavorite(false);
+      if (dataFavorites) {
+        if (dataFavorites.user_cars.find((car) => car.car_id == carId)) {
+          setIsFavorite(true);
+        } else {
+          setIsFavorite(false);
+        }
       }
     }
   }, [dataFavorites]);

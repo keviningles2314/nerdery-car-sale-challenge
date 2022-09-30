@@ -27,10 +27,10 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
 
   useEffect(() => {
     if (data) {
-      if (data!.users.length > 0) {
+      if (data.users.length > 0) {
         dispatch({
           type: Types.SET_USER,
-          payload: { userData: data!.users[0] },
+          payload: { userData: data.users[0] },
         });
         navigate('/');
         setIsError(false);
