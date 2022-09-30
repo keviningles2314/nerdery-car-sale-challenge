@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { theme } from '../../style/theme';
 
 export const StyledEmailField = styled.input`
-  color: ${theme.black};
+  color: ${theme.primary};
   background-color: ${theme.colorTextField};
   border-radius: ${theme.rounded};
   border: none;

@@ -8,6 +8,6 @@ interface TextProps {
 
 export const HeadingTitleStyled = styled(BaseText)`
   color: ${(props: TextProps) =>
-    props.isBaseColor ? theme.black : theme.white};
+    props.isBaseColor ? theme.primary : theme.secondary};
   font-size: ${theme.big};
 `;

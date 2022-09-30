@@ -4,7 +4,7 @@ import { theme } from '../../style/theme';
 export const Select = styled.select`
   border: none;
   padding-left: 10px;
-  background-color: ${theme.white};
+  background-color: ${theme.secondary};
   width: 50%;
   cursor: pointer;
   font-size: 0.8rem;
