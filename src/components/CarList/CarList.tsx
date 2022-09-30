@@ -12,13 +12,13 @@ import LoadingComponent from '../Loading/Loading';
 import BodyList from './BodyList/BodyList';
 import { Container } from './CarListStyled';
 
-interface usercars {
+interface UserCars {
   user_id: number;
   car_id: number;
 }
 
 interface CarListProps {
-  favoritesCars?: usercars[];
+  favoritesCars?: UserCars[];
 }
 
 const CarListComponent = ({ favoritesCars }: CarListProps) => {

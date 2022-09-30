@@ -20,7 +20,7 @@ const FilterComponent = ({ setSearchParam }: FilterProps) => {
     800
   );
 
-  const OnChangeOptionHandler = (
+  const onChangeOptionHandler = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setOrderOption(event.target.value);
@@ -46,7 +46,7 @@ const FilterComponent = ({ setSearchParam }: FilterProps) => {
             { value: 'desc', text: 'Descending' },
             { value: 'asc', text: 'Ascending' },
           ]}
-          onChangeOption={OnChangeOptionHandler}
+          onChangeOption={onChangeOptionHandler}
         />
       </Container>
     </>

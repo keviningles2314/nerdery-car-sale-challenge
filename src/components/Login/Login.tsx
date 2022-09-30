@@ -15,7 +15,6 @@ interface LoginComponentProps {
 }
 
 const LoginComponent = ({ title }: LoginComponentProps) => {
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const [email, setEmail] = useState<string>('');
   const [isError, setIsError] = useState(false);
 
@@ -25,9 +24,12 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
   const [getUserLazyResults, { data, error, loading }] =
     useQuery_UserLazyQuery();
 
+  const isUser = data ? data.users.length > 0 : false;
+
   useEffect(() => {
+    const isValidEmail = emailValidation(email);
     if (data) {
-      if (data.users.length > 0) {
+      if (isUser && isValidEmail) {
         dispatch({
           type: Types.LOGIN_USER,
           payload: { userData: data.users[0] },
@@ -36,13 +38,11 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
         setIsError(false);
       } else {
         setIsError(true);
-        setIsButtonDisabled(false);
       }
     }
   }, [data, loading]);
 
   const handleClick = () => {
-    setIsButtonDisabled(true);
     getUserLazyResults({
       variables: {
         where: {
@@ -57,13 +57,8 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
   const handleEmailValidation = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    setIsError(false);
     setEmail(event.target.value);
-    const isValidEmail = emailValidation(event.target.value);
-    if (isValidEmail) {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
   };
 
   return (
@@ -74,11 +69,11 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
         onChangeText={handleEmailValidation}
       />
       <Button
-        title={'Login'}
+        title={loading ? 'Loading...' : 'Login'}
         onClick={handleClick}
-        disabled={isButtonDisabled}
+        disabled={loading}
       />
-      {isError && <ErrorMessage message='User Not Found' />}
+      {isError && <ErrorMessage message='Invalid email or User Not Found' />}
       {error && <ErrorMessage message={error.message} />}
     </Container>
   );

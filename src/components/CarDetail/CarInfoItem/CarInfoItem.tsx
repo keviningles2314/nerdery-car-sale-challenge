@@ -10,7 +10,7 @@ const CarInfoItem = ({ title, element }: CarInfoItemProps) => {
   return (
     <Container>
       <RegularText text={`${title} :`} isBaseColor isBold />
-      <RegularText text={`${element ? element : 'No info'}`} isBaseColor />
+      <RegularText text={`${element ?? 'No info'}`} isBaseColor />
     </Container>
   );
 };
