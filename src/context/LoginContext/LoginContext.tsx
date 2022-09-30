@@ -54,7 +54,7 @@ export const LoginContextProvider = ({
         const userLocalStorageData = localStorage.getItem('userState');
         if (userLocalStorageData) {
           dispatch({
-            type: Types.SET_USER,
+            type: Types.LOGIN_USER,
             payload: { userData: JSON.parse(userLocalStorageData) },
           });
         }
@@ -68,7 +68,7 @@ export const LoginContextProvider = ({
 
   const logOutHandler = () => {
     dispatch({
-      type: Types.DELETE_USER,
+      type: Types.LOGOUT_USER,
     });
     localStorage.clear();
   };

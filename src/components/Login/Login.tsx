@@ -29,7 +29,7 @@ const LoginComponent = ({ title }: LoginComponentProps) => {
     if (data) {
       if (data.users.length > 0) {
         dispatch({
-          type: Types.SET_USER,
+          type: Types.LOGIN_USER,
           payload: { userData: data.users[0] },
         });
         navigate('/');

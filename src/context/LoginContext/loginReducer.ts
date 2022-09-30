@@ -12,15 +12,15 @@ type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum Types {
-  SET_USER = 'SET_USER',
-  DELETE_USER = 'DELETE_USER',
+  LOGIN_USER = 'LOGIN_USER',
+  LOGOUT_USER = 'LOGOUT_USER',
 }
 
 type UserPayload = {
-  [Types.SET_USER]: {
+  [Types.LOGIN_USER]: {
     userData: User;
   };
-  [Types.DELETE_USER]: {};
+  [Types.LOGOUT_USER]: {};
 };
 
 export type UserActions = ActionMap<UserPayload>[keyof ActionMap<UserPayload>];
@@ -30,7 +30,7 @@ export const loginReducer = (
   action: UserActions
 ) => {
   switch (action.type) {
-    case Types.SET_USER:
+    case Types.LOGIN_USER:
       if (action.payload) {
         const { userData } = action.payload;
 
@@ -41,7 +41,7 @@ export const loginReducer = (
         };
       }
       return { ...state };
-    case Types.DELETE_USER:
+    case Types.LOGOUT_USER:
       return {
         ...state,
         userData: {
