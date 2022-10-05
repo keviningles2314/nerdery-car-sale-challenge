@@ -1,4 +1,4 @@
-import { StyledEmailField } from './TextFieldStyled';
+import { TextBox } from './TextBox';
 
 interface TextFieldProps {
   placeholder?: string;
@@ -16,15 +16,16 @@ const TextField = ({
   fieldRequired,
 }: TextFieldProps) => {
   return (
-    <StyledEmailField
+    <TextBox
       type='text'
       {...(register && {
         ...register(fieldName, {
-          required: fieldRequired ? fieldRequired : false,
+          required: fieldRequired ?? false,
         }),
       })}
       onChange={onChangeText}
       placeholder={placeholder}
+      label={fieldName}
     />
   );
 };

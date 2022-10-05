@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '../../style/theme';
 
-export const StyledEmailField = styled.input`
+export const TextBox = styled.input`
   color: ${theme.primary};
   background-color: ${theme.colorTextField};
   border-radius: ${theme.rounded};

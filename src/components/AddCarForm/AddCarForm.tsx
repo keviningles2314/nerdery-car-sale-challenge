@@ -22,7 +22,7 @@ import {
   SelectOption,
 } from './AddCarFormStyled';
 import RegularText from '../Text/RegularText/RegularText';
-import TextField from '../TextField/TextField';
+
 import ReactDatePicker from 'react-datepicker';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -30,6 +30,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import SuccessCreationMessage from '../SuccessCreationMessage/SuccessCreationMessage';
 import { GET_CARS } from '../../api/graphql/query/cars';
+import TextField from '../TextField/TextField';
 
 export type FormInput = {
   price: number | null;
@@ -359,6 +360,7 @@ const AddCarForm = () => {
                     {...register('condition')}
                     type='radio'
                     value='A'
+                    id='salvage'
                   />
                 </LabelCondition>
                 <LabelCondition htmlFor='new'>
@@ -408,7 +410,7 @@ const AddCarForm = () => {
               />
             </SectionNestedElement>
             <SectionNestedElement>
-              <SelectOption {...register('color')}>
+              <SelectOption {...register('color')} data-testid='color'>
                 <OptionElement value=''>Select Color</OptionElement>
                 {!loading && (
                   <>
@@ -433,6 +435,7 @@ const AddCarForm = () => {
               <SelectOption
                 {...register('state')}
                 onChange={handleOptionStateChange}
+                data-testid='state'
               >
                 <OptionElement value=''>Select State</OptionElement>
                 {!loading && (
@@ -452,7 +455,7 @@ const AddCarForm = () => {
               ) : null}
             </SectionNestedElement>
             <SectionNestedElement>
-              <SelectOption {...register('city')}>
+              <SelectOption {...register('city')} data-testid='city'>
                 <OptionElement value=''>Select City</OptionElement>
                 {!lazyCitiesLoading && lazyCitiesData ? (
                   <>

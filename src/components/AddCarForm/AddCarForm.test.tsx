@@ -1,11 +1,13 @@
 import { MockedProvider } from '@apollo/client/testing';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { Mutation_CarsDocument } from 'src/api/graphql/__generated__/graphql-types';
-import { mockSelectData } from 'src/utils/test/mockData';
-import { fireEvent, render, waitFor } from 'src/utils/test/test-utils';
+import {
+  mockSelectCityVariables,
+  mockSelectData,
+  mockSelectModelsVariables,
+} from 'src/utils/test/mockData';
+import { fireEvent, render, screen, waitFor } from 'src/utils/test/test-utils';
 import { v4 } from 'uuid';
 import AddCarForm from './AddCarForm';
 
@@ -13,7 +15,7 @@ describe('form functions', () => {
   it('Should shows error ', async () => {
     const { getByText, getByTestId } = render(
       <BrowserRouter>
-        <MockedProvider mocks={[mockSelectData]}>
+        <MockedProvider mocks={[mockSelectData]} addTypename={false}>
           <AddCarForm />
         </MockedProvider>
       </BrowserRouter>
@@ -37,106 +39,133 @@ describe('form functions', () => {
       request: {
         query: Mutation_CarsDocument,
         variables: {
-          object: {
-            brand_id: 3,
-            model_id: 3,
-            state_id: 3,
-            city_id: 3,
-            vin: 'MLX4545',
-            year: 2020,
-            sale_date: '2022-12-20',
-            odometer: '15000',
-            price: '10000',
-            condition: 'A',
-            title: 'Ford mustant 2020',
-            batch: v4(),
-            damage: 'no damage',
-            color_id: 3,
-            description: 'Nice car',
-          },
+          objects: [
+            {
+              brand_id: 2,
+              model_id: 2,
+              state_id: 2,
+              city_id: 2,
+              vin: 'MX2003Q',
+              year: 2022,
+              sale_date: new Date().getDate(),
+              odometer: 20000,
+              price: 30000,
+              condition: 'A',
+              title: 'Jeep Patriot',
+              batch: 'f6d91eac-80fd-4313-98b7-c3ada5a58676',
+              damage_type: 'No damage',
+              color_id: 2,
+              description: 'No damage',
+            },
+          ],
         },
       },
       result: {
         data: {
           returning: {
-            year: 2020,
+            year: 2022,
           },
         },
       },
     };
-    const { getByText, getByTestId, getByPlaceholderText } = render(
-      <BrowserRouter>
-        <MockedProvider mocks={[mockSelectData, mockCreateCar]}>
-          <AddCarForm />
-        </MockedProvider>
-      </BrowserRouter>
-    );
+
+    const { findByText, getByTestId, getByPlaceholderText, getByLabelText } =
+      render(
+        <BrowserRouter>
+          <MockedProvider
+            mocks={[
+              mockSelectData,
+              mockSelectModelsVariables,
+              mockSelectCityVariables,
+              mockCreateCar,
+            ]}
+            addTypename={false}
+          >
+            <AddCarForm />
+          </MockedProvider>
+        </BrowserRouter>
+      );
     const inputTitle = getByPlaceholderText(/title/i);
     const inputOdometer = getByPlaceholderText(/odometer/i);
     const inputVin = getByPlaceholderText(/vin/i);
     const inputPrice = getByPlaceholderText(/price/i);
     const inputDamage = getByPlaceholderText(/damage/i);
-    const inputDescription = getByPlaceholderText(/description/i);
-    await act(async () => {
-      fireEvent.change(inputTitle, {
-        target: { value: 'Ford mustang' },
-      });
-      fireEvent.change(inputOdometer, {
-        target: { value: 20000 },
-      });
-      fireEvent.change(inputVin, {
-        target: { value: 'MX2003Q' },
-      });
-      fireEvent.change(inputPrice, {
-        target: { value: 30000 },
-      });
-      fireEvent.change(inputDamage, {
-        target: { value: 'No damage' },
-      });
-      fireEvent.change(inputDescription, {
-        target: { value: 'No damage' },
-      });
+    const inputDescription = screen.getByPlaceholderText(/description/i);
+    userEvent.type(inputTitle, 'Jeep Patriot');
+    userEvent.type(inputOdometer, '20000');
+    userEvent.type(inputVin, 'MX2003Q');
+    userEvent.type(inputPrice, '30000');
+    userEvent.type(inputDamage, 'No damage');
+    userEvent.type(inputDescription, 'No damage');
+    fireEvent.click(getByLabelText('A: Salvage Title'), {
+      target: { value: 'A' },
     });
-    await waitFor(
-      async () => {
-        await userEvent.selectOptions(getByTestId('brand'), 'Jeep');
-      },
-      {
-        timeout: 1000,
-      }
-    );
-
-    expect(inputTitle).toHaveValue('Ford mustang');
-    expect(inputOdometer).toHaveValue('20000');
-    expect(inputVin).toHaveValue('MX2003Q');
-    expect(inputPrice).toHaveValue('30000');
-    expect(inputDamage).toHaveValue('No damage');
-    expect(inputDescription).toHaveValue('No damage');
-    expect(getByTestId('brand')).toHaveValue('2');
 
     await waitFor(
       async () => {
-        await act(async () => {
-          fireEvent.click(getByTestId('button'));
-        });
-      },
-      {
-        timeout: 2000,
-      }
-    );
+        userEvent.selectOptions(
+          screen.getByTestId('brand'),
+          screen.getByRole('option', { name: 'Jeep' })
+        );
 
-    await waitFor(
-      async () => {
-        await expect(await getByText(/Creation Complete/i)).toBeInTheDocument();
+        userEvent.selectOptions(
+          screen.getByTestId('color'),
+          screen.getByRole('option', { name: 'Red' })
+        );
+
+        userEvent.selectOptions(
+          screen.getByTestId('state'),
+          screen.getByRole('option', { name: 'Utah' })
+        );
       },
       {
         timeout: 3000,
       }
     );
+    await waitFor(
+      async () => {
+        userEvent.selectOptions(
+          screen.getByTestId('model'),
+          screen.getByRole('option', { name: 'Patriot' })
+        );
+        userEvent.selectOptions(
+          screen.getByTestId('city'),
+          screen.getByRole('option', { name: 'Provo' })
+        );
+      },
+      {
+        timeout: 3000,
+      }
+    );
+    expect(
+      (screen.getByRole('option', { name: 'Jeep' }) as HTMLOptionElement)
+        .selected
+    ).toBe(true);
+    expect(
+      (screen.getByRole('option', { name: 'Patriot' }) as HTMLOptionElement)
+        .selected
+    ).toBe(true);
+    expect(
+      (screen.getByRole('option', { name: 'Red' }) as HTMLOptionElement)
+        .selected
+    ).toBe(true);
+    expect(
+      (screen.getByRole('option', { name: 'Utah' }) as HTMLOptionElement)
+        .selected
+    ).toBe(true);
+    expect(
+      (screen.getByRole('option', { name: 'Provo' }) as HTMLOptionElement)
+        .selected
+    ).toBe(true);
+    expect(inputTitle).toHaveValue('Jeep Patriot');
+    expect(inputOdometer).toHaveValue('20000');
+    expect(inputVin).toHaveValue('MX2003Q');
+    expect(inputPrice).toHaveValue('30000');
+    expect(inputDamage).toHaveValue('No damage');
+    expect(inputDescription).toHaveValue('No damage');
+    expect(getByLabelText('A: Salvage Title')).toBeChecked();
+    fireEvent.click(getByTestId('button'));
 
-    // fireEvent.change(getByText(/Select Color/i), { target: { value: 2 } });
-    // expect(getByText('Red')).toBeInTheDocument();
-    // fireEvent.change(getByText(/Select State/i), { target: { value: 2 } });
-    // expect(getByText(/utah/i)).toBeInTheDocument();
+    expect(await findByText(/Creation Complete/i)).toBeInTheDocument();
   });
 });

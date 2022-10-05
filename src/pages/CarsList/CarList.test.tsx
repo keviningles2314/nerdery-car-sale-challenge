@@ -34,20 +34,6 @@ describe('Car list page', () => {
     });
   });
 
-  it('should show empty data error', async () => {
-    const carsEmptyData = mockEmptyObject;
-    render(
-      <BrowserRouter>
-        <MockedProvider mocks={[carsEmptyData]} addTypename={false}>
-          <CarList />
-        </MockedProvider>
-      </BrowserRouter>
-    );
-    await waitFor(() => {
-      expect(screen.getByText(/No data Found/i)).toBeInTheDocument();
-    });
-  });
-
   it('should show a graphql error', async () => {
     const carsErrorData = {
       request: {

@@ -1,9 +1,9 @@
-import EmailField from '../TextField/TextField';
 import { Container } from './FilterStyled';
 import React, { useCallback, useEffect, useState } from 'react';
 import RegularText from '../Text/RegularText/RegularText';
 import SelectOptionFilter from '../SelectOptionFilter/SelectOption';
 import debounce from 'lodash/debounce';
+import TextField from '../TextField/TextField';
 
 interface FilterProps {
   setSearchParam: Function;
@@ -36,7 +36,7 @@ const FilterComponent = ({ setSearchParam }: FilterProps) => {
   return (
     <>
       <Container>
-        <EmailField
+        <TextField
           onChangeText={onChangeTextHandler}
           placeholder={'Search by VIN, Title or Batch No'}
         />

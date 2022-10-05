@@ -2,6 +2,7 @@ import {
   Get_Add_Car_Fields_QueryDocument,
   Order_By,
   Query_GetCarsDocument,
+  useGet_Add_Car_Fields_QueryLazyQuery,
 } from '../../api/graphql/__generated__/graphql-types';
 
 export const mockCarObject = {
@@ -57,6 +58,27 @@ export const mockCarObject = {
 export const mockEmptyObject = {
   request: {
     query: Query_GetCarsDocument,
+    variables: {
+      orderBy: [
+        {
+          sale_date: Order_By.Desc,
+        },
+      ],
+      where: {
+        _or: [
+          {
+            title: {
+              _iregex: '',
+            },
+          },
+          {
+            vin: {
+              _iregex: '',
+            },
+          },
+        ],
+      },
+    },
   },
   result: {
     data: {
@@ -157,7 +179,7 @@ export const mockSelectData = {
   },
 };
 
-export const mockSelectDataVariables = {
+export const mockSelectModelsVariables = {
   request: {
     query: Get_Add_Car_Fields_QueryDocument,
     variables: {
@@ -166,6 +188,49 @@ export const mockSelectDataVariables = {
           _eq: 2,
         },
       },
+    },
+  },
+  result: {
+    data: {
+      brands: [
+        {
+          id: 2,
+          name: 'Jeep',
+        },
+      ],
+      models: [
+        {
+          id: 2,
+          name: 'Patriot',
+        },
+      ],
+      colors: [
+        {
+          id: 2,
+          name: 'Red',
+        },
+      ],
+      states: [
+        {
+          id: 2,
+          name: 'Utah',
+        },
+      ],
+      cities: [
+        {
+          id: 2,
+          name: 'Salt Lake',
+          state_id: 2,
+        },
+      ],
+    },
+  },
+};
+
+export const mockSelectCityVariables = {
+  request: {
+    query: Get_Add_Car_Fields_QueryDocument,
+    variables: {
       where: {
         state_id: {
           _eq: 2,
@@ -202,7 +267,7 @@ export const mockSelectDataVariables = {
       cities: [
         {
           id: 2,
-          name: 'Salt Lake',
+          name: 'Provo',
           state_id: 2,
         },
       ],
