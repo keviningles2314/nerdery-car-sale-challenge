@@ -1,12 +1,11 @@
-import { ApolloProvider } from '@apollo/client';
-import { render, RenderOptions } from '@testing-library/react';
-import React, { ReactElement, ReactNode } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { client } from '../../index';
-import { LoginContextProvider } from '../../context/LoginContext/LoginContext';
+import { ApolloProvider } from "@apollo/client"
+import { render, RenderOptions } from "@testing-library/react"
+import React, { ReactElement, ReactNode } from "react"
+import { client } from "../../app"
+import { LoginContextProvider } from "../../context/LoginContext/login-context"
 
 interface NestedProvidersProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const NestedProviders = ({ children }: NestedProvidersProps) => {
@@ -16,13 +15,13 @@ const NestedProviders = ({ children }: NestedProvidersProps) => {
         <LoginContextProvider>{children}</LoginContextProvider>
       </ApolloProvider>
     </React.StrictMode>
-  );
-};
+  )
+}
 
 const customRender = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>
-) => render(ui, { wrapper: NestedProviders, ...options });
+  options?: Omit<RenderOptions, "wrapper">
+) => render(ui, { wrapper: NestedProviders, ...options })
 
-export * from '@testing-library/react';
-export { customRender as render };
+export * from "@testing-library/react"
+export { customRender as renderUI }

@@ -1,12 +1,12 @@
-import HeadingTitle from '../../components/Text/HeadingTitle/HeadingTitle';
-import { Container } from './HomeStyled';
+import HeadingTitle from "../../components/text/heading-title/heading-title"
+import { Container } from "./home-styled"
 
-const Home = () => {
+const home = () => {
   return (
     <Container>
-      <HeadingTitle text={'welcome'} isBaseColor={true} />
+      <HeadingTitle text="welcome" isBaseColor />
     </Container>
-  );
-};
+  )
+}
 
-export default Home;
+export default home

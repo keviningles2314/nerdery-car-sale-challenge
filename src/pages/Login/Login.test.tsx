@@ -1,12 +1,12 @@
-import { ApolloProvider } from '@apollo/client';
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import { LoginContextProvider } from '../../context/LoginContext/LoginContext';
-import Login from './Login';
-import { client } from '../../index';
-import React from 'react';
-describe('Login Page', () => {
-  it('should render Login page', () => {
+import { ApolloProvider } from "@apollo/client"
+import { render, screen } from "@testing-library/react"
+import { BrowserRouter } from "react-router-dom"
+import { LoginContextProvider } from "../../context/LoginContext/login-context"
+import Login from "./login"
+import { client } from "../../app"
+import React from "react"
+describe("Login Page", () => {
+  it("should render Login page", () => {
     render(
       <React.StrictMode>
         <ApolloProvider client={client}>
@@ -17,7 +17,7 @@ describe('Login Page', () => {
           </LoginContextProvider>
         </ApolloProvider>
       </React.StrictMode>
-    );
-    expect(screen.getByText(/welcome/i)).toBeInTheDocument();
-  });
-});
+    )
+    expect(screen.getByText(/welcome/i)).toBeInTheDocument()
+  })
+})

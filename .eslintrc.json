@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": ["@ravnhq/eslint-config", "@ravnhq/eslint-config/react"]
+}

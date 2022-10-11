@@ -3,13 +3,17 @@ schema:
   https://working-swan-45.hasura.app/v1/graphql:
     headers:
       x-hasura-admin-secret: 6G6GeneaqR7WrQDlRdLzs7NxY0r8I480LFFT3OXGmA4Ijg8xqhIguIZkQLx5oWTl
-documents: './src/**/!(*.d).{ts,tsx}'
+documents: "./src/**/!(*.d).{ts,tsx}"
+config:
+  namingConvention:
+    typeNames: "change-case-all#camelCase"
+    transformUnderscore: true
 generates:
   ./src/api/graphql/__generated__/graphql-types.ts:
     plugins:
-      - 'typescript'
-      - 'typescript-operations'
-      - 'typescript-react-apollo'
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
   ./src/api/graphql/__generated__/graphql.schema.json:
     plugins:
-      - 'introspection'
+      - "introspection"

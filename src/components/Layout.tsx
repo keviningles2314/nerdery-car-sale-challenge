@@ -1,8 +1,8 @@
-import { PropsWithChildren } from 'react';
-import Navbar from './Navbar/Navbar';
+import { PropsWithChildren } from "react"
+import Navbar from "./navbar/navbar"
 
 interface LayoutProps {
-  children: PropsWithChildren;
+  children: PropsWithChildren
 }
 
 const Layout = ({ children }: LayoutProps) => {
@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Navbar />
       {children}
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

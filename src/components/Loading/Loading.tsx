@@ -1,6 +1,6 @@
-import RegularText from '../Text/RegularText/RegularText';
+import RegularText from "../text/regular-text/regular-text"
 
 const Loading = () => {
-  return <RegularText text='Loading...' isBaseColor />;
-};
-export default Loading;
+  return <RegularText text="Loading..." isBaseColor />
+}
+export default Loading
