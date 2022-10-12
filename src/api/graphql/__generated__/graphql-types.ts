@@ -1,0 +1,3943 @@
+import { gql } from "@apollo/client"
+import * as Apollo from "@apollo/client"
+export type Maybe<T> = T | null
+export type InputMaybe<T> = Maybe<T>
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K]
+}
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>
+}
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>
+}
+const defaultOptions = {} as const
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: string
+  String: string
+  Boolean: boolean
+  Int: number
+  Float: number
+  bpchar: string
+  date: Date
+  money: number
+  smallint: number
+  uuid: string
+}
+/** column ordering options */
+export enum OrderBy {
+  /** in ascending order, nulls last */
+  Asc = "asc",
+  /** in ascending order, nulls first */
+  AscNullsFirst = "asc_nulls_first",
+  /** in ascending order, nulls last */
+  AscNullsLast = "asc_nulls_last",
+  /** in descending order, nulls first */
+  Desc = "desc",
+  /** in descending order, nulls first */
+  DescNullsFirst = "desc_nulls_first",
+  /** in descending order, nulls last */
+  DescNullsLast = "desc_nulls_last",
+}
+
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["Int"]>
+  _gt?: InputMaybe<Scalars["Int"]>
+  _gte?: InputMaybe<Scalars["Int"]>
+  _in?: InputMaybe<Array<Scalars["Int"]>>
+  _is_null?: InputMaybe<Scalars["Boolean"]>
+  _lt?: InputMaybe<Scalars["Int"]>
+  _lte?: InputMaybe<Scalars["Int"]>
+  _neq?: InputMaybe<Scalars["Int"]>
+  _nin?: InputMaybe<Array<Scalars["Int"]>>
+}
+
+/** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
+export type String_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["String"]>
+  _gt?: InputMaybe<Scalars["String"]>
+  _gte?: InputMaybe<Scalars["String"]>
+  /** does the column match the given case-insensitive pattern */
+  _ilike?: InputMaybe<Scalars["String"]>
+  _in?: InputMaybe<Array<Scalars["String"]>>
+  /** does the column match the given POSIX regular expression, case insensitive */
+  _iregex?: InputMaybe<Scalars["String"]>
+  _is_null?: InputMaybe<Scalars["Boolean"]>
+  /** does the column match the given pattern */
+  _like?: InputMaybe<Scalars["String"]>
+  _lt?: InputMaybe<Scalars["String"]>
+  _lte?: InputMaybe<Scalars["String"]>
+  _neq?: InputMaybe<Scalars["String"]>
+  /** does the column NOT match the given case-insensitive pattern */
+  _nilike?: InputMaybe<Scalars["String"]>
+  _nin?: InputMaybe<Array<Scalars["String"]>>
+  /** does the column NOT match the given POSIX regular expression, case insensitive */
+  _niregex?: InputMaybe<Scalars["String"]>
+  /** does the column NOT match the given pattern */
+  _nlike?: InputMaybe<Scalars["String"]>
+  /** does the column NOT match the given POSIX regular expression, case sensitive */
+  _nregex?: InputMaybe<Scalars["String"]>
+  /** does the column NOT match the given SQL regular expression */
+  _nsimilar?: InputMaybe<Scalars["String"]>
+  /** does the column match the given POSIX regular expression, case sensitive */
+  _regex?: InputMaybe<Scalars["String"]>
+  /** does the column match the given SQL regular expression */
+  _similar?: InputMaybe<Scalars["String"]>
+}
+
+/** Boolean expression to compare columns of type "bpchar". All fields are combined with logical 'AND'. */
+export type Bpchar_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["bpchar"]>
+  _gt?: InputMaybe<Scalars["bpchar"]>
+  _gte?: InputMaybe<Scalars["bpchar"]>
+  /** does the column match the given case-insensitive pattern */
+  _ilike?: InputMaybe<Scalars["bpchar"]>
+  _in?: InputMaybe<Array<Scalars["bpchar"]>>
+  /** does the column match the given POSIX regular expression, case insensitive */
+  _iregex?: InputMaybe<Scalars["bpchar"]>
+  _is_null?: InputMaybe<Scalars["Boolean"]>
+  /** does the column match the given pattern */
+  _like?: InputMaybe<Scalars["bpchar"]>
+  _lt?: InputMaybe<Scalars["bpchar"]>
+  _lte?: InputMaybe<Scalars["bpchar"]>
+  _neq?: InputMaybe<Scalars["bpchar"]>
+  /** does the column NOT match the given case-insensitive pattern */
+  _nilike?: InputMaybe<Scalars["bpchar"]>
+  _nin?: InputMaybe<Array<Scalars["bpchar"]>>
+  /** does the column NOT match the given POSIX regular expression, case insensitive */
+  _niregex?: InputMaybe<Scalars["bpchar"]>
+  /** does the column NOT match the given pattern */
+  _nlike?: InputMaybe<Scalars["bpchar"]>
+  /** does the column NOT match the given POSIX regular expression, case sensitive */
+  _nregex?: InputMaybe<Scalars["bpchar"]>
+  /** does the column NOT match the given SQL regular expression */
+  _nsimilar?: InputMaybe<Scalars["bpchar"]>
+  /** does the column match the given POSIX regular expression, case sensitive */
+  _regex?: InputMaybe<Scalars["bpchar"]>
+  /** does the column match the given SQL regular expression */
+  _similar?: InputMaybe<Scalars["bpchar"]>
+}
+
+/** columns and relationships of "brands" */
+export type Brands = {
+  __typename?: "brands"
+  carsCount: Scalars["smallint"]
+  id: Scalars["Int"]
+  name: Scalars["String"]
+  uuid: Scalars["uuid"]
+}
+/** select columns of table "brands" */
+export enum Brands_Select_Column {
+  /** column name */
+  CarsCount = "cars_count",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** aggregate fields of "brands" */
+export type Brands_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Brands_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+
+/** aggregate avg on columns */
+export type BrandsAvgFields = {
+  __typename?: "brands_avg_fields"
+  carsCount?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+/** aggregate max on columns */
+export type Brands_Max_Fields = {
+  __typename?: "brands_max_fields"
+  carsCount?: Maybe<Scalars["smallint"]>
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** aggregate min on columns */
+export type Brands_Min_Fields = {
+  __typename?: "brands_min_fields"
+  carsCount?: Maybe<Scalars["smallint"]>
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+/** aggregate stddev on columns */
+export type Brands_Stddev_Fields = {
+  __typename?: "brands_stddev_fields"
+  carsCount?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type Brands_Stddev_Pop_Fields = {
+  __typename?: "brands_stddev_pop_fields"
+  carsCount?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type Brands_Stddev_Samp_Fields = {
+  __typename?: "brands_stddev_samp_fields"
+  carsCount?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+/** Initial value of the column from where the streaming should start */
+export type Brands_Stream_Cursor_Value_Input = {
+  carsCount?: InputMaybe<Scalars["smallint"]>
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** aggregate sum on columns */
+export type Brands_Sum_Fields = {
+  __typename?: "brands_sum_fields"
+  carsCount?: Maybe<Scalars["smallint"]>
+  id?: Maybe<Scalars["Int"]>
+}
+
+/** update columns of table "brands" */
+export enum Brands_Update_Column {
+  /** column name */
+  CarsCount = "cars_count",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["uuid"]>
+  _gt?: InputMaybe<Scalars["uuid"]>
+  _gte?: InputMaybe<Scalars["uuid"]>
+  _in?: InputMaybe<Array<Scalars["uuid"]>>
+  _is_null?: InputMaybe<Scalars["Boolean"]>
+  _lt?: InputMaybe<Scalars["uuid"]>
+  _lte?: InputMaybe<Scalars["uuid"]>
+  _neq?: InputMaybe<Scalars["uuid"]>
+  _nin?: InputMaybe<Array<Scalars["uuid"]>>
+}
+
+/** aggregate var_pop on columns */
+export type Brands_Variable_Pop_Fields = {
+  __typename?: "brands_var_pop_fields"
+  carsCount?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_samp on columns */
+export type Brands_Variable_Samp_Fields = {
+  __typename?: "brands_var_samp_fields"
+  carsCount?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate variance on columns */
+export type Brands_Variance_Fields = {
+  __typename?: "brands_variance_fields"
+  carsCount?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate fields of "brands" */
+export type Brands_Aggregate_Fields = {
+  __typename?: "brands_aggregate_fields"
+  avg?: Maybe<BrandsAvgFields>
+  count: Scalars["Int"]
+  max?: Maybe<Brands_Max_Fields>
+  min?: Maybe<Brands_Min_Fields>
+  stddev?: Maybe<Brands_Stddev_Fields>
+  stddev_pop?: Maybe<Brands_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Brands_Stddev_Samp_Fields>
+  sum?: Maybe<Brands_Sum_Fields>
+  var_pop?: Maybe<Brands_Variable_Pop_Fields>
+  var_samp?: Maybe<Brands_Variable_Samp_Fields>
+  variance?: Maybe<Brands_Variance_Fields>
+}
+
+/** aggregated selection of "brands" */
+export type Brands_Aggregate = {
+  __typename?: "brands_aggregate"
+  aggregate?: Maybe<Brands_Aggregate_Fields>
+  nodes: Array<Brands>
+}
+/** Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'. */
+export type Smallint_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["smallint"]>
+  _gt?: InputMaybe<Scalars["smallint"]>
+  _gte?: InputMaybe<Scalars["smallint"]>
+  _in?: InputMaybe<Array<Scalars["smallint"]>>
+  _is_null?: InputMaybe<Scalars["Boolean"]>
+  _lt?: InputMaybe<Scalars["smallint"]>
+  _lte?: InputMaybe<Scalars["smallint"]>
+  _neq?: InputMaybe<Scalars["smallint"]>
+  _nin?: InputMaybe<Array<Scalars["smallint"]>>
+}
+
+/** Boolean expression to filter rows from the table "brands". All fields are combined with a logical 'AND'. */
+export type Brands_Bool_Exp = {
+  _and?: InputMaybe<Array<Brands_Bool_Exp>>
+  _not?: InputMaybe<Brands_Bool_Exp>
+  _or?: InputMaybe<Array<Brands_Bool_Exp>>
+  cars_count?: InputMaybe<Smallint_Comparison_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  name?: InputMaybe<String_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "brands" */
+export enum Brands_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  BrandsPkey = "brands_pkey",
+  /** unique or primary key constraint on columns "uuid" */
+  BrandsUuidKey = "brands_uuid_key",
+}
+
+/** input type for incrementing numeric columns in table "brands" */
+export type Brands_Inc_Input = {
+  carsCount?: InputMaybe<Scalars["smallint"]>
+  id?: InputMaybe<Scalars["Int"]>
+}
+
+/** input type for inserting data into table "brands" */
+export type Brands_Insert_Input = {
+  carsCount?: InputMaybe<Scalars["smallint"]>
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** response of any mutation on the table "brands" */
+export type Brands_Mutation_Response = {
+  __typename?: "brands_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<Brands>
+}
+/** on_conflict condition type for table "brands" */
+export type Brands_On_Conflict = {
+  constraint: Brands_Constraint
+  update_columns?: Array<Brands_Update_Column>
+  where?: InputMaybe<Brands_Bool_Exp>
+}
+/** input type for inserting object relation for remote table "brands" */
+export type Brands_Object_Related_Insert_Input = {
+  data: Brands_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<Brands_On_Conflict>
+}
+
+/** Ordering options when selecting data from "brands". */
+export type Brands_Order_By = {
+  carsCount?: InputMaybe<OrderBy>
+  id?: InputMaybe<OrderBy>
+  name?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+
+/** primary key columns input for table: brands */
+export type Brands_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** input type for updating data in table "brands" */
+export type Brands_Set_Input = {
+  carsCount?: InputMaybe<Scalars["smallint"]>
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** aggregate variance on columns */
+export type Colors_Variance_Fields = {
+  __typename?: "colors_variance_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** ordering argument of a cursor */
+export enum Cursor_Ordering {
+  /** ascending ordering of the cursor */
+  Asc = "ASC",
+  /** descending ordering of the cursor */
+  Desc = "DESC",
+}
+
+/** Streaming cursor of the table "brands" */
+export type Brands_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Brands_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+export type Brands_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Brands_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Brands_Set_Input>
+  where: Brands_Bool_Exp
+}
+
+/** columns and relationships of "cars" */
+export type Cars = {
+  __typename?: "cars"
+  batch: string
+  condition: string
+  damageType?: string | null
+  description?: string | null
+  id: number
+  odometer?: number | null
+  price: number
+  saleDate: Date
+  title?: string | null
+  vin: string
+  year?: number | null
+  city: {
+    __typename?: "cities"
+    name: string
+    id: number
+    state: { __typename?: "states"; id: number; name: string }
+  }
+  color: { __typename?: "colors"; id: number; name: string }
+  model: {
+    __typename?: "models"
+    id: number
+    name: string
+    brand: { __typename?: "brands"; id: number; name: string }
+  }
+}
+/** select columns of table "cars" */
+export enum Cars_Select_Column {
+  /** column name */
+  Batch = "batch",
+  /** column name */
+  BrandId = "brand_id",
+  /** column name */
+  CityId = "city_id",
+  /** column name */
+  ColorId = "color_id",
+  /** column name */
+  Condition = "condition",
+  /** column name */
+  CreateDate = "create_date",
+  /** column name */
+  DamageType = "damage_type",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Id = "id",
+  /** column name */
+  ModelId = "model_id",
+  /** column name */
+  Odometer = "odometer",
+  /** column name */
+  Price = "price",
+  /** column name */
+  SaleDate = "sale_date",
+  /** column name */
+  StateId = "state_id",
+  /** column name */
+  Title = "title",
+  /** column name */
+  UpdateDate = "update_date",
+  /** column name */
+  Uuid = "uuid",
+  /** column name */
+  Vin = "vin",
+  /** column name */
+  Year = "year",
+}
+
+/** aggregate max on columns */
+export type Cars_Max_Fields = {
+  __typename?: "cars_max_fields"
+  batch?: Maybe<Scalars["uuid"]>
+  brand_id?: Maybe<Scalars["Int"]>
+  city_id?: Maybe<Scalars["Int"]>
+  color_id?: Maybe<Scalars["Int"]>
+  condition?: Maybe<Scalars["bpchar"]>
+  create_date?: Maybe<Scalars["date"]>
+  damage_type?: Maybe<Scalars["String"]>
+  description?: Maybe<Scalars["String"]>
+  id?: Maybe<Scalars["Int"]>
+  model_id?: Maybe<Scalars["Int"]>
+  odometer?: Maybe<Scalars["Int"]>
+  price?: Maybe<Scalars["money"]>
+  sale_date?: Maybe<Scalars["date"]>
+  state_id?: Maybe<Scalars["Int"]>
+  title?: Maybe<Scalars["String"]>
+  update_date?: Maybe<Scalars["date"]>
+  uuid?: Maybe<Scalars["uuid"]>
+  vin?: Maybe<Scalars["String"]>
+  year?: Maybe<Scalars["Int"]>
+}
+
+/** aggregate min on columns */
+export type Cars_Min_Fields = {
+  __typename?: "cars_min_fields"
+  batch?: Maybe<Scalars["uuid"]>
+  brand_id?: Maybe<Scalars["Int"]>
+  city_id?: Maybe<Scalars["Int"]>
+  color_id?: Maybe<Scalars["Int"]>
+  condition?: Maybe<Scalars["bpchar"]>
+  create_date?: Maybe<Scalars["date"]>
+  damage_type?: Maybe<Scalars["String"]>
+  description?: Maybe<Scalars["String"]>
+  id?: Maybe<Scalars["Int"]>
+  model_id?: Maybe<Scalars["Int"]>
+  odometer?: Maybe<Scalars["Int"]>
+  price?: Maybe<Scalars["money"]>
+  sale_date?: Maybe<Scalars["date"]>
+  state_id?: Maybe<Scalars["Int"]>
+  title?: Maybe<Scalars["String"]>
+  update_date?: Maybe<Scalars["date"]>
+  uuid?: Maybe<Scalars["uuid"]>
+  vin?: Maybe<Scalars["String"]>
+  year?: Maybe<Scalars["Int"]>
+}
+/** aggregate avg on columns */
+export type Cars_Avg_Fields = {
+  __typename?: "cars_avg_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev on columns */
+export type Cars_Stddev_Fields = {
+  __typename?: "cars_stddev_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type Cars_Stddev_Pop_Fields = {
+  __typename?: "cars_stddev_pop_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type Cars_Stddev_Samp_Fields = {
+  __typename?: "cars_stddev_samp_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate sum on columns */
+export type Cars_Sum_Fields = {
+  __typename?: "cars_sum_fields"
+  brand_id?: Maybe<Scalars["Int"]>
+  city_id?: Maybe<Scalars["Int"]>
+  color_id?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["Int"]>
+  model_id?: Maybe<Scalars["Int"]>
+  odometer?: Maybe<Scalars["Int"]>
+  price?: Maybe<Scalars["money"]>
+  state_id?: Maybe<Scalars["Int"]>
+  year?: Maybe<Scalars["Int"]>
+}
+
+/** aggregate var_pop on columns */
+export type Cars_Variance_Pop_Fields = {
+  __typename?: "cars_var_pop_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_samp on columns */
+export type Cars_Variance_Samp_Fields = {
+  __typename?: "cars_var_samp_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate variance on columns */
+export type Cars_Variable_Fields = {
+  __typename?: "cars_variance_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate fields of "cars" */
+export type Cars_Aggregate_Fields = {
+  __typename?: "cars_aggregate_fields"
+  avg?: Maybe<Cars_Avg_Fields>
+  count: Scalars["Int"]
+  max?: Maybe<Cars_Max_Fields>
+  min?: Maybe<Cars_Min_Fields>
+  stddev?: Maybe<Cars_Stddev_Fields>
+  stddev_pop?: Maybe<Cars_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Cars_Stddev_Samp_Fields>
+  sum?: Maybe<Cars_Sum_Fields>
+  var_pop?: Maybe<Cars_Variance_Pop_Fields>
+  var_samp?: Maybe<Cars_Variance_Samp_Fields>
+  variance?: Maybe<Cars_Variable_Fields>
+}
+/** aggregated selection of "cars" */
+export type Cars_Aggregate = {
+  __typename?: "cars_aggregate"
+  aggregate?: Maybe<Cars_Aggregate_Fields>
+  nodes: Array<Cars>
+}
+
+/** aggregate fields of "cars" */
+export type Cars_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Cars_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+/** Boolean expression to filter rows from the table "states". All fields are combined with a logical 'AND'. */
+export type States_Bool_Exp = {
+  _and?: InputMaybe<Array<States_Bool_Exp>>
+  _not?: InputMaybe<States_Bool_Exp>
+  _or?: InputMaybe<Array<States_Bool_Exp>>
+  // eslint-disable-next-line no-use-before-define
+  cities?: InputMaybe<Cities_Bool_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  name?: InputMaybe<String_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+/** Boolean expression to filter rows from the table "cities". All fields are combined with a logical 'AND'. */
+export type Cities_Bool_Exp = {
+  _and?: InputMaybe<Array<Cities_Bool_Exp>>
+  _not?: InputMaybe<Cities_Bool_Exp>
+  _or?: InputMaybe<Array<Cities_Bool_Exp>>
+  id?: InputMaybe<Int_Comparison_Exp>
+  name?: InputMaybe<String_Comparison_Exp>
+  state?: InputMaybe<States_Bool_Exp>
+  stateId?: InputMaybe<Int_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+/** Boolean expression to filter rows from the table "colors". All fields are combined with a logical 'AND'. */
+export type Colors_Bool_Exp = {
+  _and?: InputMaybe<Array<Colors_Bool_Exp>>
+  _not?: InputMaybe<Colors_Bool_Exp>
+  _or?: InputMaybe<Array<Colors_Bool_Exp>>
+  id?: InputMaybe<Int_Comparison_Exp>
+  name?: InputMaybe<String_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["date"]>
+  _gt?: InputMaybe<Scalars["date"]>
+  _gte?: InputMaybe<Scalars["date"]>
+  _in?: InputMaybe<Array<Scalars["date"]>>
+  _is_null?: InputMaybe<Scalars["Boolean"]>
+  _lt?: InputMaybe<Scalars["date"]>
+  _lte?: InputMaybe<Scalars["date"]>
+  _neq?: InputMaybe<Scalars["date"]>
+  _nin?: InputMaybe<Array<Scalars["date"]>>
+}
+
+/** Boolean expression to filter rows from the table "models". All fields are combined with a logical 'AND'. */
+export type Models_Bool_Exp = {
+  _and?: InputMaybe<Array<Models_Bool_Exp>>
+  _not?: InputMaybe<Models_Bool_Exp>
+  _or?: InputMaybe<Array<Models_Bool_Exp>>
+  brand?: InputMaybe<Brands_Bool_Exp>
+  brandId?: InputMaybe<Int_Comparison_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  name?: InputMaybe<String_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+/** Boolean expression to compare columns of type "money". All fields are combined with logical 'AND'. */
+export type Money_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars["money"]>
+  _gt?: InputMaybe<Scalars["money"]>
+  _gte?: InputMaybe<Scalars["money"]>
+  _in?: InputMaybe<Array<Scalars["money"]>>
+  _is_null?: InputMaybe<Scalars["Boolean"]>
+  _lt?: InputMaybe<Scalars["money"]>
+  _lte?: InputMaybe<Scalars["money"]>
+  _neq?: InputMaybe<Scalars["money"]>
+  _nin?: InputMaybe<Array<Scalars["money"]>>
+}
+
+/** Boolean expression to filter rows from the table "cars". All fields are combined with a logical 'AND'. */
+export type Cars_Bool_Exp = {
+  _and?: InputMaybe<Array<Cars_Bool_Exp>>
+  _not?: InputMaybe<Cars_Bool_Exp>
+  _or?: InputMaybe<Array<Cars_Bool_Exp>>
+  batch?: InputMaybe<Uuid_Comparison_Exp>
+  brand?: InputMaybe<Brands_Bool_Exp>
+  brandId?: InputMaybe<Int_Comparison_Exp>
+  city?: InputMaybe<Cities_Bool_Exp>
+  cityId?: InputMaybe<Int_Comparison_Exp>
+  color?: InputMaybe<Colors_Bool_Exp>
+  colorId?: InputMaybe<Int_Comparison_Exp>
+  condition?: InputMaybe<Bpchar_Comparison_Exp>
+  createDate?: InputMaybe<Date_Comparison_Exp>
+  damageType?: InputMaybe<String_Comparison_Exp>
+  description?: InputMaybe<String_Comparison_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  model?: InputMaybe<Models_Bool_Exp>
+  modelId?: InputMaybe<Int_Comparison_Exp>
+  odometer?: InputMaybe<Int_Comparison_Exp>
+  price?: InputMaybe<Money_Comparison_Exp>
+  saleDate?: InputMaybe<Date_Comparison_Exp>
+  state?: InputMaybe<States_Bool_Exp>
+  stateId?: InputMaybe<Int_Comparison_Exp>
+  title?: InputMaybe<String_Comparison_Exp>
+  updateDate?: InputMaybe<Date_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+  vin?: InputMaybe<String_Comparison_Exp>
+  year?: InputMaybe<Int_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "cars" */
+export enum Cars_Constraint {
+  /** unique or primary key constraint on columns "batch" */
+  CarsBatchKey = "cars_batch_key",
+  /** unique or primary key constraint on columns "id" */
+  CarsPkey = "cars_pkey",
+  /** unique or primary key constraint on columns "uuid" */
+  CarsUuidKey = "cars_uuid_key",
+  /** unique or primary key constraint on columns "vin" */
+  CarsVinKey = "cars_vin_key",
+}
+
+/** input type for incrementing numeric columns in table "cars" */
+export type Cars_Inc_Input = {
+  brand_id?: InputMaybe<Scalars["Int"]>
+  city_id?: InputMaybe<Scalars["Int"]>
+  color_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  model_id?: InputMaybe<Scalars["Int"]>
+  odometer?: InputMaybe<Scalars["Int"]>
+  price?: InputMaybe<Scalars["money"]>
+  state_id?: InputMaybe<Scalars["Int"]>
+  year?: InputMaybe<Scalars["Int"]>
+}
+
+/** unique or primary key constraints on table "states" */
+export enum States_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  StatesPkey = "states_pkey",
+  /** unique or primary key constraint on columns "uuid" */
+  StatesUuidKey = "states_uuid_key",
+}
+
+/** update columns of table "states" */
+export enum States_Update_Column {
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** on_conflict condition type for table "states" */
+export type States_On_Conflict = {
+  constraint: States_Constraint
+  update_columns?: Array<States_Update_Column>
+  where?: InputMaybe<States_Bool_Exp>
+}
+
+/** unique or primary key constraints on table "cities" */
+export enum Cities_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  CitiesPkey = "cities_pkey",
+}
+/** update columns of table "cities" */
+export enum Cities_Update_Column {
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  StateId = "state_id",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** on_conflict condition type for table "cities" */
+export type Cities_On_Conflict = {
+  constraint: Cities_Constraint
+  update_columns?: Array<Cities_Update_Column>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+/** input type for inserting data into table "states" */
+export type States_Insert_Input = {
+  // eslint-disable-next-line no-use-before-define
+  cities?: InputMaybe<Cities_Array_Related_Insert_Input>
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+/** input type for inserting object relation for remote table "states" */
+export type States_Object_Related_Insert_Input = {
+  data: States_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<States_On_Conflict>
+}
+/** input type for inserting data into table "cities" */
+export type Cities_Insert_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  state?: InputMaybe<States_Object_Related_Insert_Input>
+  state_id?: InputMaybe<Scalars["Int"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+/** input type for inserting array relation for remote table "cities" */
+export type Cities_Array_Related_Insert_Input = {
+  data: Array<Cities_Insert_Input>
+  /** upsert condition */
+  on_conflict?: InputMaybe<Cities_On_Conflict>
+}
+
+/** input type for inserting object relation for remote table "cities" */
+export type Cities_Object_Related_Insert_Input = {
+  data: Cities_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<Cities_On_Conflict>
+}
+/** update columns of table "colors" */
+export enum Colors_Update_Column {
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** unique or primary key constraints on table "colors" */
+export enum Colors_Constraint {
+  /** unique or primary key constraint on columns "name" */
+  ColorsNameKey = "colors_name_key",
+  /** unique or primary key constraint on columns "id" */
+  ColorsPkey = "colors_pkey",
+  /** unique or primary key constraint on columns "uuid" */
+  ColorsUuidKey = "colors_uuid_key",
+}
+
+/** on_conflict condition type for table "colors" */
+export type Colors_On_Conflict = {
+  constraint: Colors_Constraint
+  update_columns?: Array<Colors_Update_Column>
+  where?: InputMaybe<Colors_Bool_Exp>
+}
+/** input type for inserting data into table "colors" */
+export type Colors_Insert_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+/** input type for inserting object relation for remote table "colors" */
+export type Colors_Object_Related_Insert_Input = {
+  data: Colors_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<Colors_On_Conflict>
+}
+
+/** input type for inserting data into table "models" */
+export type Models_Insert_Input = {
+  brand?: InputMaybe<Brands_Object_Related_Insert_Input>
+  brand_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** unique or primary key constraints on table "models" */
+export enum Models_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ModelsPkey = "models_pkey",
+  /** unique or primary key constraint on columns "uuid" */
+  ModelsUuidKey = "models_uuid_key",
+}
+
+/** update columns of table "models" */
+export enum Models_Update_Column {
+  /** column name */
+  BrandId = "brand_id",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** on_conflict condition type for table "models" */
+export type Models_On_Conflict = {
+  constraint: Models_Constraint
+  update_columns?: Array<Models_Update_Column>
+  where?: InputMaybe<Models_Bool_Exp>
+}
+
+/** input type for inserting object relation for remote table "models" */
+export type Models_Object_Related_Insert_Input = {
+  data: Models_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<Models_On_Conflict>
+}
+
+/** input type for inserting data into table "cars" */
+export type Cars_Insert_Input = {
+  batch?: InputMaybe<Scalars["uuid"]>
+  brand?: InputMaybe<Brands_Object_Related_Insert_Input>
+  brandId?: InputMaybe<Scalars["Int"]>
+  city?: InputMaybe<Cities_Object_Related_Insert_Input>
+  cityId?: InputMaybe<Scalars["Int"]>
+  color?: InputMaybe<Colors_Object_Related_Insert_Input>
+  colorId?: InputMaybe<Scalars["Int"]>
+  condition?: InputMaybe<Scalars["bpchar"]>
+  createDate?: InputMaybe<Scalars["date"]>
+  damageType?: InputMaybe<Scalars["String"]>
+  description?: InputMaybe<Scalars["String"]>
+  id?: InputMaybe<Scalars["Int"]>
+  model?: InputMaybe<Models_Object_Related_Insert_Input>
+  modelId?: InputMaybe<Scalars["Int"]>
+  odometer?: InputMaybe<Scalars["Int"]>
+  price?: InputMaybe<Scalars["money"]>
+  saleDate?: InputMaybe<Scalars["date"]>
+  state?: InputMaybe<States_Object_Related_Insert_Input>
+  stateId?: InputMaybe<Scalars["Int"]>
+  title?: InputMaybe<Scalars["String"]>
+  updateDate?: InputMaybe<Scalars["date"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+  vin?: InputMaybe<Scalars["String"]>
+  year?: InputMaybe<Scalars["Int"]>
+}
+
+/** response of any mutation on the table "cars" */
+export type Cars_Mutation_Response = {
+  __typename?: "cars_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<Cars>
+}
+
+/** update columns of table "cars" */
+export enum Cars_Update_Column {
+  /** column name */
+  Batch = "batch",
+  /** column name */
+  BrandId = "brand_id",
+  /** column name */
+  CityId = "city_id",
+  /** column name */
+  ColorId = "color_id",
+  /** column name */
+  Condition = "condition",
+  /** column name */
+  CreateDate = "create_date",
+  /** column name */
+  DamageType = "damage_type",
+  /** column name */
+  Description = "description",
+  /** column name */
+  Id = "id",
+  /** column name */
+  ModelId = "model_id",
+  /** column name */
+  Odometer = "odometer",
+  /** column name */
+  Price = "price",
+  /** column name */
+  SaleDate = "sale_date",
+  /** column name */
+  StateId = "state_id",
+  /** column name */
+  Title = "title",
+  /** column name */
+  UpdateDate = "update_date",
+  /** column name */
+  Uuid = "uuid",
+  /** column name */
+  Vin = "vin",
+  /** column name */
+  Year = "year",
+}
+
+/** on_conflict condition type for table "cars" */
+export type Cars_On_Conflict = {
+  constraint: Cars_Constraint
+  update_columns?: Array<Cars_Update_Column>
+  where?: InputMaybe<Cars_Bool_Exp>
+}
+
+/** primary key columns input for table: cars */
+export type Cars_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** input type for updating data in table "cars" */
+export type Cars_Set_Input = {
+  batch?: InputMaybe<Scalars["uuid"]>
+  brand_id?: InputMaybe<Scalars["Int"]>
+  city_id?: InputMaybe<Scalars["Int"]>
+  color_id?: InputMaybe<Scalars["Int"]>
+  condition?: InputMaybe<Scalars["bpchar"]>
+  create_date?: InputMaybe<Scalars["date"]>
+  damage_type?: InputMaybe<Scalars["String"]>
+  description?: InputMaybe<Scalars["String"]>
+  id?: InputMaybe<Scalars["Int"]>
+  model_id?: InputMaybe<Scalars["Int"]>
+  odometer?: InputMaybe<Scalars["Int"]>
+  price?: InputMaybe<Scalars["money"]>
+  sale_date?: InputMaybe<Scalars["date"]>
+  state_id?: InputMaybe<Scalars["Int"]>
+  title?: InputMaybe<Scalars["String"]>
+  update_date?: InputMaybe<Scalars["date"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+  vin?: InputMaybe<Scalars["String"]>
+  year?: InputMaybe<Scalars["Int"]>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Cars_Stream_Cursor_Value_Input = {
+  batch?: InputMaybe<Scalars["uuid"]>
+  brand_id?: InputMaybe<Scalars["Int"]>
+  city_id?: InputMaybe<Scalars["Int"]>
+  color_id?: InputMaybe<Scalars["Int"]>
+  condition?: InputMaybe<Scalars["bpchar"]>
+  create_date?: InputMaybe<Scalars["date"]>
+  damage_type?: InputMaybe<Scalars["String"]>
+  description?: InputMaybe<Scalars["String"]>
+  id?: InputMaybe<Scalars["Int"]>
+  model_id?: InputMaybe<Scalars["Int"]>
+  odometer?: InputMaybe<Scalars["Int"]>
+  price?: InputMaybe<Scalars["money"]>
+  sale_date?: InputMaybe<Scalars["date"]>
+  state_id?: InputMaybe<Scalars["Int"]>
+  title?: InputMaybe<Scalars["String"]>
+  update_date?: InputMaybe<Scalars["date"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+  vin?: InputMaybe<Scalars["String"]>
+  year?: InputMaybe<Scalars["Int"]>
+}
+/** Streaming cursor of the table "cars" */
+export type Cars_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Cars_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+export type Cars_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Cars_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Cars_Set_Input>
+  where: Cars_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type Cars_Variable_Pop_Fields = {
+  __typename?: "cars_var_pop_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_samp on columns */
+export type Cars_Variable_Samp_Fields = {
+  __typename?: "cars_var_samp_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate variance on columns */
+export type Cars_Variance_Fields = {
+  __typename?: "cars_variance_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  city_id?: Maybe<Scalars["Float"]>
+  color_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  model_id?: Maybe<Scalars["Float"]>
+  odometer?: Maybe<Scalars["Float"]>
+  price?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+  year?: Maybe<Scalars["Float"]>
+}
+
+/** columns and relationships of "states" */
+export type States = {
+  __typename?: "states"
+  /** An array relationship */
+  // eslint-disable-next-line no-use-before-define
+  cities: Array<Cities>
+  /** An aggregate relationship */
+  // eslint-disable-next-line no-use-before-define
+  cities_aggregate: Cities_Aggregate
+  id: Scalars["Int"]
+  name: Scalars["String"]
+  uuid: Scalars["uuid"]
+}
+
+/** columns and relationships of "cities" */
+export type Cities = {
+  __typename?: "cities"
+  id: Scalars["Int"]
+  name: Scalars["String"]
+  /** An object relationship */
+  state: States
+  state_id: Scalars["Int"]
+  uuid: Scalars["uuid"]
+}
+/** aggregate avg on columns */
+export type Cities_Avg_Fields = {
+  __typename?: "cities_avg_fields"
+  id?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+}
+
+/** order by avg() on columns of table "cities" */
+export type Cities_Avg_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+/** order by max() on columns of table "cities" */
+export type Cities_Max_Order_By = {
+  id?: InputMaybe<OrderBy>
+  name?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+/** order by min() on columns of table "cities" */
+export type Cities_Min_Order_By = {
+  id?: InputMaybe<OrderBy>
+  name?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+/** order by stddev() on columns of table "cities" */
+export type Cities_Stddev_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+/** order by stddev_pop() on columns of table "cities" */
+export type Cities_Stddev_Pop_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+/** order by stddev_samp() on columns of table "cities" */
+export type Cities_Stddev_Samp_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+
+/** order by variance() on columns of table "cities" */
+export type Cities_Variance_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+/** order by sum() on columns of table "cities" */
+export type Cities_Sum_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+
+/** input type for incrementing numeric columns in table "cities" */
+export type Cities_Inc_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  state_id?: InputMaybe<Scalars["Int"]>
+}
+
+/** aggregate max on columns */
+export type Cities_Max_Fields = {
+  __typename?: "cities_max_fields"
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  state_id?: Maybe<Scalars["Int"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** aggregate min on columns */
+export type Cities_Min_Fields = {
+  __typename?: "cities_min_fields"
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  state_id?: Maybe<Scalars["Int"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** response of any mutation on the table "cities" */
+export type Cities_Mutation_Response = {
+  __typename?: "cities_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<Cities>
+}
+
+/** primary key columns input for table: cities */
+export type Cities_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** select columns of table "cities" */
+export enum Cities_Select_Column {
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  StateId = "state_id",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** input type for updating data in table "cities" */
+export type Cities_Set_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  state_id?: InputMaybe<Scalars["Int"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** aggregate stddev on columns */
+export type Cities_Stddev_Fields = {
+  __typename?: "cities_stddev_fields"
+  id?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type Cities_Stddev_Pop_Fields = {
+  __typename?: "cities_stddev_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type Cities_Stddev_Samp_Fields = {
+  __typename?: "cities_stddev_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Cities_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  state_id?: InputMaybe<Scalars["Int"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** Streaming cursor of the table "cities" */
+export type Cities_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Cities_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** aggregate sum on columns */
+export type Cities_Sum_Fields = {
+  __typename?: "cities_sum_fields"
+  id?: Maybe<Scalars["Int"]>
+  state_id?: Maybe<Scalars["Int"]>
+}
+
+export type Cities_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Cities_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Cities_Set_Input>
+  where: Cities_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type Cities_Variable_Pop_Fields = {
+  __typename?: "cities_var_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+}
+
+/** order by var_pop() on columns of table "cities" */
+export type Cities_Variable_Pop_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+
+/** aggregate var_samp on columns */
+export type Cities_Variable_Samp_Fields = {
+  __typename?: "cities_var_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+}
+
+/** order by var_samp() on columns of table "cities" */
+export type Cities_Variable_Samp_Order_By = {
+  id?: InputMaybe<OrderBy>
+  state_id?: InputMaybe<OrderBy>
+}
+
+/** aggregate variance on columns */
+export type Cities_Variance_Fields = {
+  __typename?: "cities_variance_fields"
+  id?: Maybe<Scalars["Float"]>
+  state_id?: Maybe<Scalars["Float"]>
+}
+/** aggregate fields of "cities" */
+export type Cities_Aggregate_Fields = {
+  __typename?: "cities_aggregate_fields"
+  avg?: Maybe<Cities_Avg_Fields>
+  count: Scalars["Int"]
+  max?: Maybe<Cities_Max_Fields>
+  min?: Maybe<Cities_Min_Fields>
+  stddev?: Maybe<Cities_Stddev_Fields>
+  stddev_pop?: Maybe<Cities_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Cities_Stddev_Samp_Fields>
+  sum?: Maybe<Cities_Sum_Fields>
+  var_pop?: Maybe<Cities_Variable_Pop_Fields>
+  var_samp?: Maybe<Cities_Variable_Samp_Fields>
+  variance?: Maybe<Cities_Variance_Fields>
+}
+
+/** aggregated selection of "cities" */
+export type Cities_Aggregate = {
+  __typename?: "cities_aggregate"
+  aggregate?: Maybe<Cities_Aggregate_Fields>
+  nodes: Array<Cities>
+}
+/** aggregate fields of "cities" */
+export type Cities_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Cities_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+
+/** order by aggregate values of table "cities" */
+export type Cities_Aggregate_Order_By = {
+  avg?: InputMaybe<Cities_Avg_Order_By>
+  count?: InputMaybe<OrderBy>
+  max?: InputMaybe<Cities_Max_Order_By>
+  min?: InputMaybe<Cities_Min_Order_By>
+  stddev?: InputMaybe<Cities_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Cities_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Cities_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Cities_Sum_Order_By>
+  var_pop?: InputMaybe<Cities_Variable_Pop_Order_By>
+  var_samp?: InputMaybe<Cities_Variable_Samp_Order_By>
+  variance?: InputMaybe<Cities_Variance_Order_By>
+}
+/** Ordering options when selecting data from "states". */
+export type States_Order_By = {
+  cities_aggregate?: InputMaybe<Cities_Aggregate_Order_By>
+  id?: InputMaybe<OrderBy>
+  name?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+/** Ordering options when selecting data from "cities". */
+export type Cities_Order_By = {
+  id?: InputMaybe<OrderBy>
+  name?: InputMaybe<OrderBy>
+  state?: InputMaybe<States_Order_By>
+  state_id?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+
+/** Ordering options when selecting data from "colors". */
+export type Colors_Order_By = {
+  id?: InputMaybe<OrderBy>
+  name?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+/** Ordering options when selecting data from "models". */
+export type Models_Order_By = {
+  brand?: InputMaybe<Brands_Order_By>
+  brand_id?: InputMaybe<OrderBy>
+  id?: InputMaybe<OrderBy>
+  name?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+/** Ordering options when selecting data from "cars". */
+export type Cars_Order_By = {
+  batch?: InputMaybe<OrderBy>
+  brand?: InputMaybe<Brands_Order_By>
+  brandId?: InputMaybe<OrderBy>
+  city?: InputMaybe<Cities_Order_By>
+  cityId?: InputMaybe<OrderBy>
+  color?: InputMaybe<Colors_Order_By>
+  colorId?: InputMaybe<OrderBy>
+  condition?: InputMaybe<OrderBy>
+  createDate?: InputMaybe<OrderBy>
+  damageType?: InputMaybe<OrderBy>
+  description?: InputMaybe<OrderBy>
+  id?: InputMaybe<OrderBy>
+  model?: InputMaybe<Models_Order_By>
+  modelId?: InputMaybe<OrderBy>
+  odometer?: InputMaybe<OrderBy>
+  price?: InputMaybe<OrderBy>
+  saleDate?: InputMaybe<OrderBy>
+  state?: InputMaybe<States_Order_By>
+  stateId?: InputMaybe<OrderBy>
+  title?: InputMaybe<OrderBy>
+  updateDate?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+  vin?: InputMaybe<OrderBy>
+  year?: InputMaybe<OrderBy>
+}
+
+/** columns and relationships of "colors" */
+export type Colors = {
+  __typename?: "colors"
+  id: Scalars["Int"]
+  name: Scalars["String"]
+  uuid: Scalars["uuid"]
+}
+
+/** aggregate avg on columns */
+export type Colors_Avg_Fields = {
+  __typename?: "colors_avg_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate max on columns */
+export type Colors_Max_Fields = {
+  __typename?: "colors_max_fields"
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** select columns of table "colors" */
+export enum Colors_Select_Column {
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** aggregate fields of "colors" */
+export type Colors_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Colors_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+
+/** input type for incrementing numeric columns in table "colors" */
+export type Colors_Inc_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+}
+
+/** aggregate min on columns */
+export type Colors_Min_Fields = {
+  __typename?: "colors_min_fields"
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** response of any mutation on the table "colors" */
+export type Colors_Mutation_Response = {
+  __typename?: "colors_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<Colors>
+}
+
+/** primary key columns input for table: colors */
+export type Colors_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** input type for updating data in table "colors" */
+export type Colors_Set_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** aggregate stddev on columns */
+export type Colors_Stddev_Fields = {
+  __typename?: "colors_stddev_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type Colors_Stddev_Pop_Fields = {
+  __typename?: "colors_stddev_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type Colors_Stddev_Samp_Fields = {
+  __typename?: "colors_stddev_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Colors_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+/** Streaming cursor of the table "colors" */
+export type Colors_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Colors_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** aggregate sum on columns */
+export type Colors_Sum_Fields = {
+  __typename?: "colors_sum_fields"
+  id?: Maybe<Scalars["Int"]>
+}
+
+export type Colors_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Colors_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Colors_Set_Input>
+  where: Colors_Bool_Exp
+}
+
+/** aggregate var_samp on columns */
+export type Colors_Variable_Samp_Fields = {
+  __typename?: "colors_var_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_pop on columns */
+export type Colors_Variable_Pop_Fields = {
+  __typename?: "colors_var_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate fields of "colors" */
+export type Colors_Aggregate_Fields = {
+  __typename?: "colors_aggregate_fields"
+  avg?: Maybe<Colors_Avg_Fields>
+  count: Scalars["Int"]
+  max?: Maybe<Colors_Max_Fields>
+  min?: Maybe<Colors_Min_Fields>
+  stddev?: Maybe<Colors_Stddev_Fields>
+  stddev_pop?: Maybe<Colors_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Colors_Stddev_Samp_Fields>
+  sum?: Maybe<Colors_Sum_Fields>
+  var_pop?: Maybe<Colors_Variable_Pop_Fields>
+  var_samp?: Maybe<Colors_Variable_Samp_Fields>
+  variance?: Maybe<Colors_Variance_Fields>
+}
+/** aggregated selection of "colors" */
+export type Colors_Aggregate = {
+  __typename?: "colors_aggregate"
+  aggregate?: Maybe<Colors_Aggregate_Fields>
+  nodes: Array<Colors>
+}
+
+/** columns and relationships of "models" */
+export type Models = {
+  __typename?: "models"
+  /** An object relationship */
+  brand: Brands
+  brand_id: Scalars["Int"]
+  id: Scalars["Int"]
+  name: Scalars["String"]
+  uuid: Scalars["uuid"]
+}
+
+/** select columns of table "models" */
+export enum Models_Select_Column {
+  /** column name */
+  BrandId = "brand_id",
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+/** aggregate fields of "models" */
+export type Models_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Models_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+
+/** aggregate avg on columns */
+export type Models_Avg_Fields = {
+  __typename?: "models_avg_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** input type for incrementing numeric columns in table "models" */
+export type Models_Inc_Input = {
+  brand_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+}
+
+/** aggregate max on columns */
+export type Models_Max_Fields = {
+  __typename?: "models_max_fields"
+  brand_id?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** aggregate min on columns */
+export type Models_Min_Fields = {
+  __typename?: "models_min_fields"
+  brand_id?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** response of any mutation on the table "models" */
+export type Models_Mutation_Response = {
+  __typename?: "models_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<Models>
+}
+
+/** primary key columns input for table: models */
+export type Models_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** input type for updating data in table "models" */
+export type Models_Set_Input = {
+  brand_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** aggregate stddev on columns */
+export type Models_Stddev_Fields = {
+  __typename?: "models_stddev_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type Models_Stddev_Pop_Fields = {
+  __typename?: "models_stddev_pop_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type Models_Stddev_Samp_Fields = {
+  __typename?: "models_stddev_samp_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+/** Initial value of the column from where the streaming should start */
+export type Models_Stream_Cursor_Value_Input = {
+  brand_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** Streaming cursor of the table "models" */
+export type Models_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Models_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** aggregate sum on columns */
+export type Models_Sum_Fields = {
+  __typename?: "models_sum_fields"
+  brand_id?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["Int"]>
+}
+
+export type Models_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Models_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Models_Set_Input>
+  where: Models_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export type Models_Variable_Pop_Fields = {
+  __typename?: "models_var_pop_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_samp on columns */
+export type Models_Variable_Samp_Fields = {
+  __typename?: "models_var_samp_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate variance on columns */
+export type Models_Variance_Fields = {
+  __typename?: "models_variance_fields"
+  brand_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate fields of "models" */
+export type Models_Aggregate_Fields = {
+  __typename?: "models_aggregate_fields"
+  avg?: Maybe<Models_Avg_Fields>
+  count: Scalars["Int"]
+  max?: Maybe<Models_Max_Fields>
+  min?: Maybe<Models_Min_Fields>
+  stddev?: Maybe<Models_Stddev_Fields>
+  stddev_pop?: Maybe<Models_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Models_Stddev_Samp_Fields>
+  sum?: Maybe<Models_Sum_Fields>
+  var_pop?: Maybe<Models_Variable_Pop_Fields>
+  var_samp?: Maybe<Models_Variable_Samp_Fields>
+  variance?: Maybe<Models_Variance_Fields>
+}
+/** aggregated selection of "models" */
+export type Models_Aggregate = {
+  __typename?: "models_aggregate"
+  aggregate?: Maybe<Models_Aggregate_Fields>
+  nodes: Array<Models>
+}
+/** response of any mutation on the table "states" */
+export type States_Mutation_Response = {
+  __typename?: "states_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<States>
+}
+
+/** mutation root */
+export type Mutation_RootDelete_BrandsArgs = {
+  where: Brands_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Brands_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootDelete_CarsArgs = {
+  where: Cars_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Cars_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootDelete_CitiesArgs = {
+  where: Cities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Cities_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootDelete_ColorsArgs = {
+  where: Colors_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Colors_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootDelete_ModelsArgs = {
+  where: Models_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Models_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootDelete_StatesArgs = {
+  where: States_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_States_By_PkArgs = {
+  id: Scalars["Int"]
+}
+/** Boolean expression to filter rows from the table "user_cars". All fields are combined with a logical 'AND'. */
+export type User_Cars_Bool_Exp = {
+  _and?: InputMaybe<Array<User_Cars_Bool_Exp>>
+  _not?: InputMaybe<User_Cars_Bool_Exp>
+  _or?: InputMaybe<Array<User_Cars_Bool_Exp>>
+  carId?: InputMaybe<Int_Comparison_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  userId?: InputMaybe<Int_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** mutation root */
+export type Mutation_RootDelete_User_CarsArgs = {
+  where: User_Cars_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_User_Cars_By_PkArgs = {
+  id: Scalars["Int"]
+}
+/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
+export type Users_Bool_Exp = {
+  _and?: InputMaybe<Array<Users_Bool_Exp>>
+  _not?: InputMaybe<Users_Bool_Exp>
+  _or?: InputMaybe<Array<Users_Bool_Exp>>
+  email?: InputMaybe<String_Comparison_Exp>
+  firstName?: InputMaybe<String_Comparison_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  lastName?: InputMaybe<String_Comparison_Exp>
+  uuid?: InputMaybe<Uuid_Comparison_Exp>
+}
+/** mutation root */
+export type Mutation_RootDelete_UsersArgs = {
+  where: Users_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Users_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootInsert_BrandsArgs = {
+  objects: Array<Brands_Insert_Input>
+  on_conflict?: InputMaybe<Brands_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Brands_OneArgs = {
+  object: Brands_Insert_Input
+  on_conflict?: InputMaybe<Brands_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_CarsArgs = {
+  objects: Array<Cars_Insert_Input>
+  on_conflict?: InputMaybe<Cars_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Cars_OneArgs = {
+  object: Cars_Insert_Input
+  on_conflict?: InputMaybe<Cars_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_CitiesArgs = {
+  objects: Array<Cities_Insert_Input>
+  on_conflict?: InputMaybe<Cities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Cities_OneArgs = {
+  object: Cities_Insert_Input
+  on_conflict?: InputMaybe<Cities_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_ColorsArgs = {
+  objects: Array<Colors_Insert_Input>
+  on_conflict?: InputMaybe<Colors_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Colors_OneArgs = {
+  object: Colors_Insert_Input
+  on_conflict?: InputMaybe<Colors_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_ModelsArgs = {
+  objects: Array<Models_Insert_Input>
+  on_conflict?: InputMaybe<Models_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Models_OneArgs = {
+  object: Models_Insert_Input
+  on_conflict?: InputMaybe<Models_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_StatesArgs = {
+  objects: Array<States_Insert_Input>
+  on_conflict?: InputMaybe<States_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_States_OneArgs = {
+  object: States_Insert_Input
+  on_conflict?: InputMaybe<States_On_Conflict>
+}
+/** input type for inserting data into table "user_cars" */
+export type User_Cars_Insert_Input = {
+  carId?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  userId?: InputMaybe<Scalars["Int"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** update columns of table "user_cars" */
+export enum User_Cars_Update_Column {
+  /** column name */
+  CarId = "car_id",
+  /** column name */
+  Id = "id",
+  /** column name */
+  UserId = "user_id",
+  /** column name */
+  Uuid = "uuid",
+}
+/** unique or primary key constraints on table "user_cars" */
+export enum User_Cars_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  UserCarsPkey = "user_cars_pkey",
+  /** unique or primary key constraint on columns "uuid" */
+  UserCarsUuidKey = "user_cars_uuid_key",
+}
+/** on_conflict condition type for table "user_cars" */
+export type User_Cars_On_Conflict = {
+  constraint: User_Cars_Constraint
+  update_columns?: Array<User_Cars_Update_Column>
+  where?: InputMaybe<User_Cars_Bool_Exp>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_User_CarsArgs = {
+  objects: Array<User_Cars_Insert_Input>
+  on_conflict?: InputMaybe<User_Cars_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_User_Cars_OneArgs = {
+  object: User_Cars_Insert_Input
+  on_conflict?: InputMaybe<User_Cars_On_Conflict>
+}
+
+/** input type for inserting data into table "users" */
+export type Users_Insert_Input = {
+  email?: InputMaybe<Scalars["String"]>
+  firstBame?: InputMaybe<Scalars["String"]>
+  id?: InputMaybe<Scalars["Int"]>
+  lastName?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** update columns of table "users" */
+export enum Users_Update_Column {
+  /** column name */
+  Email = "email",
+  /** column name */
+  FirstName = "first_name",
+  /** column name */
+  Id = "id",
+  /** column name */
+  LastName = "last_name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** unique or primary key constraints on table "users" */
+export enum Users_Constraint {
+  /** unique or primary key constraint on columns "email" */
+  UsersEmailKey = "users_email_key",
+  /** unique or primary key constraint on columns "id" */
+  UsersPkey = "users_pkey",
+  /** unique or primary key constraint on columns "uuid" */
+  UsersUuidKey = "users_uuid_key",
+}
+
+/** on_conflict condition type for table "users" */
+export type Users_On_Conflict = {
+  constraint: Users_Constraint
+  update_columns?: Array<Users_Update_Column>
+  where?: InputMaybe<Users_Bool_Exp>
+}
+/** mutation root */
+export type Mutation_RootInsert_UsersArgs = {
+  objects: Array<Users_Insert_Input>
+  on_conflict?: InputMaybe<Users_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Users_OneArgs = {
+  object: Users_Insert_Input
+  on_conflict?: InputMaybe<Users_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_BrandsArgs = {
+  _inc?: InputMaybe<Brands_Inc_Input>
+  _set?: InputMaybe<Brands_Set_Input>
+  where: Brands_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Brands_By_PkArgs = {
+  _inc?: InputMaybe<Brands_Inc_Input>
+  _set?: InputMaybe<Brands_Set_Input>
+  pk_columns: Brands_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Brands_ManyArgs = {
+  updates: Array<Brands_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_CarsArgs = {
+  _inc?: InputMaybe<Cars_Inc_Input>
+  _set?: InputMaybe<Cars_Set_Input>
+  where: Cars_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Cars_By_PkArgs = {
+  _inc?: InputMaybe<Cars_Inc_Input>
+  _set?: InputMaybe<Cars_Set_Input>
+  pk_columns: Cars_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Cars_ManyArgs = {
+  updates: Array<Cars_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_CitiesArgs = {
+  _inc?: InputMaybe<Cities_Inc_Input>
+  _set?: InputMaybe<Cities_Set_Input>
+  where: Cities_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Cities_By_PkArgs = {
+  _inc?: InputMaybe<Cities_Inc_Input>
+  _set?: InputMaybe<Cities_Set_Input>
+  pk_columns: Cities_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Cities_ManyArgs = {
+  updates: Array<Cities_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_ColorsArgs = {
+  _inc?: InputMaybe<Colors_Inc_Input>
+  _set?: InputMaybe<Colors_Set_Input>
+  where: Colors_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Colors_By_PkArgs = {
+  _inc?: InputMaybe<Colors_Inc_Input>
+  _set?: InputMaybe<Colors_Set_Input>
+  pk_columns: Colors_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Colors_ManyArgs = {
+  updates: Array<Colors_Updates>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_ModelsArgs = {
+  _inc?: InputMaybe<Models_Inc_Input>
+  _set?: InputMaybe<Models_Set_Input>
+  where: Models_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Models_By_PkArgs = {
+  _inc?: InputMaybe<Models_Inc_Input>
+  _set?: InputMaybe<Models_Set_Input>
+  pk_columns: Models_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Models_ManyArgs = {
+  updates: Array<Models_Updates>
+}
+
+/** input type for incrementing numeric columns in table "states" */
+export type States_Inc_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+}
+/** input type for updating data in table "states" */
+export type States_Set_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_StatesArgs = {
+  _inc?: InputMaybe<States_Inc_Input>
+  _set?: InputMaybe<States_Set_Input>
+  where: States_Bool_Exp
+}
+
+/** primary key columns input for table: states */
+export type States_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_States_By_PkArgs = {
+  _inc?: InputMaybe<States_Inc_Input>
+  _set?: InputMaybe<States_Set_Input>
+  pk_columns: States_Pk_Columns_Input
+}
+
+export type States_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<States_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<States_Set_Input>
+  where: States_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_States_ManyArgs = {
+  updates: Array<States_Updates>
+}
+
+/** input type for incrementing numeric columns in table "user_cars" */
+export type User_Cars_Inc_Input = {
+  car_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  user_id?: InputMaybe<Scalars["Int"]>
+}
+/** input type for updating data in table "user_cars" */
+export type User_Cars_Set_Input = {
+  car_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  user_id?: InputMaybe<Scalars["Int"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_User_CarsArgs = {
+  _inc?: InputMaybe<User_Cars_Inc_Input>
+  _set?: InputMaybe<User_Cars_Set_Input>
+  where: User_Cars_Bool_Exp
+}
+/** primary key columns input for table: user_cars */
+export type User_Cars_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_User_Cars_By_PkArgs = {
+  _inc?: InputMaybe<User_Cars_Inc_Input>
+  _set?: InputMaybe<User_Cars_Set_Input>
+  pk_columns: User_Cars_Pk_Columns_Input
+}
+export type User_Cars_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<User_Cars_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<User_Cars_Set_Input>
+  where: User_Cars_Bool_Exp
+}
+/** mutation root */
+export type Mutation_RootUpdate_User_Cars_ManyArgs = {
+  updates: Array<User_Cars_Updates>
+}
+
+/** input type for incrementing numeric columns in table "users" */
+export type Users_Inc_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+}
+
+/** input type for updating data in table "users" */
+export type Users_Set_Input = {
+  email?: InputMaybe<Scalars["String"]>
+  firstName?: InputMaybe<Scalars["String"]>
+  id?: InputMaybe<Scalars["Int"]>
+  lastName?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_UsersArgs = {
+  _inc?: InputMaybe<Users_Inc_Input>
+  _set?: InputMaybe<Users_Set_Input>
+  where: Users_Bool_Exp
+}
+
+/** primary key columns input for table: users */
+export type Users_Pk_Columns_Input = {
+  id: Scalars["Int"]
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_By_PkArgs = {
+  _inc?: InputMaybe<Users_Inc_Input>
+  _set?: InputMaybe<Users_Set_Input>
+  pk_columns: Users_Pk_Columns_Input
+}
+export type Users_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Users_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Users_Set_Input>
+  where: Users_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Users_ManyArgs = {
+  updates: Array<Users_Updates>
+}
+
+export type Query_RootBrandsArgs = {
+  distinct_on?: InputMaybe<Array<Brands_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Brands_Order_By>>
+  where?: InputMaybe<Brands_Bool_Exp>
+}
+
+export type Query_RootBrands_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Brands_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Brands_Order_By>>
+  where?: InputMaybe<Brands_Bool_Exp>
+}
+
+export type Query_RootBrands_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Query_RootCarsArgs = {
+  distinct_on?: InputMaybe<Array<Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cars_Order_By>>
+  where?: InputMaybe<Cars_Bool_Exp>
+}
+
+export type Query_RootCars_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cars_Order_By>>
+  where?: InputMaybe<Cars_Bool_Exp>
+}
+
+export type Query_RootCars_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Query_RootCitiesArgs = {
+  distinct_on?: InputMaybe<Array<Cities_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cities_Order_By>>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+export type Query_RootCities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Cities_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cities_Order_By>>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+export type Query_RootCities_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Query_RootColorsArgs = {
+  distinct_on?: InputMaybe<Array<Colors_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Colors_Order_By>>
+  where?: InputMaybe<Colors_Bool_Exp>
+}
+
+export type Query_RootColors_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Colors_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Colors_Order_By>>
+  where?: InputMaybe<Colors_Bool_Exp>
+}
+
+export type Query_RootColors_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Query_RootModelsArgs = {
+  distinct_on?: InputMaybe<Array<Models_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Models_Order_By>>
+  where?: InputMaybe<Models_Bool_Exp>
+}
+
+export type Query_RootModels_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Models_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Models_Order_By>>
+  where?: InputMaybe<Models_Bool_Exp>
+}
+
+export type Query_RootModels_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** select columns of table "states" */
+export enum States_Select_Column {
+  /** column name */
+  Id = "id",
+  /** column name */
+  Name = "name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+export type Query_RootStatesArgs = {
+  distinct_on?: InputMaybe<Array<States_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<States_Order_By>>
+  where?: InputMaybe<States_Bool_Exp>
+}
+
+export type Query_RootStates_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<States_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<States_Order_By>>
+  where?: InputMaybe<States_Bool_Exp>
+}
+
+export type Query_RootStates_By_PkArgs = {
+  id: Scalars["Int"]
+}
+/** Ordering options when selecting data from "user_cars". */
+export type User_Cars_Order_By = {
+  car_id?: InputMaybe<OrderBy>
+  id?: InputMaybe<OrderBy>
+  user_id?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+
+/** select columns of table "user_cars" */
+export enum User_Cars_Select_Column {
+  /** column name */
+  CarId = "car_id",
+  /** column name */
+  Id = "id",
+  /** column name */
+  UserId = "user_id",
+  /** column name */
+  Uuid = "uuid",
+}
+
+export type Query_RootUser_CarsArgs = {
+  distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<User_Cars_Order_By>>
+  where?: InputMaybe<User_Cars_Bool_Exp>
+}
+
+export type Query_RootUser_Cars_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<User_Cars_Order_By>>
+  where?: InputMaybe<User_Cars_Bool_Exp>
+}
+
+export type Query_RootUser_Cars_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** select columns of table "users" */
+export enum Users_Select_Column {
+  /** column name */
+  Email = "email",
+  /** column name */
+  FirstName = "first_name",
+  /** column name */
+  Id = "id",
+  /** column name */
+  LastName = "last_name",
+  /** column name */
+  Uuid = "uuid",
+}
+
+/** Ordering options when selecting data from "users". */
+export type Users_Order_By = {
+  email?: InputMaybe<OrderBy>
+  firstName?: InputMaybe<OrderBy>
+  id?: InputMaybe<OrderBy>
+  lastName?: InputMaybe<OrderBy>
+  uuid?: InputMaybe<OrderBy>
+}
+
+export type Query_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Users_Order_By>>
+  where?: InputMaybe<Users_Bool_Exp>
+}
+
+export type Query_RootUsers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Users_Order_By>>
+  where?: InputMaybe<Users_Bool_Exp>
+}
+
+export type Query_RootUsers_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** columns and relationships of "states" */
+export type StatesCitiesArgs = {
+  distinct_on?: InputMaybe<Array<Cities_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cities_Order_By>>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+/** columns and relationships of "states" */
+export type StatesCities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Cities_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cities_Order_By>>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+/** aggregate fields of "states" */
+export type States_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<States_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+
+/** aggregate avg on columns */
+export type States_Avg_Fields = {
+  __typename?: "states_avg_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate max on columns */
+export type States_Max_Fields = {
+  __typename?: "states_max_fields"
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** aggregate min on columns */
+export type States_Min_Fields = {
+  __typename?: "states_min_fields"
+  id?: Maybe<Scalars["Int"]>
+  name?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** aggregate stddev on columns */
+export type States_Stddev_Fields = {
+  __typename?: "states_stddev_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type States_Stddev_Pop_Fields = {
+  __typename?: "states_stddev_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type States_Stddev_Samp_Fields = {
+  __typename?: "states_stddev_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** Initial value of the column from where the streaming should start */
+export type States_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars["Int"]>
+  name?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** Streaming cursor of the table "states" */
+export type States_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: States_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+/** aggregate sum on columns */
+export type States_Sum_Fields = {
+  __typename?: "states_sum_fields"
+  id?: Maybe<Scalars["Int"]>
+}
+
+/** aggregate var_pop on columns */
+export type States_Variables_Pop_Fields = {
+  __typename?: "states_var_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_samp on columns */
+export type States_Variables_Samp_Fields = {
+  __typename?: "states_var_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate variance on columns */
+export type States_Variance_Fields = {
+  __typename?: "states_variance_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate fields of "states" */
+export type States_Aggregate_Fields = {
+  __typename?: "states_aggregate_fields"
+  avg?: Maybe<States_Avg_Fields>
+  count: Scalars["Int"]
+  max?: Maybe<States_Max_Fields>
+  min?: Maybe<States_Min_Fields>
+  stddev?: Maybe<States_Stddev_Fields>
+  stddev_pop?: Maybe<States_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<States_Stddev_Samp_Fields>
+  sum?: Maybe<States_Sum_Fields>
+  var_pop?: Maybe<States_Variables_Pop_Fields>
+  var_samp?: Maybe<States_Variables_Samp_Fields>
+  variance?: Maybe<States_Variance_Fields>
+}
+
+/** aggregated selection of "states" */
+export type States_Aggregate = {
+  __typename?: "states_aggregate"
+  aggregate?: Maybe<States_Aggregate_Fields>
+  nodes: Array<States>
+}
+
+export type Subscription_RootBrandsArgs = {
+  distinct_on?: InputMaybe<Array<Brands_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Brands_Order_By>>
+  where?: InputMaybe<Brands_Bool_Exp>
+}
+
+export type Subscription_RootBrands_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Brands_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Brands_Order_By>>
+  where?: InputMaybe<Brands_Bool_Exp>
+}
+
+export type Subscription_RootBrands_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Subscription_RootBrands_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<Brands_Stream_Cursor_Input>>
+  where?: InputMaybe<Brands_Bool_Exp>
+}
+
+export type Subscription_RootCarsArgs = {
+  distinct_on?: InputMaybe<Array<Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cars_Order_By>>
+  where?: InputMaybe<Cars_Bool_Exp>
+}
+
+export type Subscription_RootCars_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cars_Order_By>>
+  where?: InputMaybe<Cars_Bool_Exp>
+}
+
+export type Subscription_RootCars_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Subscription_RootCars_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<Cars_Stream_Cursor_Input>>
+  where?: InputMaybe<Cars_Bool_Exp>
+}
+
+export type Subscription_RootCitiesArgs = {
+  distinct_on?: InputMaybe<Array<Cities_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cities_Order_By>>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+export type Subscription_RootCities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Cities_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Cities_Order_By>>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+export type Subscription_RootCities_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Subscription_RootCities_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<Cities_Stream_Cursor_Input>>
+  where?: InputMaybe<Cities_Bool_Exp>
+}
+
+export type Subscription_RootColorsArgs = {
+  distinct_on?: InputMaybe<Array<Colors_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Colors_Order_By>>
+  where?: InputMaybe<Colors_Bool_Exp>
+}
+
+export type Subscription_RootColors_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Colors_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Colors_Order_By>>
+  where?: InputMaybe<Colors_Bool_Exp>
+}
+
+export type Subscription_RootColors_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Subscription_RootColors_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<Colors_Stream_Cursor_Input>>
+  where?: InputMaybe<Colors_Bool_Exp>
+}
+
+export type Subscription_RootModelsArgs = {
+  distinct_on?: InputMaybe<Array<Models_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Models_Order_By>>
+  where?: InputMaybe<Models_Bool_Exp>
+}
+
+export type Subscription_RootModels_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Models_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Models_Order_By>>
+  where?: InputMaybe<Models_Bool_Exp>
+}
+
+export type Subscription_RootModels_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Subscription_RootModels_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<Models_Stream_Cursor_Input>>
+  where?: InputMaybe<Models_Bool_Exp>
+}
+
+export type Subscription_RootStatesArgs = {
+  distinct_on?: InputMaybe<Array<States_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<States_Order_By>>
+  where?: InputMaybe<States_Bool_Exp>
+}
+
+export type Subscription_RootStates_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<States_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<States_Order_By>>
+  where?: InputMaybe<States_Bool_Exp>
+}
+
+export type Subscription_RootStates_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+export type Subscription_RootStates_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<States_Stream_Cursor_Input>>
+  where?: InputMaybe<States_Bool_Exp>
+}
+
+export type Subscription_RootUser_CarsArgs = {
+  distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<User_Cars_Order_By>>
+  where?: InputMaybe<User_Cars_Bool_Exp>
+}
+
+export type Subscription_RootUser_Cars_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Cars_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<User_Cars_Order_By>>
+  where?: InputMaybe<User_Cars_Bool_Exp>
+}
+
+export type Subscription_RootUser_Cars_By_PkArgs = {
+  id: Scalars["Int"]
+}
+/** Initial value of the column from where the streaming should start */
+export type User_Cars_Stream_Cursor_Value_Input = {
+  car_id?: InputMaybe<Scalars["Int"]>
+  id?: InputMaybe<Scalars["Int"]>
+  user_id?: InputMaybe<Scalars["Int"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+/** Streaming cursor of the table "user_cars" */
+export type User_Cars_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: User_Cars_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+export type Subscription_RootUser_Cars_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<User_Cars_Stream_Cursor_Input>>
+  where?: InputMaybe<User_Cars_Bool_Exp>
+}
+
+export type Subscription_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Users_Order_By>>
+  where?: InputMaybe<Users_Bool_Exp>
+}
+
+export type Subscription_RootUsers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>
+  limit?: InputMaybe<Scalars["Int"]>
+  offset?: InputMaybe<Scalars["Int"]>
+  order_by?: InputMaybe<Array<Users_Order_By>>
+  where?: InputMaybe<Users_Bool_Exp>
+}
+
+export type Subscription_RootUsers_By_PkArgs = {
+  id: Scalars["Int"]
+}
+
+/** Initial value of the column from where the streaming should start */
+export type Users_Stream_Cursor_Value_Input = {
+  email?: InputMaybe<Scalars["String"]>
+  firstName?: InputMaybe<Scalars["String"]>
+  id?: InputMaybe<Scalars["Int"]>
+  lastName?: InputMaybe<Scalars["String"]>
+  uuid?: InputMaybe<Scalars["uuid"]>
+}
+
+/** Streaming cursor of the table "users" */
+export type Users_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Users_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>
+}
+
+export type Subscription_RootUsers_StreamArgs = {
+  batch_size: Scalars["Int"]
+  cursor: Array<InputMaybe<Users_Stream_Cursor_Input>>
+  where?: InputMaybe<Users_Bool_Exp>
+}
+
+/** columns and relationships of "user_cars" */
+export type UserCars = {
+  __typename?: "user_cars"
+  car_id: Scalars["Int"]
+  id: Scalars["Int"]
+  user_id: Scalars["Int"]
+  uuid: Scalars["uuid"]
+}
+/** aggregate avg on columns */
+export type User_Cars_Avg_Fields = {
+  __typename?: "user_cars_avg_fields"
+  car_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  user_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate fields of "user_cars" */
+export type User_Cars_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<User_Cars_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+
+/** aggregate max on columns */
+export type User_Cars_Max_Fields = {
+  __typename?: "user_cars_max_fields"
+  car_id?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["Int"]>
+  user_id?: Maybe<Scalars["Int"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** aggregate min on columns */
+export type User_Cars_Min_Fields = {
+  __typename?: "user_cars_min_fields"
+  car_id?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["Int"]>
+  user_id?: Maybe<Scalars["Int"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** response of any mutation on the table "user_cars" */
+export type User_Cars_Mutation_Response = {
+  __typename?: "user_cars_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<UserCars>
+}
+
+/** aggregate stddev on columns */
+export type User_Cars_Stddev_Fields = {
+  __typename?: "user_cars_stddev_fields"
+  car_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  user_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type User_Cars_Stddev_Pop_Fields = {
+  __typename?: "user_cars_stddev_pop_fields"
+  car_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  user_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type User_Cars_Stddev_Samp_Fields = {
+  __typename?: "user_cars_stddev_samp_fields"
+  car_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  user_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate sum on columns */
+export type User_Cars_Sum_Fields = {
+  __typename?: "user_cars_sum_fields"
+  car_id?: Maybe<Scalars["Int"]>
+  id?: Maybe<Scalars["Int"]>
+  user_id?: Maybe<Scalars["Int"]>
+}
+
+/** aggregate var_pop on columns */
+export type User_Cars_Variable_Pop_Fields = {
+  __typename?: "user_cars_var_pop_fields"
+  car_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  user_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_samp on columns */
+export type User_Cars_Variable_Samp_Fields = {
+  __typename?: "user_cars_var_samp_fields"
+  car_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  user_id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate variance on columns */
+export type User_Cars_Variance_Fields = {
+  __typename?: "user_cars_variance_fields"
+  car_id?: Maybe<Scalars["Float"]>
+  id?: Maybe<Scalars["Float"]>
+  user_id?: Maybe<Scalars["Float"]>
+}
+
+/** columns and relationships of "users" */
+export type Users = {
+  __typename?: "users"
+  email: Scalars["String"]
+  firstName: Scalars["String"]
+  id: Scalars["Int"]
+  lastName: Scalars["String"]
+  uuid: Scalars["uuid"]
+}
+
+/** aggregate fields of "users" */
+export type Users_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Users_Select_Column>>
+  distinct?: InputMaybe<Scalars["Boolean"]>
+}
+
+/** aggregate avg on columns */
+export type Users_Avg_Fields = {
+  __typename?: "users_avg_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate max on columns */
+export type Users_Max_Fields = {
+  __typename?: "users_max_fields"
+  email?: Maybe<Scalars["String"]>
+  firstName?: Maybe<Scalars["String"]>
+  id?: Maybe<Scalars["Int"]>
+  lastName?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** aggregate min on columns */
+export type Users_Min_Fields = {
+  __typename?: "users_min_fields"
+  email?: Maybe<Scalars["String"]>
+  firstName?: Maybe<Scalars["String"]>
+  id?: Maybe<Scalars["Int"]>
+  lastName?: Maybe<Scalars["String"]>
+  uuid?: Maybe<Scalars["uuid"]>
+}
+
+/** response of any mutation on the table "users" */
+export type Users_Mutation_Response = {
+  __typename?: "users_mutation_response"
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars["Int"]
+  /** data from the rows affected by the mutation */
+  returning: Array<Users>
+}
+
+/** mutation root */
+export type Mutation_Root = {
+  __typename?: "mutation_root"
+  /** delete data from the table: "brands" */
+  delete_brands?: Maybe<Brands_Mutation_Response>
+  /** delete single row from the table: "brands" */
+  delete_brands_by_pk?: Maybe<Brands>
+  /** delete data from the table: "cars" */
+  delete_cars?: Maybe<Cars_Mutation_Response>
+  /** delete single row from the table: "cars" */
+  delete_cars_by_pk?: Maybe<Cars>
+  /** delete data from the table: "cities" */
+  delete_cities?: Maybe<Cities_Mutation_Response>
+  /** delete single row from the table: "cities" */
+  delete_cities_by_pk?: Maybe<Cities>
+  /** delete data from the table: "colors" */
+  delete_colors?: Maybe<Colors_Mutation_Response>
+  /** delete single row from the table: "colors" */
+  delete_colors_by_pk?: Maybe<Colors>
+  /** delete data from the table: "models" */
+  delete_models?: Maybe<Models_Mutation_Response>
+  /** delete single row from the table: "models" */
+  delete_models_by_pk?: Maybe<Models>
+  /** delete data from the table: "states" */
+  delete_states?: Maybe<States_Mutation_Response>
+  /** delete single row from the table: "states" */
+  delete_states_by_pk?: Maybe<States>
+  /** delete data from the table: "user_cars" */
+  delete_user_cars?: Maybe<User_Cars_Mutation_Response>
+  /** delete single row from the table: "user_cars" */
+  delete_user_cars_by_pk?: Maybe<UserCars>
+  /** delete data from the table: "users" */
+  delete_users?: Maybe<Users_Mutation_Response>
+  /** delete single row from the table: "users" */
+  delete_users_by_pk?: Maybe<Users>
+  /** insert data into the table: "brands" */
+  insert_brands?: Maybe<Brands_Mutation_Response>
+  /** insert a single row into the table: "brands" */
+  insert_brands_one?: Maybe<Brands>
+  /** insert data into the table: "cars" */
+  insert_cars?: Maybe<Cars_Mutation_Response>
+  /** insert a single row into the table: "cars" */
+  insert_cars_one?: Maybe<Cars>
+  /** insert data into the table: "cities" */
+  insert_cities?: Maybe<Cities_Mutation_Response>
+  /** insert a single row into the table: "cities" */
+  insert_cities_one?: Maybe<Cities>
+  /** insert data into the table: "colors" */
+  insert_colors?: Maybe<Colors_Mutation_Response>
+  /** insert a single row into the table: "colors" */
+  insert_colors_one?: Maybe<Colors>
+  /** insert data into the table: "models" */
+  insert_models?: Maybe<Models_Mutation_Response>
+  /** insert a single row into the table: "models" */
+  insert_models_one?: Maybe<Models>
+  /** insert data into the table: "states" */
+  insert_states?: Maybe<States_Mutation_Response>
+  /** insert a single row into the table: "states" */
+  insert_states_one?: Maybe<States>
+  /** insert data into the table: "user_cars" */
+  insert_user_cars?: Maybe<User_Cars_Mutation_Response>
+  /** insert a single row into the table: "user_cars" */
+  insert_user_cars_one?: Maybe<UserCars>
+  /** insert data into the table: "users" */
+  insert_users?: Maybe<Users_Mutation_Response>
+  /** insert a single row into the table: "users" */
+  insert_users_one?: Maybe<Users>
+  /** update data of the table: "brands" */
+  update_brands?: Maybe<Brands_Mutation_Response>
+  /** update single row of the table: "brands" */
+  update_brands_by_pk?: Maybe<Brands>
+  /** update multiples rows of table: "brands" */
+  update_brands_many?: Maybe<Array<Maybe<Brands_Mutation_Response>>>
+  /** update data of the table: "cars" */
+  update_cars?: Maybe<Cars_Mutation_Response>
+  /** update single row of the table: "cars" */
+  update_cars_by_pk?: Maybe<Cars>
+  /** update multiples rows of table: "cars" */
+  update_cars_many?: Maybe<Array<Maybe<Cars_Mutation_Response>>>
+  /** update data of the table: "cities" */
+  update_cities?: Maybe<Cities_Mutation_Response>
+  /** update single row of the table: "cities" */
+  update_cities_by_pk?: Maybe<Cities>
+  /** update multiples rows of table: "cities" */
+  update_cities_many?: Maybe<Array<Maybe<Cities_Mutation_Response>>>
+  /** update data of the table: "colors" */
+  update_colors?: Maybe<Colors_Mutation_Response>
+  /** update single row of the table: "colors" */
+  update_colors_by_pk?: Maybe<Colors>
+  /** update multiples rows of table: "colors" */
+  update_colors_many?: Maybe<Array<Maybe<Colors_Mutation_Response>>>
+  /** update data of the table: "models" */
+  update_models?: Maybe<Models_Mutation_Response>
+  /** update single row of the table: "models" */
+  update_models_by_pk?: Maybe<Models>
+  /** update multiples rows of table: "models" */
+  update_models_many?: Maybe<Array<Maybe<Models_Mutation_Response>>>
+  /** update data of the table: "states" */
+  update_states?: Maybe<States_Mutation_Response>
+  /** update single row of the table: "states" */
+  update_states_by_pk?: Maybe<States>
+  /** update multiples rows of table: "states" */
+  update_states_many?: Maybe<Array<Maybe<States_Mutation_Response>>>
+  /** update data of the table: "user_cars" */
+  update_user_cars?: Maybe<User_Cars_Mutation_Response>
+  /** update single row of the table: "user_cars" */
+  update_user_cars_by_pk?: Maybe<UserCars>
+  /** update multiples rows of table: "user_cars" */
+  update_user_cars_many?: Maybe<Array<Maybe<User_Cars_Mutation_Response>>>
+  /** update data of the table: "users" */
+  update_users?: Maybe<Users_Mutation_Response>
+  /** update single row of the table: "users" */
+  update_users_by_pk?: Maybe<Users>
+  /** update multiples rows of table: "users" */
+  update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>
+}
+
+/** aggregate stddev on columns */
+export type Users_Stddev_Fields = {
+  __typename?: "users_stddev_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_pop on columns */
+export type Users_Stddev_Pop_Fields = {
+  __typename?: "users_stddev_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate stddev_samp on columns */
+export type Users_Stddev_Samp_Fields = {
+  __typename?: "users_stddev_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate sum on columns */
+export type Users_Sum_Fields = {
+  __typename?: "users_sum_fields"
+  id?: Maybe<Scalars["Int"]>
+}
+
+/** aggregate var_pop on columns */
+export type Users_Variable_Pop_Fields = {
+  __typename?: "users_var_pop_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate var_samp on columns */
+export type Users_Variable_Samp_Fields = {
+  __typename?: "users_var_samp_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate variance on columns */
+export type Users_Variance_Fields = {
+  __typename?: "users_variance_fields"
+  id?: Maybe<Scalars["Float"]>
+}
+
+/** aggregate fields of "users" */
+export type Users_Aggregate_Fields = {
+  __typename?: "users_aggregate_fields"
+  avg?: Maybe<Users_Avg_Fields>
+  count: Scalars["Int"]
+  max?: Maybe<Users_Max_Fields>
+  min?: Maybe<Users_Min_Fields>
+  stddev?: Maybe<Users_Stddev_Fields>
+  stddev_pop?: Maybe<Users_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Users_Stddev_Samp_Fields>
+  sum?: Maybe<Users_Sum_Fields>
+  var_pop?: Maybe<Users_Variable_Pop_Fields>
+  var_samp?: Maybe<Users_Variable_Samp_Fields>
+  variance?: Maybe<Users_Variance_Fields>
+}
+/** aggregated selection of "users" */
+export type Users_Aggregate = {
+  __typename?: "users_aggregate"
+  aggregate?: Maybe<Users_Aggregate_Fields>
+  nodes: Array<Users>
+}
+/** aggregate fields of "user_cars" */
+export type UserCarsAggregateFields = {
+  __typename?: "user_cars_aggregate_fields"
+  avg?: Maybe<User_Cars_Avg_Fields>
+  count: Scalars["Int"]
+  max?: Maybe<User_Cars_Max_Fields>
+  min?: Maybe<User_Cars_Min_Fields>
+  stddev?: Maybe<User_Cars_Stddev_Fields>
+  stddev_pop?: Maybe<User_Cars_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<User_Cars_Stddev_Samp_Fields>
+  sum?: Maybe<User_Cars_Sum_Fields>
+  var_pop?: Maybe<User_Cars_Variable_Pop_Fields>
+  var_samp?: Maybe<User_Cars_Variable_Samp_Fields>
+  variance?: Maybe<User_Cars_Variance_Fields>
+}
+
+/** aggregated selection of "user_cars" */
+export type User_Cars_Aggregate = {
+  __typename?: "user_cars_aggregate"
+  aggregate?: Maybe<UserCarsAggregateFields>
+  nodes: Array<UserCars>
+}
+
+export type Query_Root = {
+  __typename?: "query_root"
+  /** fetch data from the table: "brands" */
+  brands: Array<Brands>
+  /** fetch aggregated fields from the table: "brands" */
+  brands_aggregate: Brands_Aggregate
+  /** fetch data from the table: "brands" using primary key columns */
+  brands_by_pk?: Maybe<Brands>
+  /** fetch data from the table: "cars" */
+  cars: Array<Cars>
+  /** fetch aggregated fields from the table: "cars" */
+  cars_aggregate: Cars_Aggregate
+  /** fetch data from the table: "cars" using primary key columns */
+  cars_by_pk?: Maybe<Cars>
+  /** An array relationship */
+  cities: Array<Cities>
+  /** An aggregate relationship */
+  cities_aggregate: Cities_Aggregate
+  /** fetch data from the table: "cities" using primary key columns */
+  cities_by_pk?: Maybe<Cities>
+  /** fetch data from the table: "colors" */
+  colors: Array<Colors>
+  /** fetch aggregated fields from the table: "colors" */
+  colors_aggregate: Colors_Aggregate
+  /** fetch data from the table: "colors" using primary key columns */
+  colors_by_pk?: Maybe<Colors>
+  /** fetch data from the table: "models" */
+  models: Array<Models>
+  /** fetch aggregated fields from the table: "models" */
+  models_aggregate: Models_Aggregate
+  /** fetch data from the table: "models" using primary key columns */
+  models_by_pk?: Maybe<Models>
+  /** fetch data from the table: "states" */
+  states: Array<States>
+  /** fetch aggregated fields from the table: "states" */
+  states_aggregate: States_Aggregate
+  /** fetch data from the table: "states" using primary key columns */
+  states_by_pk?: Maybe<States>
+  /** fetch data from the table: "user_cars" */
+  user_cars: Array<UserCars>
+  /** fetch aggregated fields from the table: "user_cars" */
+  user_cars_aggregate: User_Cars_Aggregate
+  /** fetch data from the table: "user_cars" using primary key columns */
+  user_cars_by_pk?: Maybe<UserCars>
+  /** fetch data from the table: "users" */
+  users: Array<Users>
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>
+}
+
+export type Subscription_Root = {
+  __typename?: "subscription_root"
+  /** fetch data from the table: "brands" */
+  brands: Array<Brands>
+  /** fetch aggregated fields from the table: "brands" */
+  brands_aggregate: Brands_Aggregate
+  /** fetch data from the table: "brands" using primary key columns */
+  brands_by_pk?: Maybe<Brands>
+  /** fetch data from the table in a streaming manner : "brands" */
+  brands_stream: Array<Brands>
+  /** fetch data from the table: "cars" */
+  cars: Array<Cars>
+  /** fetch aggregated fields from the table: "cars" */
+  cars_aggregate: Cars_Aggregate
+  /** fetch data from the table: "cars" using primary key columns */
+  cars_by_pk?: Maybe<Cars>
+  /** fetch data from the table in a streaming manner : "cars" */
+  cars_stream: Array<Cars>
+  /** An array relationship */
+  cities: Array<Cities>
+  /** An aggregate relationship */
+  cities_aggregate: Cities_Aggregate
+  /** fetch data from the table: "cities" using primary key columns */
+  cities_by_pk?: Maybe<Cities>
+  /** fetch data from the table in a streaming manner : "cities" */
+  cities_stream: Array<Cities>
+  /** fetch data from the table: "colors" */
+  colors: Array<Colors>
+  /** fetch aggregated fields from the table: "colors" */
+  colors_aggregate: Colors_Aggregate
+  /** fetch data from the table: "colors" using primary key columns */
+  colors_by_pk?: Maybe<Colors>
+  /** fetch data from the table in a streaming manner : "colors" */
+  colors_stream: Array<Colors>
+  /** fetch data from the table: "models" */
+  models: Array<Models>
+  /** fetch aggregated fields from the table: "models" */
+  models_aggregate: Models_Aggregate
+  /** fetch data from the table: "models" using primary key columns */
+  models_by_pk?: Maybe<Models>
+  /** fetch data from the table in a streaming manner : "models" */
+  models_stream: Array<Models>
+  /** fetch data from the table: "states" */
+  states: Array<States>
+  /** fetch aggregated fields from the table: "states" */
+  states_aggregate: States_Aggregate
+  /** fetch data from the table: "states" using primary key columns */
+  states_by_pk?: Maybe<States>
+  /** fetch data from the table in a streaming manner : "states" */
+  states_stream: Array<States>
+  /** fetch data from the table: "user_cars" */
+  user_cars: Array<UserCars>
+  /** fetch aggregated fields from the table: "user_cars" */
+  user_cars_aggregate: User_Cars_Aggregate
+  /** fetch data from the table: "user_cars" using primary key columns */
+  user_cars_by_pk?: Maybe<UserCars>
+  /** fetch data from the table in a streaming manner : "user_cars" */
+  user_cars_stream: Array<UserCars>
+  /** fetch data from the table: "users" */
+  users: Array<Users>
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>
+  /** fetch data from the table in a streaming manner : "users" */
+  users_stream: Array<Users>
+}
+
+export type Insert_User_CarsMutationVariables = Exact<{
+  objects: Array<User_Cars_Insert_Input> | User_Cars_Insert_Input
+}>
+
+export type Insert_User_CarsMutation = {
+  __typename?: "mutation_root"
+  insertUserCars?: {
+    __typename?: "user_cars_mutation_response"
+    returning: Array<{
+      __typename?: "user_cars"
+      carId: number
+      userId: number
+      id: number
+    }>
+  } | null
+}
+
+export type Delete_User_CarsMutationVariables = Exact<{
+  where: User_Cars_Bool_Exp
+}>
+
+export type Delete_User_CarsMutation = {
+  __typename?: "mutation_root"
+  deleteUserCars?: {
+    __typename?: "user_cars_mutation_response"
+    returning: Array<{
+      __typename?: "user_cars"
+      carId: number
+      userId: number
+      id: number
+    }>
+  } | null
+}
+
+export type Mutation_CarsMutationVariables = Exact<{
+  objects: Array<Cars_Insert_Input> | Cars_Insert_Input
+}>
+
+export type Mutation_CarsMutation = {
+  __typename?: "mutation_root"
+  insertCars?: {
+    __typename?: "cars_mutation_response"
+    returning: Array<{
+      __typename?: "cars"
+      batch: string
+      brandId: number
+      modelId: number
+      year?: number | null
+      vin: string
+      title?: string | null
+      saleDate: Date
+      price: number
+      odometer?: number | null
+      damageType?: string | null
+      condition: string
+      colorId: number
+      stateId: number
+      cityId: number
+      description?: string | null
+    }>
+  } | null
+}
+
+export type Query_GetCarsQueryVariables = Exact<{
+  orderBy?: InputMaybe<Array<Cars_Order_By> | Cars_Order_By>
+  where?: InputMaybe<Cars_Bool_Exp>
+}>
+
+export type Query_GetCarsQuery = {
+  __typename?: "query_root"
+  cars: Array<{
+    __typename?: "cars"
+    batch: string
+    condition: string
+    damageType?: string | null
+    description?: string | null
+    id: number
+    odometer?: number | null
+    price: number
+    saleDate: Date
+    title?: string | null
+    vin: string
+    year?: number | null
+    city: {
+      __typename?: "cities"
+      name: string
+      id: number
+      state: { __typename?: "states"; id: number; name: string }
+    }
+    color: { __typename?: "colors"; id: number; name: string }
+    model: {
+      __typename?: "models"
+      id: number
+      name: string
+      brand: { __typename?: "brands"; id: number; name: string }
+    }
+  }>
+}
+
+export type QueryFavoriteCarsQueryVariables = Exact<{
+  where?: InputMaybe<User_Cars_Bool_Exp>
+}>
+
+export type QueryFavoriteCarsQuery = {
+  __typename?: "query_root"
+  userCars: Array<{
+    __typename?: "user_cars"
+    carId: number
+    userId: number
+    id: number
+  }>
+}
+
+export type Get_Add_Car_Fields_QueryQueryVariables = Exact<{
+  where?: InputMaybe<Cities_Bool_Exp>
+  modelsWhere?: InputMaybe<Models_Bool_Exp>
+}>
+
+export type Get_Add_Car_Fields_QueryQuery = {
+  __typename?: "query_root"
+  colors: Array<{ __typename?: "colors"; id: number; name: string }>
+  states: Array<{ __typename?: "states"; id: number; name: string }>
+  cities: Array<{
+    __typename?: "cities"
+    id: number
+    name: string
+    stateId: number
+  }>
+  brands: Array<{ __typename?: "brands"; id: number; name: string }>
+  models: Array<{ __typename?: "models"; id: number; name: string }>
+}
+
+export type Query_UserQueryVariables = Exact<{
+  where?: InputMaybe<Users_Bool_Exp>
+}>
+
+export type Query_UserQuery = {
+  __typename?: "query_root"
+  users: Array<{
+    __typename?: "users"
+    firstName: string
+    lastName: string
+    email: string
+    id: number
+  }>
+}
+
+export const InsertUserCarsDocument = gql`
+  mutation Insert_user_cars($objects: [user_cars_insert_input!]!) {
+    insert_user_cars(objects: $objects) {
+      returning {
+        car_id
+        user_id
+        id
+      }
+    }
+  }
+`
+export type InsertUserCarsMutationFunction = Apollo.MutationFunction<
+  Insert_User_CarsMutation,
+  Insert_User_CarsMutationVariables
+>
+
+/**
+ * __useInsert_User_CarsMutation__
+ *
+ * To run a mutation, you first call `useInsert_User_CarsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsert_User_CarsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertUserCarsMutation, { data, loading, error }] = useInsert_User_CarsMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useInsertUserCarsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Insert_User_CarsMutation,
+    Insert_User_CarsMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    Insert_User_CarsMutation,
+    Insert_User_CarsMutationVariables
+  >(InsertUserCarsDocument, options)
+}
+export type Insert_User_CarsMutationHookResult = ReturnType<
+  typeof useInsertUserCarsMutation
+>
+export type Insert_User_CarsMutationResult =
+  Apollo.MutationResult<Insert_User_CarsMutation>
+export type Insert_User_CarsMutationOptions = Apollo.BaseMutationOptions<
+  Insert_User_CarsMutation,
+  Insert_User_CarsMutationVariables
+>
+export const DeleteUserCarsDocument = gql`
+  mutation Delete_user_cars($where: user_cars_bool_exp!) {
+    delete_user_cars(where: $where) {
+      returning {
+        car_id
+        user_id
+        id
+      }
+    }
+  }
+`
+export type DeleteUserCarsMutationFunction = Apollo.MutationFunction<
+  Delete_User_CarsMutation,
+  Delete_User_CarsMutationVariables
+>
+
+/**
+ * __useDelete_User_CarsMutation__
+ *
+ * To run a mutation, you first call `useDelete_User_CarsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDelete_User_CarsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserCarsMutation, { data, loading, error }] = useDelete_User_CarsMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteUserCarsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Delete_User_CarsMutation,
+    Delete_User_CarsMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    Delete_User_CarsMutation,
+    Delete_User_CarsMutationVariables
+  >(DeleteUserCarsDocument, options)
+}
+export type Delete_User_CarsMutationHookResult = ReturnType<
+  typeof useDeleteUserCarsMutation
+>
+export type Delete_User_CarsMutationResult =
+  Apollo.MutationResult<Delete_User_CarsMutation>
+export type Delete_User_CarsMutationOptions = Apollo.BaseMutationOptions<
+  Delete_User_CarsMutation,
+  Delete_User_CarsMutationVariables
+>
+export const MutationCarsDocument = gql`
+  mutation Mutation_cars($objects: [cars_insert_input!]!) {
+    insert_cars(objects: $objects) {
+      returning {
+        batch
+        brand_id
+        model_id
+        year
+        vin
+        title
+        sale_date
+        price
+        odometer
+        damage_type
+        condition
+        color_id
+        state_id
+        city_id
+        description
+      }
+    }
+  }
+`
+export type MutationCarsMutationFunction = Apollo.MutationFunction<
+  Mutation_CarsMutation,
+  Mutation_CarsMutationVariables
+>
+
+/**
+ * __useMutation_CarsMutation__
+ *
+ * To run a mutation, you first call `useMutation_CarsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMutation_CarsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [mutationCarsMutation, { data, loading, error }] = useMutation_CarsMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useMutationCarsMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Mutation_CarsMutation,
+    Mutation_CarsMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    Mutation_CarsMutation,
+    Mutation_CarsMutationVariables
+  >(MutationCarsDocument, options)
+}
+export type Mutation_CarsMutationHookResult = ReturnType<
+  typeof useMutationCarsMutation
+>
+export type Mutation_CarsMutationResult =
+  Apollo.MutationResult<Mutation_CarsMutation>
+export type Mutation_CarsMutationOptions = Apollo.BaseMutationOptions<
+  Mutation_CarsMutation,
+  Mutation_CarsMutationVariables
+>
+export const QueryGetCarsDocument = gql`
+  query Query_getCars($orderBy: [cars_order_by!], $where: cars_bool_exp) {
+    cars(order_by: $orderBy, where: $where) {
+      batch
+      city {
+        name
+        id
+        state {
+          id
+          name
+        }
+      }
+      color {
+        id
+        name
+      }
+      condition
+      damage_type
+      description
+      id
+      odometer
+      price
+      sale_date
+      title
+      vin
+      year
+      model {
+        id
+        name
+        brand {
+          id
+          name
+        }
+      }
+    }
+  }
+`
+
+/**
+ * __useQuery_GetCarsQuery__
+ *
+ * To run a query within a React component, call `useQuery_GetCarsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useQuery_GetCarsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useQuery_GetCarsQuery({
+ *   variables: {
+ *      orderBy: // value for 'orderBy'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useQueryGetCarsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Query_GetCarsQuery,
+    Query_GetCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<Query_GetCarsQuery, Query_GetCarsQueryVariables>(
+    QueryGetCarsDocument,
+    options
+  )
+}
+export function useQueryGetCarsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Query_GetCarsQuery,
+    Query_GetCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<Query_GetCarsQuery, Query_GetCarsQueryVariables>(
+    QueryGetCarsDocument,
+    options
+  )
+}
+export type QueryGetCarsQueryHookResult = ReturnType<
+  typeof useQueryGetCarsQuery
+>
+export type QueryGetCarsLazyQueryHookResult = ReturnType<
+  typeof useQueryGetCarsLazyQuery
+>
+export type QueryGetCarsQueryResult = Apollo.QueryResult<
+  Query_GetCarsQuery,
+  Query_GetCarsQueryVariables
+>
+export const QueryFavoriteCarsDocument = gql`
+  query QueryFavoriteCars($where: user_cars_bool_exp) {
+    user_cars(where: $where) {
+      car_id
+      user_id
+      id
+    }
+  }
+`
+
+/**
+ * __useQueryFavoriteCarsQuery__
+ *
+ * To run a query within a React component, call `useQueryFavoriteCarsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useQueryFavoriteCarsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useQueryFavoriteCarsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useQueryFavoriteCarsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >(QueryFavoriteCarsDocument, options)
+}
+export function useQueryFavoriteCarsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    QueryFavoriteCarsQuery,
+    QueryFavoriteCarsQueryVariables
+  >(QueryFavoriteCarsDocument, options)
+}
+export type QueryFavoriteCarsQueryHookResult = ReturnType<
+  typeof useQueryFavoriteCarsQuery
+>
+export type QueryFavoriteCarsLazyQueryHookResult = ReturnType<
+  typeof useQueryFavoriteCarsLazyQuery
+>
+export type QueryFavoriteCarsQueryResult = Apollo.QueryResult<
+  QueryFavoriteCarsQuery,
+  QueryFavoriteCarsQueryVariables
+>
+export const GetAddCarFieldsQueryDocument = gql`
+  query GET_ADD_CAR_FIELDS_Query(
+    $where: cities_bool_exp
+    $modelsWhere: models_bool_exp
+  ) {
+    colors {
+      id
+      name
+    }
+    states {
+      id
+      name
+    }
+    cities(where: $where) {
+      id
+      name
+      state_id
+    }
+    brands {
+      id
+      name
+    }
+    models(where: $modelsWhere) {
+      id
+      name
+    }
+  }
+`
+
+/**
+ * __useGet_Add_Car_Fields_QueryQuery__
+ *
+ * To run a query within a React component, call `useGet_Add_Car_Fields_QueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGet_Add_Car_Fields_QueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGet_Add_Car_Fields_QueryQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      modelsWhere: // value for 'modelsWhere'
+ *   },
+ * });
+ */
+export function useGetAddCarFieldsQueryQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >(GetAddCarFieldsQueryDocument, options)
+}
+export function useGetAddCarFieldsQueryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<
+    Get_Add_Car_Fields_QueryQuery,
+    Get_Add_Car_Fields_QueryQueryVariables
+  >(GetAddCarFieldsQueryDocument, options)
+}
+export type Get_Add_Car_Fields_QueryQueryHookResult = ReturnType<
+  typeof useGetAddCarFieldsQueryQuery
+>
+export type Get_Add_Car_Fields_QueryLazyQueryHookResult = ReturnType<
+  typeof useGetAddCarFieldsQueryLazyQuery
+>
+export type Get_Add_Car_Fields_QueryQueryResult = Apollo.QueryResult<
+  Get_Add_Car_Fields_QueryQuery,
+  Get_Add_Car_Fields_QueryQueryVariables
+>
+export const QueryUserDocument = gql`
+  query Query_user($where: users_bool_exp) {
+    users(where: $where) {
+      first_name
+      last_name
+      email
+      id
+    }
+  }
+`
+
+/**
+ * __useQuery_UserQuery__
+ *
+ * To run a query within a React component, call `useQuery_UserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useQuery_UserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useQuery_UserQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useQueryUserQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Query_UserQuery,
+    Query_UserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<Query_UserQuery, Query_UserQueryVariables>(
+    QueryUserDocument,
+    options
+  )
+}
+export function useQueryUserLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Query_UserQuery,
+    Query_UserQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<Query_UserQuery, Query_UserQueryVariables>(
+    QueryUserDocument,
+    options
+  )
+}
+export type Query_UserQueryHookResult = ReturnType<typeof useQueryUserQuery>
+export type Query_UserLazyQueryHookResult = ReturnType<
+  typeof useQueryUserLazyQuery
+>
+export type Query_UserQueryResult = Apollo.QueryResult<
+  Query_UserQuery,
+  Query_UserQueryVariables
+>
