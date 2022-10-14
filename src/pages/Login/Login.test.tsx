@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
 import { LoginContextProvider } from "../../context/login-context/login-context"
 import Login from "./login"
-import { client } from "../../app"
+import { client } from "../../app-router"
 import React from "react"
 describe("Login Page", () => {
   it("should render Login page", () => {
