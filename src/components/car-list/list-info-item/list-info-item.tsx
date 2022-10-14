@@ -5,7 +5,7 @@ import {
   StarRegular,
   StarSolid,
 } from "./list-info-item-styled"
-import { useLoginContext } from "../../../context/LoginContext/login-context"
+import { useLoginContext } from "../../../context/login-context/login-context"
 import useFavoriteCar from "../../../hooks/use-favorite-car"
 import ErrorMessage from "../../error-message/error-message"
 

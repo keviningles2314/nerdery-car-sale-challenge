@@ -2,7 +2,7 @@ import { ApolloProvider } from "@apollo/client"
 import { render, RenderOptions } from "@testing-library/react"
 import React, { ReactElement, ReactNode } from "react"
 import { client } from "../../app"
-import { LoginContextProvider } from "../../context/LoginContext/login-context"
+import { LoginContextProvider } from "../../context/login-context/login-context"
 
 interface NestedProvidersProps {
   children: ReactNode

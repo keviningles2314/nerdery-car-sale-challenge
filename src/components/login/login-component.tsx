@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useQueryUserLazyQuery } from "../../api/graphql/__generated__/graphql-types"
-import { useLoginContext } from "../../context/LoginContext/login-context"
-import { Types } from "../../context/LoginContext/login-reducer"
+import { useLoginContext } from "../../context/login-context/login-context"
+import { Types } from "../../context/login-context/login-reducer"
 import { emailValidation } from "../../helpers/validators"
 import Button from "../button/button"
 import ErrorMessage from "../error-message/error-message"
@@ -15,7 +15,7 @@ interface LoginComponentProps {
 }
 
 const LoginComponent = ({ title }: LoginComponentProps) => {
-  const [email, setEmail] = useState<string>("")
+  const [email, setEmail] = useState("")
   const [isError, setIsError] = useState(false)
 
   const navigate = useNavigate()

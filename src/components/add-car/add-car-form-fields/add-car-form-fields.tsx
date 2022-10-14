@@ -67,8 +67,6 @@ const AddCarFormFields = () => {
     }
   }, [brandId, getDataCities, getDataModels, stateId])
 
-  // eslint-disable-next-line no-console
-  console.log(brandId)
   return (
     <>
       <TextField fieldName={title} placeholder={title} fieldRequired />

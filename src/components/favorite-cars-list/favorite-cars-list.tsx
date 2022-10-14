@@ -1,5 +1,5 @@
 import { useQueryFavoriteCarsQuery } from "../../api/graphql/__generated__/graphql-types"
-import { useLoginContext } from "../../context/LoginContext/login-context"
+import { useLoginContext } from "../../context/login-context/login-context"
 import CarListComponent from "../car-list/car-list-component"
 import ErrorMessage from "../error-message/error-message"
 import LoadingComponent from "../loading/loading"

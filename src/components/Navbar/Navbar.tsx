@@ -1,4 +1,4 @@
-import { useLoginContext } from "../../context/LoginContext/login-context"
+import { useLoginContext } from "../../context/login-context/login-context"
 import Button from "../button/button"
 import LinkElement from "../link-element/link-element"
 import RegularText from "../text/regular-text/regular-text"
@@ -10,7 +10,8 @@ const Navbar = () => {
   const onClickLogOut = () => {
     logOutHandler()
   }
-
+  // eslint-disable-next-line no-console
+  console.log(state.userData)
   return (
     <Container>
       <LinkElement text="Home" path="/" />
@@ -23,10 +24,7 @@ const Navbar = () => {
       )}
       {state.isUserAuthenticated ? (
         <>
-          <RegularText
-            text={`${state.userData.firstName} ${state.userData.lastName}`}
-            isBaseColor={false}
-          />
+          <RegularText text={`${state.userData.email}`} isBaseColor={false} />
           <Button title="Log Out" onClick={onClickLogOut} />
         </>
       ) : null}

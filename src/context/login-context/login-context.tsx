@@ -59,7 +59,6 @@ export const LoginContextProvider = ({
     })
     localStorage.clear()
   }
-
   return (
     <LoginContext.Provider
       value={{

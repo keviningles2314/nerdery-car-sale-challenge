@@ -1,7 +1,7 @@
 import { ApolloProvider } from "@apollo/client"
 import { render, screen } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
-import { LoginContextProvider } from "../../context/LoginContext/login-context"
+import { LoginContextProvider } from "../../context/login-context/login-context"
 import Login from "./login"
 import { client } from "../../app"
 import React from "react"

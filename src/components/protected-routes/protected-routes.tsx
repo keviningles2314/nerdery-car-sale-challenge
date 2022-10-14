@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom"
-import { useLoginContext } from "../../context/LoginContext/login-context"
+import { useLoginContext } from "../../context/login-context/login-context"
 
 const ProtectedRoutes = () => {
   const { state } = useLoginContext()

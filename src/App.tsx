@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import Layout from "./components/layout"
 import ProtectedRoutes from "./components/protected-routes/protected-routes"
 import PublicRoutes from "./components/public-routes/public-routes"
-import { LoginContextProvider } from "./context/LoginContext/login-context"
+import { LoginContextProvider } from "./context/login-context/login-context"
 import AddCar from "./pages/add-car/add-car"
 import CarDetail from "./pages/car-detail/car-detail"
 import CarsList from "./pages/cars-list/cars-list"
@@ -15,7 +15,6 @@ import {
   InMemoryCache,
   createHttpLink,
   ApolloProvider,
-  // ApolloLink,
 } from "@apollo/client"
 
 const httpLink = createHttpLink({

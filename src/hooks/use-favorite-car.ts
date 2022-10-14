@@ -5,7 +5,7 @@ import {
   useQueryFavoriteCarsQuery,
   UserCars,
 } from "../api/graphql/__generated__/graphql-types"
-import { useLoginContext } from "../context/LoginContext/login-context"
+import { useLoginContext } from "../context/login-context/login-context"
 
 interface userCars extends UserCars {
   __ref?: string
