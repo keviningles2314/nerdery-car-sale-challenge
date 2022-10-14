@@ -7,7 +7,7 @@ import AddCar from "./pages/add-car/add-car"
 import CarDetail from "./pages/car-detail/car-detail"
 import CarsList from "./pages/cars-list/cars-list"
 import Home from "./pages/Home/home"
-import Login from "./pages/login/login"
+import Login from "./pages/Login/login"
 import UserCars from "./pages/user-cars/user-cars"
 import { setContext } from "@apollo/client/link/context"
 import {
