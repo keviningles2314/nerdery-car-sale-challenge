@@ -39,7 +39,7 @@ export const client = new ApolloClient({
   connectToDevTools: true,
 })
 
-const App = () => {
+const AppRouter = () => {
   return (
     <ApolloProvider client={client}>
       <LoginContextProvider>
@@ -64,4 +64,4 @@ const App = () => {
   )
 }
 
-export default App
+export default AppRouter
