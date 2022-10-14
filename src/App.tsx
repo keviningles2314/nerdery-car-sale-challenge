@@ -38,7 +38,7 @@ export const client = new ApolloClient({
   }),
   connectToDevTools: true,
 })
-
+//
 const App = () => {
   return (
     <ApolloProvider client={client}>
