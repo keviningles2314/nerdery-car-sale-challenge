@@ -4,7 +4,7 @@ import Navbar from "./navbar/navbar"
 interface LayoutProps {
   children: PropsWithChildren
 }
-
+//
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
