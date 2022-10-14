@@ -895,7 +895,7 @@ export type Colors_Object_Related_Insert_Input = {
 /** input type for inserting data into table "models" */
 export type Models_Insert_Input = {
   brand?: InputMaybe<Brands_Object_Related_Insert_Input>
-  brand_id?: InputMaybe<Scalars["Int"]>
+  branId?: InputMaybe<Scalars["Int"]>
   id?: InputMaybe<Scalars["Int"]>
   name?: InputMaybe<Scalars["String"]>
   uuid?: InputMaybe<Scalars["uuid"]>
@@ -1415,7 +1415,7 @@ export type Colors_Order_By = {
 /** Ordering options when selecting data from "models". */
 export type Models_Order_By = {
   brand?: InputMaybe<Brands_Order_By>
-  brand_id?: InputMaybe<OrderBy>
+  brandId?: InputMaybe<OrderBy>
   id?: InputMaybe<OrderBy>
   name?: InputMaybe<OrderBy>
   uuid?: InputMaybe<OrderBy>
@@ -1605,7 +1605,7 @@ export type Models = {
   __typename?: "models"
   /** An object relationship */
   brand: Brands
-  brand_id: Scalars["Int"]
+  brandId: Scalars["Int"]
   id: Scalars["Int"]
   name: Scalars["String"]
   uuid: Scalars["uuid"]
@@ -1631,20 +1631,20 @@ export type Models_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Models_Avg_Fields = {
   __typename?: "models_avg_fields"
-  brand_id?: Maybe<Scalars["Float"]>
+  brandId?: Maybe<Scalars["Float"]>
   id?: Maybe<Scalars["Float"]>
 }
 
 /** input type for incrementing numeric columns in table "models" */
 export type Models_Inc_Input = {
-  brand_id?: InputMaybe<Scalars["Int"]>
+  brandId?: InputMaybe<Scalars["Int"]>
   id?: InputMaybe<Scalars["Int"]>
 }
 
 /** aggregate max on columns */
 export type Models_Max_Fields = {
   __typename?: "models_max_fields"
-  brand_id?: Maybe<Scalars["Int"]>
+  brandId?: Maybe<Scalars["Int"]>
   id?: Maybe<Scalars["Int"]>
   name?: Maybe<Scalars["String"]>
   uuid?: Maybe<Scalars["uuid"]>
@@ -1653,7 +1653,7 @@ export type Models_Max_Fields = {
 /** aggregate min on columns */
 export type Models_Min_Fields = {
   __typename?: "models_min_fields"
-  brand_id?: Maybe<Scalars["Int"]>
+  brandId?: Maybe<Scalars["Int"]>
   id?: Maybe<Scalars["Int"]>
   name?: Maybe<Scalars["String"]>
   uuid?: Maybe<Scalars["uuid"]>
@@ -1675,7 +1675,7 @@ export type Models_Pk_Columns_Input = {
 
 /** input type for updating data in table "models" */
 export type Models_Set_Input = {
-  brand_id?: InputMaybe<Scalars["Int"]>
+  brandId?: InputMaybe<Scalars["Int"]>
   id?: InputMaybe<Scalars["Int"]>
   name?: InputMaybe<Scalars["String"]>
   uuid?: InputMaybe<Scalars["uuid"]>
@@ -1684,26 +1684,26 @@ export type Models_Set_Input = {
 /** aggregate stddev on columns */
 export type Models_Stddev_Fields = {
   __typename?: "models_stddev_fields"
-  brand_id?: Maybe<Scalars["Float"]>
+  brandId?: Maybe<Scalars["Float"]>
   id?: Maybe<Scalars["Float"]>
 }
 
 /** aggregate stddev_pop on columns */
 export type Models_Stddev_Pop_Fields = {
   __typename?: "models_stddev_pop_fields"
-  brand_id?: Maybe<Scalars["Float"]>
+  brandId?: Maybe<Scalars["Float"]>
   id?: Maybe<Scalars["Float"]>
 }
 
 /** aggregate stddev_samp on columns */
 export type Models_Stddev_Samp_Fields = {
   __typename?: "models_stddev_samp_fields"
-  brand_id?: Maybe<Scalars["Float"]>
+  brandId?: Maybe<Scalars["Float"]>
   id?: Maybe<Scalars["Float"]>
 }
 /** Initial value of the column from where the streaming should start */
 export type Models_Stream_Cursor_Value_Input = {
-  brand_id?: InputMaybe<Scalars["Int"]>
+  brandId?: InputMaybe<Scalars["Int"]>
   id?: InputMaybe<Scalars["Int"]>
   name?: InputMaybe<Scalars["String"]>
   uuid?: InputMaybe<Scalars["uuid"]>
@@ -1720,7 +1720,7 @@ export type Models_Stream_Cursor_Input = {
 /** aggregate sum on columns */
 export type Models_Sum_Fields = {
   __typename?: "models_sum_fields"
-  brand_id?: Maybe<Scalars["Int"]>
+  brandId?: Maybe<Scalars["Int"]>
   id?: Maybe<Scalars["Int"]>
 }
 
@@ -1735,21 +1735,21 @@ export type Models_Updates = {
 /** aggregate var_pop on columns */
 export type Models_Variable_Pop_Fields = {
   __typename?: "models_var_pop_fields"
-  brand_id?: Maybe<Scalars["Float"]>
+  brandId?: Maybe<Scalars["Float"]>
   id?: Maybe<Scalars["Float"]>
 }
 
 /** aggregate var_samp on columns */
 export type Models_Variable_Samp_Fields = {
   __typename?: "models_var_samp_fields"
-  brand_id?: Maybe<Scalars["Float"]>
+  brandId?: Maybe<Scalars["Float"]>
   id?: Maybe<Scalars["Float"]>
 }
 
 /** aggregate variance on columns */
 export type Models_Variance_Fields = {
   __typename?: "models_variance_fields"
-  brand_id?: Maybe<Scalars["Float"]>
+  brandId?: Maybe<Scalars["Float"]>
   id?: Maybe<Scalars["Float"]>
 }
 
@@ -3377,19 +3377,19 @@ export type Mutation_CarsMutation = {
     returning: Array<{
       __typename?: "cars"
       batch: string
-      brandId: number
-      modelId: number
+      brandId: number | null
+      modelId: number | null
       year?: number | null
       vin: string
       title?: string | null
       saleDate: Date
-      price: number
+      price: number | null
       odometer?: number | null
       damageType?: string | null
       condition: string
-      colorId: number
-      stateId: number
-      cityId: number
+      colorId: number | null
+      stateId: number | null
+      cityId: number | null
       description?: string | null
     }>
   } | null
@@ -3452,16 +3452,11 @@ export type Get_Add_Car_Fields_QueryQueryVariables = Exact<{
 
 export type Get_Add_Car_Fields_QueryQuery = {
   __typename?: "query_root"
-  colors: Array<{ __typename?: "colors"; id: number; name: string }>
-  states: Array<{ __typename?: "states"; id: number; name: string }>
-  cities: Array<{
-    __typename?: "cities"
-    id: number
-    name: string
-    stateId: number
-  }>
-  brands: Array<{ __typename?: "brands"; id: number; name: string }>
-  models: Array<{ __typename?: "models"; id: number; name: string }>
+  colors: Array<Colors>
+  states: Array<States>
+  cities: Array<Cities>
+  brands: Array<Brands>
+  models: Array<Models>
 }
 
 export type Query_UserQueryVariables = Exact<{

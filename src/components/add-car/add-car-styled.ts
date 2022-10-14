@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Select, Option } from "../select-option-filter/select-option-styled"
 
 export const Container = styled.div`
   display: flex;
@@ -24,21 +23,4 @@ export const SectionNestedElement = styled(NestedElements)`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-`
-
-export const SelectOption = styled(Select)``
-
-export const OptionElement = styled(Option)``
-
-export const InputElementField = styled.input``
-
-export const ConditionContainer = styled.div`
-  display: flex;
-  gap: 40px;
-  width: 50%;
-`
-
-export const LabelCondition = styled.label`
-  display: flex;
-  gap: 10px;
 `

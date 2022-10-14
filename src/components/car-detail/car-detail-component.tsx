@@ -1,5 +1,5 @@
 import { Cars } from "../../api/graphql/__generated__/graphql-types"
-import { defaultImagePath } from "../../helpers/objectValues"
+import { defaultImagePath } from "../../helpers/object-values"
 import HeadingTitle from "../text/heading-title/heading-title"
 
 import { Container, ImageDetail, InfoContainer } from "./car-detail-styled"

@@ -1,19 +1,7 @@
 export const emailValidation = (email: string) => {
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(email)) {
-    return true;
-  } else {
-    return false;
-  }
-};
+  return /^\w+(?:[.-]?\w+)*@\w+(?:[.-]?\w+)*(?:\.\w{2,4})+$/.test(email)
+}
 
 export const isValidUuid = (uuid: string) => {
-  if (
-    /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(
-      uuid
-    )
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-};
+  return /^[\dA-Fa-f]{8}(?:-[\dA-Fa-f]{4}){3}-[\dA-Fa-f]{12}$/.test(uuid)
+}

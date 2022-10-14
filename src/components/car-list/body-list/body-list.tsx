@@ -2,7 +2,7 @@ import { Cars } from "../../../api/graphql/__generated__/graphql-types"
 import ListImageItem from "../list-image-item/list-image-item"
 import ListInfoItem from "../list-info-item/list-info-item"
 import { Container, Section } from "./body-list-styled"
-import { defaultImagePath } from "../../../helpers/objectValues"
+import { defaultImagePath } from "../../../helpers/object-values"
 
 interface BodyListProps {
   carsInfo: Cars[]

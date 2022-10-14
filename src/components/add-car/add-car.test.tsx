@@ -8,7 +8,7 @@ import {
   mockSelectModelsVariables,
 } from "src/utils/test/mock-data"
 import { fireEvent, render, screen, waitFor } from "src/utils/test/test-utils"
-import AddCarForm from "./add-car-form"
+import AddCarForm from "./add-car"
 
 describe("form functions", () => {
   it("Should shows error ", async () => {
