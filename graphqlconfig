@@ -1,0 +1,4 @@
+{
+  "name": "nerdery-car-sale-challenge",
+  "schemaPath": "src/api/graphql/__generated__/graphql.schema.json"
+}
